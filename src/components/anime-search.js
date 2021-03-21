@@ -1,9 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import {useParams, useHistory} from "react-router-dom";
+import {connect} from 'react-redux';
 import animeService from "../services/anime-service";
+import animeActions from "../actions/anime-actions";
 
-const AnimeSearch = () => {
-    const history = useHistory()
+const AnimeSearch = (
+/*    {
+        myResults = [],
+        findAnimeByTitle
+    }*/
+    ) => {
+    //const history = useHistory()
     const {title} = useParams()
     const [searchTitle, setSearchTitle] = useState(title)
     const [results, setResults] = useState({Search: []})
@@ -14,7 +21,7 @@ const AnimeSearch = () => {
     }, [])
 
     const findAnimeByTitle = (title) => {
-        history.push(title)
+        //history.push(title)
         animeService.findAnimeByTitle(title)
             .then((results) => {
                 console.log(results)
@@ -35,9 +42,7 @@ const AnimeSearch = () => {
                 </div>
                 <div className="col-3">
                     <button
-                        onClick={() => {
-                            findAnimeByTitle(searchTitle)
-                        }}
+                        onClick={() => {findAnimeByTitle(searchTitle)}}
                         className="btn btn-primary btn-block">
                         Search
                     </button>
@@ -47,6 +52,7 @@ const AnimeSearch = () => {
 
             <ul className="list-group">
                 {
+/*                    myResults && myResults.Search && myResults.Search.map((anime) => {*/
                     results && results.Search && results.Search.map((anime) => {
                         return(
                             <li className="list-group-item">
@@ -55,9 +61,21 @@ const AnimeSearch = () => {
                         )
                     })
                 }
+                {JSON.stringify(results)}
             </ul>
         </div>
     )
 }
+
+/*
+const stateToPropertiesManager = (state) => ({
+    myResults: state.animeReducer.results
+})
+
+const dispatchToPropertiesManager = (dispatch) => ({
+    findAnimeByTitle: (title) => animeActions.findAnimeByTitle(dispatch, title)
+})
+
+export default connect(stateToPropertiesManager, dispatchToPropertiesManager)(AnimeSearch)*/
 
 export default AnimeSearch
