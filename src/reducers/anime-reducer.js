@@ -10,7 +10,6 @@ const animeReducer = (state=initialState, action) => {
         // find anime by search title
         case FIND_ANIME_BY_TITLE:
             return {
-                ...state,
                 results: action.results
             }
         default:
