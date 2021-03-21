@@ -17,9 +17,11 @@ const AnimeSearch = () => {
         history.push(title)
         animeService.findAnimeByTitle(title)
             .then((results) => {
+                console.log(results)
                 setResults(results)
             })
     }
+
     return(
         <div>
             <h2>Search Screen</h2>

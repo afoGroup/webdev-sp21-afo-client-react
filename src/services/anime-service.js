@@ -37,7 +37,7 @@ const findAnimeByGenre = (genreId) => {
         .then(response => response.json())
 }
 
-export default{
+const api = {
     //search operation by user
     findAllAnimeForUser,
     findWatchedAnimeForUser,
@@ -47,3 +47,5 @@ export default{
     findAnimeByTitle,
     findAnimeByGenre
 }
+
+export default api;
