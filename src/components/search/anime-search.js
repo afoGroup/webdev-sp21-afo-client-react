@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useParams} from "react-router-dom";
 import {connect} from 'react-redux';
 import animeActions from "../../actions/anime-actions";
-import {ACTION, ADVENTURE, COMEDY, FANTASY, HORROR} from "../../constants/genre-id";
+import {ACTION, ADVENTURE, COMEDY, FANTASY, HORROR, ROMANCE, SCI_FI, THRILLER} from "../../constants/genre-id";
 
 const AnimeSearch = (
         {
@@ -16,41 +16,11 @@ const AnimeSearch = (
     const [searchGenre, setSearchGenre] = useState(ACTION)
     const [searchType, setSearchType] = useState(1)
 
-    /*useEffect(() => {
-        setSearchTitle(title)
-    }, [])*/
-
     return (
         <div>
             <h2>Anime Search</h2>
             <div className="row">
-                {
-                    searchType==1 &&
-                    <div className="col-6">
 
-                        <input value={searchTitle}
-                               onChange={(event) => {
-                                   setSearchTitle(event.target.value)
-                               }}
-                               className="form-control"/>
-                    </div>
-                }
-                {
-                    searchType!=1 &&
-                    <div className="col-6">
-                        <select
-                            onChange={(e) => {
-                                setSearchGenre(e.target.value)
-                            }}
-                            value={searchGenre} className="form-control">
-                            <option value={ACTION}>Action</option>
-                            <option value={ADVENTURE}>Adventure</option>
-                            <option value={COMEDY}>Comedy</option>
-                            <option value={FANTASY}>Fantasy</option>
-                            <option value={HORROR}>Horror</option>
-                        </select>
-                    </div>
-                }
                 <div className="col-3">
                     <select
                         onChange={(e) => {
@@ -61,39 +31,62 @@ const AnimeSearch = (
                         <option value={0}>Genre</option>
                     </select>
                 </div>
+
+
+                {searchType==1 &&
+                    <div className="col-6">
+                        <input value={searchTitle}
+                               onChange={(event) => {
+                                   setSearchTitle(event.target.value)}}
+                               className="form-control"/>
+                    </div>
+                }
+
+                {searchType!=1 &&
+                    <div className="col-6">
+                        <select
+                            onChange={(e) => {
+                                setSearchGenre(e.target.value)}}
+                            value={searchGenre} className="form-control">
+                            <option value={ACTION}>Action</option>
+                            <option value={ADVENTURE}>Adventure</option>
+                            <option value={COMEDY}>Comedy</option>
+                            <option value={FANTASY}>Fantasy</option>
+                            <option value={HORROR}>Horror</option>
+                            <option value={THRILLER}>Thriller</option>
+                            <option value={ROMANCE}>Romance</option>
+                            <option value={SCI_FI}>Sci-Fi</option>
+                        </select>
+                    </div>
+                }
+
                 <div className="col-3">
-                    {
-                        searchType==1 &&
+                    {searchType==1 &&
                         <button
                             onClick={() => {
-                                findAnimeByTitle(searchTitle)
-                            }}
-                            className="btn btn-primary btn-block">
-                            Search
+                                findAnimeByTitle(searchTitle)}}
+                            className="btn btn-primary btn-block">Search
                         </button>
                     }
-                    {
-                        searchType!=1 &&
+
+                    {searchType!=1 &&
                         <button
                             onClick={() => {
-                                findAnimeByGenre(searchGenre)
-                            }}
-                            className="btn btn-primary btn-block">
-                            Search
+                                findAnimeByGenre(searchGenre)}}
+                            className="btn btn-primary btn-block">Search
                         </button>
                     }
                 </div>
             </div>
+
             <br/>
 
             <ul className="list-group">
-                {
-                    myResults && myResults.results && myResults.results.map(anime =>
+                {myResults && myResults.results && myResults.results.map(anime =>
                             <li className="list-group-item">
                                 {anime.title}
                             </li>
-                    )
-                }
+                )}
             </ul>
         </div>
     )

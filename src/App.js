@@ -1,6 +1,6 @@
 import {BrowserRouter, Route} from "react-router-dom";
 import AnimeSearch from "./components/search/anime-search";
-import HomeScreen from "./components/afo-home";
+import HomeScreen from "./components/home/afo-home";
 import animeReducer from "./reducers/anime-reducer";
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
