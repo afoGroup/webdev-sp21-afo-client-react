@@ -7,7 +7,7 @@ export const findAnimeByTitle = (dispatch, title) => {
         .findAnimeByTitle(title)
         .then(results => dispatch({
             type: FIND_ANIME_BY_TITLE,
-            results
+            results: results
         }))
 }
 

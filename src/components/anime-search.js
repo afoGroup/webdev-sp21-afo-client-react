@@ -14,12 +14,12 @@ const AnimeSearch = (
 
     useEffect(() => {
         setSearchTitle(title)
-        findAnimeByTitle(title)
+        //findAnimeByTitle(title)
     }, [])
 
     return (
         <div>
-            <h2>Search Screen</h2>
+            <h2>Search By Anime Title</h2>
             <div className="row">
                 <div className="col-9">
                     <input value={searchTitle}
@@ -42,16 +42,12 @@ const AnimeSearch = (
 
             <ul className="list-group">
                 {
-
-                    myResults && myResults.Search && myResults.Search.map((anime) => {
-                    return (
+                    myResults && myResults.results && myResults.results.map(anime =>
                             <li className="list-group-item">
                                 {anime.title}
                             </li>
-                        )
-                    })
+                    )
                 }
-                {JSON.stringify(myResults)}
             </ul>
         </div>
     )
