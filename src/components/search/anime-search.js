@@ -83,9 +83,32 @@ const AnimeSearch = (
 
             <ul className="list-group">
                 {myResults && myResults.results && myResults.results.map(anime =>
-                            <li className="list-group-item">
-                                {anime.title}
-                            </li>
+                        <li className="list-group-item">
+                            <div className="col-2">
+                                Id: {anime.mal_id}
+                            </div>
+
+                            <div className="col-10">
+                                <h3>
+                                    {anime.title}
+                                </h3>
+                            </div>
+
+                            <div className="col-12">
+                                <p>
+                                    <img src={anime.image_url} width={120} style={{float: "right"}}/>
+                                    {anime.synopsis}
+                                </p>
+                            </div>
+
+                            <div className="col-4">
+                                <p>
+                                    Rated {anime.rated}
+                                </p>
+                            </div>
+
+                        </li>
+
                 )}
             </ul>
         </div>
