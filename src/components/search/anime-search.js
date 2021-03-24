@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {useParams} from "react-router-dom";
 import {connect} from 'react-redux';
 import animeActions from "../../actions/anime-actions";
@@ -12,9 +12,10 @@ const AnimeSearch = (
         }
 ) => {
     const {title} = useParams()
+    const [searchType, setSearchType] = useState(1)
     const [searchTitle, setSearchTitle] = useState(title)
     const [searchGenre, setSearchGenre] = useState(ACTION)
-    const [searchType, setSearchType] = useState(1)
+    const [searchURL, setSearchURL] = useState()
 
     return (
         <div>
@@ -24,16 +25,17 @@ const AnimeSearch = (
                 <div className="col-3">
                     <select
                         onChange={(e) => {
-                            setSearchType(e.target.value)
+                            setSearchType(parseInt(e.target.value))
                         }}
                         value={searchType} className="form-control">
                         <option value={1}>Title</option>
                         <option value={0}>Genre</option>
+                        <option value={2}>Image URL</option>
                     </select>
                 </div>
 
 
-                {searchType==1 &&
+                {searchType===1 &&
                     <div className="col-6">
                         <input value={searchTitle}
                                onChange={(event) => {
@@ -42,7 +44,7 @@ const AnimeSearch = (
                     </div>
                 }
 
-                {searchType!=1 &&
+                {searchType===0 &&
                     <div className="col-6">
                         <select
                             onChange={(e) => {
@@ -60,8 +62,17 @@ const AnimeSearch = (
                     </div>
                 }
 
+                {searchType===2 &&
+                <div className="col-6">
+                    <input value={searchTitle}
+                           onChange={(event) => {
+                               setSearchTitle(event.target.value)}}
+                           className="form-control"/>
+                </div>
+                }
+
                 <div className="col-3">
-                    {searchType==1 &&
+                    {searchType===1 &&
                         <button
                             onClick={() => {
                                 findAnimeByTitle(searchTitle)}}
@@ -69,13 +80,21 @@ const AnimeSearch = (
                         </button>
                     }
 
-                    {searchType!=1 &&
+                    {searchType===0 &&
                         <button
                             onClick={() => {
                                 findAnimeByGenre(searchGenre)}}
                             className="btn btn-primary btn-block">Search
                         </button>
                     }
+                    {/*{searchType===2 &&*/}
+                    {/*<button*/}
+                    {/*    onClick={() => {*/}
+                    {/*        findAnimeByURL(searchImageURL)}}*/}
+                    {/*    className="btn btn-primary btn-block">Search*/}
+                    {/*</button>*/}
+                    {/*}*/}
+
                 </div>
             </div>
 

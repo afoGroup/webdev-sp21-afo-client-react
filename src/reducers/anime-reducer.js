@@ -17,6 +17,10 @@ const animeReducer = (state=initialState, action) => {
             return {
                 results: action.results
             }
+        // case FIND_ANIME_BY_URL:
+        //     return {
+        //         results: action.results
+        //     }
         default:
             return state
     }
