@@ -65,7 +65,7 @@ const AnimeSearch = (
 
                 {searchType===2 &&
                 <div className="col-6">
-                    <input value={searchTitle}
+                    <input value={searchURL}
                            onChange={(event) => {
                                setSearchURL(event.target.value)}}
                            className="form-control"/>
