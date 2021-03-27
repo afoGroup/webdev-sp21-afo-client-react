@@ -8,7 +8,8 @@ const AnimeSearch = (
         {
             myResults = [],
             findAnimeByTitle,
-            findAnimeByGenre
+            findAnimeByGenre,
+            findAnimeByURL
         }
 ) => {
     const {title} = useParams()
@@ -66,7 +67,7 @@ const AnimeSearch = (
                 <div className="col-6">
                     <input value={searchTitle}
                            onChange={(event) => {
-                               setSearchTitle(event.target.value)}}
+                               setSearchURL(event.target.value)}}
                            className="form-control"/>
                 </div>
                 }
@@ -75,7 +76,9 @@ const AnimeSearch = (
                     {searchType===1 &&
                         <button
                             onClick={() => {
-                                findAnimeByTitle(searchTitle)}}
+                                findAnimeByTitle(searchTitle)
+                                console.log(searchTitle)
+                            }}
                             className="btn btn-primary btn-block">Search
                         </button>
                     }
@@ -87,13 +90,13 @@ const AnimeSearch = (
                             className="btn btn-primary btn-block">Search
                         </button>
                     }
-                    {/*{searchType===2 &&*/}
-                    {/*<button*/}
-                    {/*    onClick={() => {*/}
-                    {/*        findAnimeByURL(searchImageURL)}}*/}
-                    {/*    className="btn btn-primary btn-block">Search*/}
-                    {/*</button>*/}
-                    {/*}*/}
+                    {searchType===2 &&
+                    <button
+                        onClick={() => {
+                            findAnimeByURL(searchURL)}}
+                        className="btn btn-primary btn-block">Search
+                    </button>
+                    }
 
                 </div>
             </div>
@@ -102,7 +105,7 @@ const AnimeSearch = (
 
             <ul className="list-group">
                 {myResults && myResults.results && myResults.results.map(anime =>
-                        <li className="list-group-item">
+                        <li className="list-group-item" key={anime.mal_id} >
                             <div className="col-2">
                                 Id: {anime.mal_id}
                             </div>
@@ -140,7 +143,8 @@ const stateToPropertiesManager = (state) => ({
 
 const dispatchToPropertiesManager = (dispatch) => ({
     findAnimeByTitle: (title) => animeActions.findAnimeByTitle(dispatch, title),
-    findAnimeByGenre: (genreId) => animeActions.findAnimeByGenre(dispatch, genreId)
+    findAnimeByGenre: (genreId) => animeActions.findAnimeByGenre(dispatch, genreId),
+    findAnimeByURL: (url) => animeActions.findAnimeByURL(dispatch, url),
 })
 
 export default connect(stateToPropertiesManager, dispatchToPropertiesManager)(AnimeSearch)

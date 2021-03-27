@@ -24,27 +24,16 @@ export const findAnimeByGenre = (dispatch, genreId) => {
 
 export const findAnimeByURL = (dispatch, imageURL) => {
     imageAnimeService
-        .findAnimeByURL(imageURL)
-        .then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-        })
+        .findImageByURL(imageURL)
         .then(data => {
-            const animeIds = []
-            data.docs.forEach(animeResult => animeIds.push(animeResult.mal_id))
-            return animeIds
+            const animeName = data.docs[0].title_english
+            return animeService.findAnimeByTitle(animeName)
         })
-        .then(animeIds => {
-            animeIds.forEach(animeIds => fetch())
-        })
-        // Lazy approach
-        // Alternatively I can use the title of the 1st result and retrieve by title
-
-        // .then(results => dispatch({
-        //     type: FIND_ANIME_BY_TITLE,
-        //     results: results
-        // }))
+        .then(results => dispatch({
+            type: FIND_ANIME_BY_TITLE,
+            results: results
+        }))
+        .catch(error => console.log(error))
 }
 
 const animeActions = {
