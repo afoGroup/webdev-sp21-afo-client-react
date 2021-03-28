@@ -1,5 +1,4 @@
 import {BrowserRouter, Route} from "react-router-dom";
-import AnimeSearch from "./components/search/anime-search";
 import AfoHome from "./components/home/afo-home";
 import AfoSearch from "./components/search/afo-search";
 import animeReducer from "./reducers/anime-reducer";

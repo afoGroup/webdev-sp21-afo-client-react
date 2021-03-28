@@ -4,7 +4,7 @@ const SearchForm= (props) => {
     const [animeTab, setAnimeTab] = useState(true);
     const [groupTab, setGroupTab] = useState(false);
     const [userTab, setUserTab] = useState(false);
-    const [animeTabOption, setAnimeTabOption] = useState('name');
+    const [animeTabOption, setAnimeTabOption] = useState('title');
 
     const tabClicked = (tab) => {
         if(tab === 'anime'){
@@ -61,8 +61,8 @@ const SearchForm= (props) => {
                                         <button
                                             type="button"
                                             className="btn btn-secondary anime-form-btn"
-                                            value="searchTitle"
-                                            onClick={() => setAnimeTabOption('name')}>
+                                            value="searchTitleBtn"
+                                            onClick={() => setAnimeTabOption('title')}>
                                             Search by Title
                                         </button>
                                     </div>
@@ -70,7 +70,7 @@ const SearchForm= (props) => {
                                         <button
                                             type="button"
                                             className="btn btn-secondary anime-form-btn"
-                                            value="searchImage"
+                                            value="searchImageBtn"
                                             onClick={() => setAnimeTabOption('image')}>
                                             Search by Image
                                         </button>
@@ -79,7 +79,7 @@ const SearchForm= (props) => {
                                 <div className="row">
                                     <div className="col input-form">
                                         {
-                                            animeTabOption === 'name' &&
+                                            animeTabOption === 'title' &&
                                             <>
                                                 <div className="row">
                                                     <div className="col-12">
@@ -87,7 +87,22 @@ const SearchForm= (props) => {
                                                         <br/>
                                                         <input type="text"
                                                                name="animeTitleInput"
-                                                               className="text-input-box"/>
+                                                               value={props.searchTitle}
+                                                               className="text-input-box"
+                                                               onChange={(event) => {
+                                                                   props.setSearchTitle(event.target.value)
+                                                               }}/>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-12 text-center">
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-outline-secondary btn-block search-btn mt-5"
+                                                            value="searchAnimeTitle"
+                                                            onClick={() => {props.searchClicked('title')}}>
+                                                            Search
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </>
@@ -101,21 +116,26 @@ const SearchForm= (props) => {
                                                         <br/>
                                                         <input type="text"
                                                                name="animeImageInput"
-                                                               className="text-input-box"/>
+                                                               value={props.searchURL}
+                                                               className="text-input-box"
+                                                               onChange={(event) => {
+                                                                   props.setSearchURL(event.target.value)
+                                                               }}/>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-12 text-center">
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-outline-secondary btn-block search-btn mt-5"
+                                                            value="searchAnimeURL"
+                                                            onClick={() => {props.searchClicked('image')}}>
+                                                            Search
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </>
                                         }
-                                        <div className="row">
-                                            <div className="col-12 text-center">
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-outline-secondary btn-block search-btn mt-5"
-                                                    value="searchAnime">
-                                                    Search
-                                                </button>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +159,8 @@ const SearchForm= (props) => {
                                                 <button
                                                     type="button"
                                                     className="btn btn-outline-secondary btn-block search-btn mt-5"
-                                                    value="searchGroup">
+                                                    value="searchGroup"
+                                                    onClick={() => {props.searchClicked('group')}}>
                                                     Search
                                                 </button>
                                             </div>
@@ -167,7 +188,8 @@ const SearchForm= (props) => {
                                                 <button
                                                     type="button"
                                                     className="btn btn-outline-secondary btn-block search-btn mt-5"
-                                                    value="searchUser">
+                                                    value="searchUser"
+                                                    onClick={() => {props.searchClicked('user')}}>
                                                     Search
                                                 </button>
                                             </div>
