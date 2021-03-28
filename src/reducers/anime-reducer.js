@@ -1,9 +1,9 @@
-import {FIND_ANIME_BY_GENRE, FIND_ANIME_BY_TITLE, FIND_ANIME_BY_ID} from "../actions/action-constants";
+import {FIND_ANIME_BY_GENRE, FIND_ANIME_BY_TITLE, FIND_ANIME_BY_ID, ADD_RESULT_PAGE} from "../actions/action-constants";
 
 const initialState = {
     results: [],
-    searchKey: '',
-    user: {}
+    user: {},
+    searchKey: ''
 };
 
 const animeReducer = (state=initialState, action) => {
