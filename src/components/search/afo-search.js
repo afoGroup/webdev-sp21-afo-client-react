@@ -1,10 +1,12 @@
-import React from 'react'
+import React from "react";
 import AfoNavbar from "../navbar/afo-navbar";
-import GroupDiscover from "../group-discover";
-import FilterList from "../filter-list";
+import SearchForm from "./search-form";
+import SearchResults from "./search-results";
+import "../../styles/afo-search.css"
 
-const AfoHome = () => {
-    return (
+const AfoSearch = (props) => {
+
+    return(
         <div className="container-fluid">
             <div className="row">
                 <div className="col-12">
@@ -13,11 +15,14 @@ const AfoHome = () => {
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-12">
-                                    <h1 className="afo-purple afo-header">AniFans Only</h1>
+                                    <h1 className="afo-purple afo-header">Search</h1>
                                 </div>
                             </div>
-                            <GroupDiscover/>
-                            <FilterList/>
+                            <SearchForm/>
+                            <div className="row">
+                                <div className="col-12 search-page-break"></div>
+                            </div>
+                            <SearchResults/>
                         </div>
                     </div>
                 </div>
@@ -26,4 +31,4 @@ const AfoHome = () => {
     )
 };
 
-export default AfoHome;
+export default AfoSearch;

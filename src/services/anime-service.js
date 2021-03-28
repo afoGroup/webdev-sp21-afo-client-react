@@ -7,35 +7,35 @@ const ANIME_URL = "https://api.jikan.moe/v3"
 const findAllAnimeForUser = (user) => {
     return fetch(`${ANIME_URL}/user/${user}/animelist/all`)
         .then(response => response.json())
-}
+};
 
 const findWatchedAnimeForUser = (user) => {
     return fetch(`${ANIME_URL}/user/${user}/animelist/watching`)
         .then(response => response.json())
-}
+};
 
 const findCompletedAnimeForUser = (user) => {
     return fetch(`${ANIME_URL}/user/${user}/animelist/completed`)
         .then(response => response.json())
-}
+};
 
-// fetch request for single MyAnimeList Objects
+// fetch request for single MyAnimeList Object
 const findAnimeByID = (id) => {
     return fetch(`${ANIME_URL}/anime/${id}`)
         .then(response => response.json())
-}
+};
 
-// fetch request for anime by tile
+// fetch request for anime by title
 const findAnimeByTitle = (title) => {
     return fetch(`${ANIME_URL}/search/anime?q=${title}`)
         .then(response => response.json())
-}
+};
 
 // fetch request for anime by genre
 const findAnimeByGenre = (genreId) => {
     return fetch(`${ANIME_URL}/search/anime?q=&genre=${genreId}`)
         .then(response => response.json())
-}
+};
 
 const api = {
     //search operation by user
@@ -46,6 +46,6 @@ const api = {
     findAnimeByID,
     findAnimeByTitle,
     findAnimeByGenre
-}
+};
 
 export default api;

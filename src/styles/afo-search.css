@@ -1,0 +1,96 @@
+#animeTab:hover > .tab-text {
+    color: #670AF5;
+}
+
+#groupTab:hover > .tab-text {
+    color: #670AF5;
+}
+
+#userTab:hover > .tab-text {
+    color: #670AF5;
+}
+
+.box-tab-row{
+    height: 50px;
+    width: 70%;
+    max-width: 800px;
+    margin:auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.box-form-row{
+    height: 380px;
+    width: 70%;
+    max-width: 800px;
+    background-color: white;
+    margin:auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.box-tab{
+    background-color: #E8E8E8;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.box-tab-12{
+    border-right: 2px solid black;
+}
+
+.tab-text{
+    padding-top: 10px;
+}
+
+.tab-text:hover{
+    color: #670AF5;
+}
+
+.box-tab.active{
+    background-color: white;
+    border-bottom: 2px solid white;
+}
+
+.box-form{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.input-form{
+    padding: 15px 125px;
+}
+
+.anime-form-btn{
+    width: 150px;
+}
+
+.text-input-box{
+    width: 100%;
+}
+
+.search-btn:hover{
+    background-color: #670AF5;
+}
+
+@media screen and (max-width: 610px){
+    .box-form-row{
+        width: 95%
+    }
+    .box-tab-row{
+        width: 95%
+    }
+}
+
+@media screen and (max-width: 790px){
+    .input-form{
+        padding: 15px 15px;
+    }
+}

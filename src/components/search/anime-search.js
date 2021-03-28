@@ -33,7 +33,7 @@ const AnimeSearch = (
                 </div>
 
 
-                {searchType==1 &&
+                {searchType===1 &&
                     <div className="col-6">
                         <input value={searchTitle}
                                onChange={(event) => {
@@ -42,7 +42,7 @@ const AnimeSearch = (
                     </div>
                 }
 
-                {searchType!=1 &&
+                {searchType!==1 &&
                     <div className="col-6">
                         <select
                             onChange={(e) => {
@@ -61,7 +61,7 @@ const AnimeSearch = (
                 }
 
                 <div className="col-3">
-                    {searchType==1 &&
+                    {searchType===1 &&
                         <button
                             onClick={() => {
                                 findAnimeByTitle(searchTitle)}}
@@ -69,7 +69,7 @@ const AnimeSearch = (
                         </button>
                     }
 
-                    {searchType!=1 &&
+                    {searchType!==1 &&
                         <button
                             onClick={() => {
                                 findAnimeByGenre(searchGenre)}}
