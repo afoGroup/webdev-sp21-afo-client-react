@@ -1,4 +1,4 @@
-const ANIME_URL = "https://api.jikan.moe/v3"
+import {ANIME_URL} from "../constants/api-urls"
 
 // tested with postman for users:
 // 1. Nekomata1037
