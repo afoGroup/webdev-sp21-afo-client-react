@@ -12,6 +12,7 @@ const AfoAnime = ({currentAnime, findAnimeByID}) => {
 
     useEffect(() => {
         console.log('setting new page');
+        console.log(currentAnime);
         findAnimeByID(animeId);
         setPageStatus('set');
     }, [pageStatus, animeId, findAnimeByID]);
@@ -27,6 +28,8 @@ const AfoAnime = ({currentAnime, findAnimeByID}) => {
                                 <div className="col-12">
                                     <h1 className="afo-purple afo-header">Anime: {animeId}</h1>
                                     <p>{currentAnime.title}</p>
+                                    <p>{currentAnime.episodes}</p>
+                                    <p>{currentAnime.synopsis}</p>
                                 </div>
                             </div>
                         </div>
