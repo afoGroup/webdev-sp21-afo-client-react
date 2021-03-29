@@ -1,10 +1,9 @@
-import {FIND_ANIME_BY_GENRE, FIND_ANIME_BY_TITLE, FIND_ANIME_BY_ID, ADD_RESULT_PAGE} from "../actions/action-constants";
+import {FIND_ANIME_BY_GENRE, FIND_ANIME_BY_TITLE, FIND_ANIME_BY_ID} from "../actions/action-constants";
 
 const initialState = {
     results: [],
     user: {},
-    searchKey: '',
-    pages: []
+    searchKey: ''
 };
 
 const animeReducer = (state=initialState, action) => {
@@ -14,21 +13,18 @@ const animeReducer = (state=initialState, action) => {
         case FIND_ANIME_BY_TITLE:
             return {
                 results: action.results,
-                searchKey: action.searchKey,
-                pages: action.pages
+                searchKey: action.searchKey
             };
         // find anime by genre id
         case FIND_ANIME_BY_GENRE:
             return {
                 results: action.results,
-                searchKey: action.searchKey,
-                pages: action.pages
+                searchKey: action.searchKey
             };
         case FIND_ANIME_BY_ID:
             return {
                 results: action.results,
-                searchKey: action.searchKey,
-                pages: action.pages
+                searchKey: action.searchKey
             };
         default:
             return state

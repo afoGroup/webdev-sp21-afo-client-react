@@ -8,8 +8,7 @@ export const findAnimeByTitle = (dispatch, title) => {
         .then(results => dispatch({
             type: FIND_ANIME_BY_TITLE,
             results: results,
-            searchKey: title,
-            pages: makePageLists(results)
+            searchKey: title
         }))
 };
 
@@ -19,8 +18,7 @@ export const findAnimeById = (dispatch, animeId) => {
         .then(results => dispatch({
             type: FIND_ANIME_BY_ID,
             results: results,
-            searchKey: 'id',
-            pages: makePageLists(results)
+            searchKey: 'id'
         }))
 };
 
@@ -30,8 +28,7 @@ export const findAnimeByGenre = (dispatch, genreId) => {
         .then(results => dispatch({
             type: FIND_ANIME_BY_GENRE,
             results: results,
-            searchKey: 'id',
-            pages: makePageLists(results)
+            searchKey: 'id'
         }))
 };
 
@@ -45,8 +42,7 @@ export const findAnimeByURL = (dispatch, imageURL) => {
         .then(results => dispatch({
             type: FIND_ANIME_BY_TITLE,
             results: results,
-            searchKey: 'url',
-            pages: makePageLists(results)
+            searchKey: 'url'
         }))
         .catch(error => console.log(error))
 };
@@ -56,30 +52,3 @@ const animeActions = {
 };
 
 export default animeActions;
-
-const makePageLists = (results) => {
-    let newSearchPages = [];
-
-    let numResults = results.length;
-    let remainder = numResults % 10;
-    let numPages = Math.floor( numResults / 10);
-    if(!(remainder === 0)){
-        numPages = numPages + 1;
-    }
-    for(let p = 1; p < numPages+1; p++){
-        let tempPageList = [];
-        let first = 0;
-        let last = 0;
-        if(p === numPages && !(remainder === 0)){
-            first = (p*10)-10;
-            last = first + (remainder+1);
-        } else{
-            last = p*10;
-            first = last-10;
-        }
-        tempPageList = results.slice(first, last);
-        newSearchPages.push(tempPageList);
-    }
-    return newSearchPages;
-
-};

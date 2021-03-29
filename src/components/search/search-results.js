@@ -22,7 +22,7 @@ const SearchResults= (props) => {
                 <div className="row">
                     <div className="col-12">
                         {
-                            props.pagesList[props.currentPage-1].map((anime,index) =>
+                            props.resultPages[props.currentPage-1].map((anime,index) =>
                                 <AnimeResult
                                     key={index}
                                     anime={anime}

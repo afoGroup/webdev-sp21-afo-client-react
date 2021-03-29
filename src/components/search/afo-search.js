@@ -7,10 +7,10 @@ import SearchResults from "./search-results";
 import "../../styles/afo-search.css"
 
 const AfoSearch = (props) => {
-    const [searchStatus, setSearchStatus] = useState('init');
     const [searchType, setSearchType] = useState('init');
     const [searchTitle, setSearchTitle] = useState('');
     const [searchURL, setSearchURL] = useState('');
+    const [resultPages, setResultPages] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pcFirst, setPcFirst] = useState(0);
     const [pcSecond, setPcSecond] = useState(0);
@@ -18,16 +18,12 @@ const AfoSearch = (props) => {
 
     useEffect(() => {
         console.log('setting...');
-        console.log(searchTitle);
-        console.log(searchStatus);
-        console.log(props.resultsList);
-        console.log(props.pagesList);
-        console.log(pcFirst);
-        console.log(pcSecond);
-        console.log(pcThird);
+        makePageLists();
+    }, [props.resultsList]);
+
+    useEffect(() => {
         updatePageControls('first');
-        setSearchStatus('set');
-    }, [searchStatus]);
+    }, [resultPages]);
 
     const searchClicked = (searchType) => {
         setSearchType(searchType);
@@ -36,7 +32,39 @@ const AfoSearch = (props) => {
         } else if(searchType === 'url'){
             props.findAnimeByURL(searchURL);
         }
-        setSearchStatus('search');
+        console.log(searchTitle);
+        console.log(props.resultsList);
+        console.log(resultPages);
+        console.log(pcFirst);
+        console.log(pcSecond);
+        console.log(pcThird);
+    };
+
+    const makePageLists = () => {
+        let newSearchPages = [];
+        if(props.resultsList.results){
+            let numResults = props.resultsList.results.length;
+            let remainder = numResults % 10;
+            let numPages = Math.floor( numResults / 10);
+            if(!(remainder === 0)){
+                numPages = numPages + 1;
+            }
+            for(let p = 1; p < numPages+1; p++){
+                let tempPageList = [];
+                let first = 0;
+                let last = 0;
+                if(p === numPages && !(remainder === 0)){
+                    first = (p*10)-10;
+                    last = first + (remainder+1);
+                } else{
+                    last = p*10;
+                    first = last-10;
+                }
+                tempPageList = props.resultsList.results.slice(first, last);
+                newSearchPages.push(tempPageList);
+            }
+            setResultPages(newSearchPages);
+        }
     };
 
     const updatePageControls = (val) => {
@@ -44,7 +72,7 @@ const AfoSearch = (props) => {
         let currentFirst = pcFirst;
         let currentSecond = pcSecond;
         let currentThird = pcThird;
-        let numPages = props.pagesList.length;
+        let numPages = resultPages.length;
         if(val === 'first'){
             setCurrentPage(1);
             setPcFirst(1);
@@ -145,7 +173,6 @@ const AfoSearch = (props) => {
                                 </div>
                             </div>
                             <SearchForm
-                                searchStatus={searchStatus}
                                 searchTitle={searchTitle}
                                 setSearchTitle={setSearchTitle}
                                 searchURL={searchURL}
@@ -153,12 +180,12 @@ const AfoSearch = (props) => {
                                 searchClicked={searchClicked}
                             />
                             {
-                                searchType !== 'init' && props.resultsList.results && props.pagesList.length >= 1 &&
+                                searchType !== 'init' && props.resultsList.results && resultPages.length >= 1 &&
                                 <>
                                     <SearchResults
                                         searchKey={props.searchKey}
                                         resultsList={props.resultsList.results}
-                                        pagesList={props.pagesList}
+                                        resultPages={resultPages}
                                         currentPage={currentPage}
                                         findAnimeById={props.findAnimeByID}
                                     />
@@ -227,7 +254,7 @@ const AfoSearch = (props) => {
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-12 pt-5 text-center">
-                                                        <p>({props.pagesList.length} pages total)</p>
+                                                        <p>({resultPages.length} pages total)</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -245,8 +272,7 @@ const AfoSearch = (props) => {
 
 const stateToPropertiesManager = (state) => ({
     resultsList: state.animeReducer.results,
-    searchKey: state.animeReducer.searchKey,
-    pagesList: state.animeReducer.pages
+    searchKey: state.animeReducer.searchKey
 });
 
 const dispatchToPropertiesManager = (dispatch) => ({
