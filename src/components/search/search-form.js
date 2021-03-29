@@ -138,7 +138,7 @@ const SearchForm= (props) => {
                                                             type="button"
                                                             className="btn btn-outline-secondary btn-block search-btn mt-5"
                                                             value="searchAnimeURL"
-                                                            onClick={() => {props.searchClicked('image')}}>
+                                                            onClick={() => {props.searchClicked('url')}}>
                                                             Search
                                                         </button>
                                                     </div>

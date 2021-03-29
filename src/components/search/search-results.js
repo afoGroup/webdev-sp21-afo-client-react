@@ -8,7 +8,7 @@ const SearchResults= (props) => {
             <div className="col-12">
                 <div className="row my-4">
                     <div className="col-12 text-center">
-                        <h4 className="afo-purple afo-header">
+                        <h4 className="afo-purple">
                             {props.resultsList.length} Results
                             {
                                 (props.searchKey !== 'url' && props.searchKey !== 'id') &&
