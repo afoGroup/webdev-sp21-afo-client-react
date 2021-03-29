@@ -27,12 +27,12 @@ const AfoAnime = ({currentAnime, findAnimeByID}) => {
                             <div className="row">
                                 <div className="col-12">
                                     {
-                                        currentAnime &&
+                                        currentAnime && currentAnime.genres &&
                                         <>
                                             <h1 className="afo-purple afo-header">Anime: {animeId}</h1>
-                                            <p>{currentAnime.title}</p>
-                                            <p>{currentAnime.episodes}</p>
-                                            <p>{currentAnime.genres[0].name}</p>
+                                            <p>Title: {currentAnime.title}</p>
+                                            <p>Episodes: {currentAnime.episodes}</p>
+                                            <p>Genre {currentAnime.genres[0].name}</p>
                                             <p>{currentAnime.synopsis}</p>
                                         </>
                                     }
