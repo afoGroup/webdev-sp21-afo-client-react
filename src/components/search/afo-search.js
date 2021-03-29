@@ -43,12 +43,6 @@ const AfoSearch = (props) => {
         } else if(searchType === 'url'){
             props.findAnimeByURL(searchURL);
         }
-        console.log(searchTitle);
-        console.log(props.resultsList);
-        console.log(resultPages);
-        console.log(pcFirst);
-        console.log(pcSecond);
-        console.log(pcThird);
     };
 
     const makePageLists = () => {
@@ -191,7 +185,7 @@ const AfoSearch = (props) => {
                                 searchClicked={searchClicked}
                             />
                             {
-                                searchType !== 'init' && props.resultsList.results && resultPages.length >= 1 &&
+                                searchType !== 'init' && props.resultsList && props.resultsList.results && resultPages.length >= 1 &&
                                 <>
                                     <SearchResults
                                         searchKey={props.searchKey}
