@@ -4,7 +4,7 @@ import AfoNavbar from "../navbar/afo-navbar";
 import animeActions from "../../actions/anime-actions";
 import {connect} from "react-redux";
 
-const AfoAnime = (props) => {
+const AfoAnime = ({currentAnime, findAnimeByID}) => {
 
     const[pageStatus, setPageStatus] = useState('init');
 
@@ -12,8 +12,9 @@ const AfoAnime = (props) => {
 
     useEffect(() => {
         console.log('setting new page');
-        props.findAnimeByID(animeId);
-    }, [pageStatus]);
+        findAnimeByID(animeId);
+        setPageStatus('set');
+    }, [pageStatus, animeId, findAnimeByID]);
 
     return (
         <div className="container-fluid">
@@ -25,6 +26,7 @@ const AfoAnime = (props) => {
                             <div className="row">
                                 <div className="col-12">
                                     <h1 className="afo-purple afo-header">Anime: {animeId}</h1>
+                                    <p>{currentAnime.title}</p>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +39,7 @@ const AfoAnime = (props) => {
 
 
 const stateToPropertiesManager = (state) => ({
-    resultsList: state.animeReducer.results
+    currentAnime: state.animeReducer.anime
 });
 
 const dispatchToPropertiesManager = (dispatch) => ({

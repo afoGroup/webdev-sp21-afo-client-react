@@ -17,7 +17,7 @@ export const findAnimeById = (dispatch, animeId) => {
         .findAnimeByID(animeId)
         .then(results => dispatch({
             type: FIND_ANIME_BY_ID,
-            results: results,
+            anime: results,
             searchKey: 'id'
         }))
 };

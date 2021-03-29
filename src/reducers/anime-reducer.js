@@ -3,7 +3,8 @@ import {FIND_ANIME_BY_GENRE, FIND_ANIME_BY_TITLE, FIND_ANIME_BY_ID} from "../act
 const initialState = {
     results: [],
     user: {},
-    searchKey: ''
+    searchKey: '',
+    anime: {}
 };
 
 const animeReducer = (state=initialState, action) => {
@@ -23,7 +24,7 @@ const animeReducer = (state=initialState, action) => {
             };
         case FIND_ANIME_BY_ID:
             return {
-                results: action.results,
+                anime: action.anime,
                 searchKey: action.searchKey
             };
         default:
