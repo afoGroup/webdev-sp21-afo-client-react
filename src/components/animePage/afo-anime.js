@@ -23,13 +23,13 @@ const AfoAnime = ({currentAnime, findAnimeByID}) => {
                 <div className="col-12">
                     <AfoNavbar/>
                     <div className="row top-row">
-                        <div className="col-12">
+                        <div className="col-6">
                             <div className="row">
                                 <div className="col-12">
                                     {
                                         currentAnime && currentAnime.genres &&
                                         <>
-                                            <h1 className="afo-purple afo-header">Anime: {animeId}</h1>
+                                            <h3 className="afo-purple">Anime: {currentAnime.title}</h3>
                                             <p>Title: {currentAnime.title}</p>
                                             <p>Episodes: {currentAnime.episodes}</p>
                                             <p>Genre: {currentAnime.genres[0].name}</p>
@@ -38,6 +38,9 @@ const AfoAnime = ({currentAnime, findAnimeByID}) => {
                                     }
                                 </div>
                             </div>
+                        </div>
+                        <div className="col-6">
+                            img
                         </div>
                     </div>
                 </div>

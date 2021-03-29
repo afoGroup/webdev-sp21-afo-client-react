@@ -15,9 +15,9 @@ const AfoSearch = (props) => {
     const [pcFirst, setPcFirst] = useState(0);
     const [pcSecond, setPcSecond] = useState(0);
     const [pcThird, setPcThird] = useState(0);
+    const [titleAlert, setTitleAlert] = useState(false);
 
     useEffect(() => {
-        console.log('setting...');
         makePageLists();
     }, [props.resultsList]);
 
@@ -25,21 +25,19 @@ const AfoSearch = (props) => {
         updatePageControls('first');
     }, [resultPages]);
 
-    const resetSearch = () => {
-        setSearchType('init');
-        setSearchTitle('');
-        setSearchURL('');
-        setResultPages([]);
-        setCurrentPage(1);
-        setPcFirst(0);
-        setPcSecond(0);
-        setPcThird(0);
-    };
+    useEffect(() => {
+        setTitleAlert(false);
+    }, [searchType]);
 
     const searchClicked = (searchType) => {
         setSearchType(searchType);
         if(searchType === 'title'){
-            props.findAnimeByTitle(searchTitle);
+            setTitleAlert(false);
+            if(searchTitle.length < 3){
+                setTitleAlert(true);
+            } else{
+                props.findAnimeByTitle(searchTitle);
+            }
         } else if(searchType === 'url'){
             props.findAnimeByURL(searchURL);
         }
@@ -183,9 +181,34 @@ const AfoSearch = (props) => {
                                 searchURL={searchURL}
                                 setSearchURL={setSearchURL}
                                 searchClicked={searchClicked}
+                                titleAlert={titleAlert}
                             />
                             {
-                                searchType !== 'init' && props.resultsList && props.resultsList.results && resultPages.length >= 1 &&
+                                searchType !== 'init' &&
+                                props.resultsList &&
+                                props.resultsList.results &&
+                                resultPages.length === 0 &&
+                                <>
+                                    <div className="row my-4">
+                                        <div className="col-12 text-center">
+                                            <h4 className="afo-purple afo-header">
+                                                0 Results
+                                                {
+                                                    (props.searchKey !== 'url' && props.searchKey !== 'id') &&
+                                                    <>
+                                                        {` for "`}{props.searchKey}"
+                                                    </>
+                                                }
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </>
+                            }
+                            {
+                                searchType !== 'init' &&
+                                props.resultsList &&
+                                props.resultsList.results &&
+                                resultPages.length >= 1 &&
                                 <>
                                     <SearchResults
                                         searchKey={props.searchKey}
@@ -220,27 +243,23 @@ const AfoSearch = (props) => {
                                                             </div>
                                                             {
                                                                 pcSecond > 0 &&
-                                                                <>
-                                                                    <div className="col-4 text-center">
-                                                                        <span
-                                                                            className={`btn pcNum ${currentPage === pcSecond ? 'active' : 'inactive'}`}
-                                                                            onClick={() => updatePageControls('pc2')}>
-                                                                            {pcSecond}
-                                                                        </span>
-                                                                    </div>
-                                                                </>
+                                                                <div className="col-4 text-center">
+                                                                    <span
+                                                                        className={`btn pcNum ${currentPage === pcSecond ? 'active' : 'inactive'}`}
+                                                                        onClick={() => updatePageControls('pc2')}>
+                                                                        {pcSecond}
+                                                                    </span>
+                                                                </div>
                                                             }
                                                             {
                                                                 pcThird > 0 &&
-                                                                <>
-                                                                    <div className="col-4 text-center">
-                                                                        <span
-                                                                            className={`btn pcNum ${currentPage === pcThird ? 'active' : 'inactive'}`}
-                                                                            onClick={() => updatePageControls('pc3')}>
-                                                                            {pcThird}
-                                                                        </span>
-                                                                    </div>
-                                                                </>
+                                                                <div className="col-4 text-center">
+                                                                    <span
+                                                                        className={`btn pcNum ${currentPage === pcThird ? 'active' : 'inactive'}`}
+                                                                        onClick={() => updatePageControls('pc3')}>
+                                                                        {pcThird}
+                                                                    </span>
+                                                                </div>
                                                             }
                                                         </div>
                                                     </div>

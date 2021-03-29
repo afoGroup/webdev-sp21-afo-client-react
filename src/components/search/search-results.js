@@ -17,6 +17,10 @@ const SearchResults= (props) => {
                                 </>
                             }
                         </h4>
+                        <p className="">
+                            (Showing items {props.currentPage * 10 - 9}{` - `}
+                            {(props.currentPage * 10 - 9)+props.resultPages[props.currentPage-1].length-1})
+                        </p>
                     </div>
                 </div>
                 <div className="row">
@@ -32,8 +36,6 @@ const SearchResults= (props) => {
                         }
                     </div>
                 </div>
-
-
             </div>
         </div>
     )

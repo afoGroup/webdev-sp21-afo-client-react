@@ -123,6 +123,15 @@
     width: 180px;
 }
 
+.result-read-more{
+    color: #3f0695;
+    text-decoration: underline;
+}
+
+.result-read-more:hover{
+    color: #670AF5;
+}
+
 @media screen and (max-width: 610px){
     .box-form-row{
         width: 95%;
@@ -135,7 +144,7 @@
     }
 }
 
-@media screen and (max-width: 790px){
+@media screen and (max-width: 870px){
     .input-form{
         padding: 15px 15px;
     }

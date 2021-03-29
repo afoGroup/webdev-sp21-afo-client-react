@@ -94,11 +94,20 @@ const SearchForm= (props) => {
                                                                }}/>
                                                     </div>
                                                 </div>
-                                                <div className="row">
+                                                {
+                                                    props.titleAlert &&
+                                                    <>
+                                                        <div className="alert alert-warning mb-0 mt-2" role="alert">
+                                                            Need at least 3 characters for search
+                                                        </div>
+                                                    </>
+                                                }
+
+                                                <div className="row mt-5">
                                                     <div className="col-12 text-center">
                                                         <button
                                                             type="button"
-                                                            className="btn btn-outline-secondary btn-block search-btn mt-5"
+                                                            className="btn btn-outline-secondary btn-block search-btn"
                                                             value="searchAnimeTitle"
                                                             onClick={() => {props.searchClicked('title')}}>
                                                             Search
