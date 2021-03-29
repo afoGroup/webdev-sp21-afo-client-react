@@ -32,7 +32,7 @@ const AfoAnime = ({currentAnime, findAnimeByID}) => {
                                             <h1 className="afo-purple afo-header">Anime: {animeId}</h1>
                                             <p>Title: {currentAnime.title}</p>
                                             <p>Episodes: {currentAnime.episodes}</p>
-                                            <p>Genre {currentAnime.genres[0].name}</p>
+                                            <p>Genre: {currentAnime.genres[0].name}</p>
                                             <p>{currentAnime.synopsis}</p>
                                         </>
                                     }

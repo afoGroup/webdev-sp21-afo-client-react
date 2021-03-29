@@ -25,6 +25,17 @@ const AfoSearch = (props) => {
         updatePageControls('first');
     }, [resultPages]);
 
+    const resetSearch = () => {
+        setSearchType('init');
+        setSearchTitle('');
+        setSearchURL('');
+        setResultPages([]);
+        setCurrentPage(1);
+        setPcFirst(0);
+        setPcSecond(0);
+        setPcThird(0);
+    };
+
     const searchClicked = (searchType) => {
         setSearchType(searchType);
         if(searchType === 'title'){
@@ -42,7 +53,7 @@ const AfoSearch = (props) => {
 
     const makePageLists = () => {
         let newSearchPages = [];
-        if(props.resultsList.results){
+        if(props.resultsList && props.resultsList.results){
             let numResults = props.resultsList.results.length;
             let remainder = numResults % 10;
             let numPages = Math.floor( numResults / 10);
