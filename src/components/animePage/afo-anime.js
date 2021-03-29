@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {useParams} from "react-router-dom";
 import AfoNavbar from "../navbar/afo-navbar";
-import animeActions from "../../actions/anime-actions";
-import {connect} from "react-redux";
 
-const AfoAnime = ({anime}) => {
+const AfoAnime = (props) => {
+
+    const {animeId} = useParams();
+
+    useEffect(() => {
+    });
+
     return (
         <div className="container-fluid">
             <div className="row">
@@ -13,7 +18,7 @@ const AfoAnime = ({anime}) => {
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-12">
-                                    <h1 className="afo-purple afo-header">Anime Page</h1>
+                                    <h1 className="afo-purple afo-header">Anime: {animeId}</h1>
                                 </div>
                             </div>
                         </div>
@@ -24,15 +29,4 @@ const AfoAnime = ({anime}) => {
     )
 };
 
-const stateToPropertiesManager = (state) => ({
-    user: state.animeReducer.user
-});
-
-const dispatchToPropertiesManager = (dispatch) => ({
-    findAnimeByTitle: (title) => animeActions.findAnimeByTitle(dispatch, title),
-    findAnimeByGenre: (genreId) => animeActions.findAnimeByGenre(dispatch, genreId),
-    findAnimeByURL: (url) => animeActions.findAnimeByURL(dispatch, url),
-    findAnimeByID: (animeId) => animeActions.findAnimeById(dispatch, animeId)
-});
-
-export default connect(stateToPropertiesManager, dispatchToPropertiesManager)(AfoAnime);
+export default AfoAnime;

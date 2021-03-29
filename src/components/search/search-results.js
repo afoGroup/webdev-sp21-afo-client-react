@@ -26,6 +26,7 @@ const SearchResults= (props) => {
                                 <AnimeResult
                                     key={index}
                                     anime={anime}
+                                    findAnimeByID={props.findAnimeById}
                                 />
                             )
                         }
