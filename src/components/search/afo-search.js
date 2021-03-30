@@ -31,8 +31,8 @@ const AfoSearch = (props) => {
 
     const searchClicked = (searchType) => {
         setSearchType(searchType);
+        setTitleAlert(false);
         if(searchType === 'title'){
-            setTitleAlert(false);
             if(searchTitle.length < 3){
                 setTitleAlert(true);
             } else{
