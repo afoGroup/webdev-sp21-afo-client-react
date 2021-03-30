@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import AfoNavbar from "../navbar/afo-navbar";
 import animeActions from "../../actions/anime-actions";
 import {connect} from "react-redux";
+import "../../styles/afo-anime.css"
 
 const AfoAnime = ({currentAnime, findAnimeByID}) => {
 
@@ -11,7 +12,6 @@ const AfoAnime = ({currentAnime, findAnimeByID}) => {
     const {animeId} = useParams();
 
     useEffect(() => {
-        console.log('setting new page');
         console.log(currentAnime);
         findAnimeByID(animeId);
         setPageStatus('set');
@@ -22,27 +22,97 @@ const AfoAnime = ({currentAnime, findAnimeByID}) => {
             <div className="row">
                 <div className="col-12">
                     <AfoNavbar/>
-                    <div className="row top-row">
-                        <div className="col-6">
-                            <div className="row">
-                                <div className="col-12">
-                                    {
-                                        currentAnime && currentAnime.genres &&
-                                        <>
-                                            <h3 className="afo-purple">Anime: {currentAnime.title}</h3>
-                                            <p>Title: {currentAnime.title}</p>
-                                            <p>Episodes: {currentAnime.episodes}</p>
-                                            <p>Genre: {currentAnime.genres[0].name}</p>
-                                            <p>{currentAnime.synopsis}</p>
-                                        </>
-                                    }
+                    {
+                        currentAnime && currentAnime.genres &&
+                        <div className="row top-row">
+                            <div className="col-12">
+                                <div className="row">
+                                    <div className="col-12 anime-info">
+                                        <div className="row pb-4">
+                                            <div className="col-12 col-md-6">
+                                                <div className="row">
+                                                    <div className="col-12">
+                                                        <div className="row">
+                                                            <div className="col-12 anime-header">
+                                                                <h3 className="afo-purple">
+                                                                    {currentAnime.title}
+                                                                </h3>
+                                                                <h6>
+                                                                    {currentAnime.title_japanese}
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-12">
+                                                                <p className="afo-gray float-right">
+                                                                    {currentAnime.rating}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-12 pb-5">
+                                                                <h6 className="afo-dark-purple">
+                                                                    <strong>
+                                                                        <i className="fa fa-star"></i>
+                                                                        {` `}{currentAnime.score} / 10
+                                                                    </strong>
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-12 pb-4">
+                                                                <p>
+                                                                    <strong>Genre: </strong>
+                                                                    {
+                                                                        currentAnime.genres.map((genre,index) =>{
+                                                                            if(index+1 === currentAnime.genres.length){
+                                                                                return <span key={index}>{genre.name}</span>
+                                                                            } else{
+                                                                                return <span key={index}>{genre.name}, </span>
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                </p>
+                                                                <p>
+                                                                    <strong>Episodes:</strong> {currentAnime.episodes}
+                                                                </p>
+                                                                <p>
+                                                                    <strong>Aired:</strong> {currentAnime.aired.string}
+                                                                </p>
+                                                                <p>
+                                                                    <strong>Status:</strong> {currentAnime.status}
+                                                                </p>
+                                                                {
+                                                                    currentAnime.trailer_url &&
+                                                                    <a className="btn btn-secondary"
+                                                                       href={currentAnime.trailer_url} target="_blank">
+                                                                        View Trailer
+                                                                    </a>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-12 col-md-6 text-center">
+                                                <img
+                                                    src={currentAnime.image_url}
+                                                    className="anime-img"
+                                                    alt={`Anime, ${currentAnime.title}`}/>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <p>{currentAnime.synopsis}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
+
                             </div>
                         </div>
-                        <div className="col-6">
-                            img
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>

@@ -17,7 +17,6 @@ const store = createStore(reducer);
 function App() {
     return (
         <Provider store={store}>
-            <div className="container-fluid">
                 <BrowserRouter>
                     <Route path={["/", "/home"]} exact={true}>
                         <AfoHome/>
@@ -34,7 +33,6 @@ function App() {
                     </Route>
 
                 </BrowserRouter>
-            </div>
         </Provider>
     );
 }
