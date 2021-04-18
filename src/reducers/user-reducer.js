@@ -1,4 +1,4 @@
-import {FIND_ALL_USERS, FIND_USER_BY_ID, REGISTER_USER} from "../actions/user-constants";
+import {FIND_ALL_USERS, FIND_USER_BY_ID, LOGIN_USER, LOGOUT_USER, REGISTER_USER} from "../actions/user-constants";
 
 const initialState = {
     user: {}
@@ -7,9 +7,13 @@ const initialState = {
 const userReducer = (state=initialState, action) => {
     switch(action.type){
 
-        case REGISTER_USER:
+        case (REGISTER_USER || LOGIN_USER):
             return {
                 user: action.user
+            }
+        case LOGOUT_USER:
+            return {
+                user: {}
             }
         case FIND_ALL_USERS:
             // TODO?
