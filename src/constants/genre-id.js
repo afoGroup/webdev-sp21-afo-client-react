@@ -43,3 +43,51 @@ export const PYSCHOLOGICAL = 40;
 export const THRILLER = 41;
 export const SEINEN = 42;
 export const JOSEI = 43;
+
+export const animeGenres = {
+    ACTION,
+    ADVENTURE,
+    CARS,
+    COMEDY,
+    DEMENTIA,
+    DEMONS,
+    MYSTERY,
+    DRAMA,
+    ECCHI,
+    FANTASY,
+    GAME,
+    HENTAI,
+    HISTORICAL,
+    HORROR,
+    KIDS,
+    MAGIC,
+    MARTIAL_ARTS,
+    MECHA,
+    MUSIC,
+    PARODY,
+    SAMURAI,
+    ROMANCE,
+    SCHOOL,
+    SCI_FI,
+    SHOUJO,
+    SHOUJO_AI,
+    SHOUNEN,
+    SHOUNEN_AI,
+    SPACE,
+    SPORTS,
+    SUPER_POWER,
+    VAMPIRE,
+    YAOI,
+    YURI,
+    HAREM,
+    SLICE_OF_LIFE,
+    SUPERNATURAL,
+    MILITARY,
+    POLICE,
+    PYSCHOLOGICAL,
+    THRILLER,
+    SEINEN,
+    JOSEI
+};
+
+export default animeGenres;
