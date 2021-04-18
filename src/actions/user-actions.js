@@ -38,16 +38,14 @@ export const loginUser = (dispatch, user) => {
                 if(actualUser.username === user.username && actualUser.password === user.password){
                     // user has been found
                     flag = 0
+                    dispatch({
+                        type: LOGIN_USER,
+                        user: actualUser
+                    })
                 }
             })
-            // if the user exists, then we should allow the login operation
-            if(flag !== -1){
-                dispatch({
-                    type: LOGIN_USER,
-                    user: user
-                })
-            }
-            else{
+            // if the user does not exist, then we should not allow the login operation
+            if(flag !== 0){
                 alert("Username/Password combination does not exist.")
             }
         })
