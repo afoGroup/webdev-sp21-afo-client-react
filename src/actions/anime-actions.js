@@ -29,7 +29,7 @@ export const findAnimeByGenre = (dispatch, genreId) => {
             type: FIND_ANIME_BY_GENRE,
             results: results,
             searchKey: 'id'
-        }))
+        })).catch(error => console.log(error))
 };
 
 export const findAnimeByURL = (dispatch, imageURL) => {
