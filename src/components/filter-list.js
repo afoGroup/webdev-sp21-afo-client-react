@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from "react";
 import animeActions from "../actions/anime-actions";
 import {connect} from "react-redux";
-import animeGenres from "../constants/genre-id";
 import '../styles/afo-filter-list.css';
 import {Link} from "react-router-dom";
 
 const FilterList = (props) => {
-    const[selectedGenre, setSelectedGenre] = useState(props.filterList[0].genreName);
+    const[selectedGenreName, setSelectedGenreName] = useState(props.filterList[0].genreName);
+    const[selectedGenreId, setSelectedGenreId] = useState(props.filterList[0].genreId);
 
     useEffect(() => {
-        console.log(props.resultsList);
-    }, [props.resultsList]);
+        props.findAnimeByGenre(selectedGenreId);
+    }, [selectedGenreId]);
 
     const selectedTab = (genre) => {
-        setSelectedGenre(genre.genreName);
-        props.findAnimeByGenre(genre.genreId);
+        setSelectedGenreName(genre.genreName);
+        setSelectedGenreId(genre.genreId);
     };
 
     return(
@@ -30,11 +30,11 @@ const FilterList = (props) => {
                                             props.filterList &&
                                             props.filterList.map((genre, index) =>
                                                 <div className="row">
-                                                    <div className={`col-12 ` + (selectedGenre === genre.genreName ? "afo-filter-tab-box-selected" : "afo-filter-tab-box")}>
+                                                    <div className={`col-12 ` + (selectedGenreName === genre.genreName ? "afo-filter-tab-box-selected" : "afo-filter-tab-box")}>
                                                         <div className={(index+1 === props.filterList.length ? "" : "afo-filter-tab-bottom")}>
                                                             <div className="col-12">
                                                                 <h5
-                                                                    className={`btn afo-filter-tab-title ` + (selectedGenre === genre.genreName ? "afo-purple" : "afo-black")}
+                                                                    className={`btn afo-filter-tab-title ` + (selectedGenreName === genre.genreName ? "afo-purple" : "afo-black")}
                                                                     onClick={() => selectedTab(genre)}>
                                                                     <strong>{genre.genreName}</strong>
                                                                 </h5>
@@ -47,7 +47,7 @@ const FilterList = (props) => {
                                     </ul>
                                 </div>
                                 <div className="col-8 afo-filter-result-container text-center">
-                                    <h5>Most Popular {selectedGenre} Anime</h5>
+                                    <h5>Most Popular {selectedGenreName} Anime</h5>
                                     <ul className="afo-filter-result-box">
                                         {
                                             props.resultsList.anime &&
