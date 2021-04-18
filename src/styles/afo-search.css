@@ -1,0 +1,151 @@
+#animeTab:hover > .tab-text {
+    color: #670AF5;
+}
+
+#groupTab:hover > .tab-text {
+    color: #670AF5;
+}
+
+#userTab:hover > .tab-text {
+    color: #670AF5;
+}
+
+.box-tab-row{
+    height: 50px;
+    width: 70%;
+    max-width: 900px;
+    margin:auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.box-form-row{
+    height: 380px;
+    width: 70%;
+    max-width: 900px;
+    background-color: white;
+    margin:auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.box-tab{
+    background-color: #E8E8E8;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.box-tab-12{
+    border-right: 2px solid black;
+}
+
+.tab-text{
+    padding-top: 10px;
+}
+
+.tab-text:hover{
+    color: #670AF5;
+}
+
+.box-tab.active{
+    background-color: white;
+    border-bottom: 2px solid white;
+}
+
+.box-form{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.input-form{
+    padding: 15px 125px;
+}
+
+.anime-form-btn{
+    width: 150px;
+}
+
+.text-input-box{
+    width: 100%;
+}
+
+.search-btn:hover{
+    background-color: #670AF5;
+}
+
+.page-arrow:hover{
+    color: #670AF5;
+}
+
+.page-control{
+    padding-bottom: 60px;
+    padding-top: 60px;
+    margin:auto;
+    max-width: 500px;
+}
+
+.pcNum.active{
+    color: #670AF5;
+}
+
+.anime-result-container{
+    min-height: 450px;
+    width: 70%;
+    max-width: 900px;
+    background-color: white;
+    margin:auto;
+    border-radius: 5px;
+    border: 2px solid black;
+
+}
+
+.result-header{
+    border-bottom: 2px solid black;
+    margin-bottom: 25px;
+}
+
+.result-header-title{
+    color: black;
+}
+
+.result-header-title:hover{
+    color: #670AF5;
+}
+
+.result-img{
+    width: 180px;
+}
+
+.result-read-more{
+    color: #3f0695;
+    text-decoration: underline;
+}
+
+.result-read-more:hover{
+    color: #670AF5;
+}
+
+@media screen and (max-width: 610px){
+    .box-form-row{
+        width: 95%;
+    }
+    .box-tab-row{
+        width: 95%;
+    }
+    .anime-result-container{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 870px){
+    .input-form{
+        padding: 15px 15px;
+    }
+}

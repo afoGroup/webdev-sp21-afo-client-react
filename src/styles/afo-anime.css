@@ -1,0 +1,26 @@
+.anime-info{
+    padding: 50px 90px;
+    max-width: 1000px;
+    margin:auto;
+}
+
+.anime-img{
+    width: 300px;
+}
+
+.anime-header{
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid gray;
+}
+
+@media screen and (max-width: 750px){
+    .anime-info{
+        padding: 40px 40px;
+    }
+
+    .anime-img{
+        max-width: 300px;
+        width: 95%
+    }
+}
