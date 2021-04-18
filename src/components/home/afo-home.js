@@ -4,6 +4,8 @@ import GroupDiscover from "../group-discover";
 import FilterList from "../filter-list";
 
 const AfoHome = () => {
+    const filterList = ['ACTION', 'ADVENTURE', 'COMEDY', 'FANTASY', 'HORROR', 'THRILLER', 'ROMANCE', 'SCI_FI'];
+
     return (
         <div className="container-fluid">
             <div className="row">
@@ -17,7 +19,8 @@ const AfoHome = () => {
                                 </div>
                             </div>
                             <GroupDiscover/>
-                            <FilterList/>
+                            <FilterList
+                                filterList={filterList}/>
                         </div>
                     </div>
                 </div>

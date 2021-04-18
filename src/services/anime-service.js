@@ -33,7 +33,7 @@ const findAnimeByTitle = (title) => {
 
 // fetch request for anime by genre
 const findAnimeByGenre = (genreId) => {
-    return fetch(`${ANIME_URL}/search/anime?q=&genre=${genreId}`)
+    return fetch(`${ANIME_URL}/genre/anime/${genreId}`)
         .then(response => response.json())
 };
 

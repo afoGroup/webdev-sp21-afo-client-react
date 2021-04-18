@@ -1,0 +1,64 @@
+ul {
+    margin: 0;
+    padding: 0;
+}
+.afo-filter-container{
+    width: 70%;
+    max-width: 900px;
+    background-color: white;
+    margin:auto;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+@media screen and (max-width: 610px){
+    .afo-filter-container{
+        width: 95%;
+    }
+}
+
+.afo-filter-tab-box-selected{
+    padding-right: 0
+}
+
+.afo-filter-tab-box{
+    border-right: 2px solid black;
+    padding-right: 0;
+
+}
+
+.afo-filter-tab-bottom{
+    border-bottom: 2px solid black;
+    padding-right: 0;
+}
+
+.afo-filter-tab-title{
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.afo-filter-tab-title:hover{
+    color: #670AF5;
+}
+
+.afo-filter-result-container{
+    padding-left: 0;
+}
+.afo-filter-result-box{
+    height: 457px;
+    overflow: auto;
+    margin-top: 3px;
+}
+
+.afo-filter-result{
+
+}
+
+.afo-filter-result-title:hover{
+    color: #670AF5;
+}
+
+.filter-img{
+    width: 100px;
+}
