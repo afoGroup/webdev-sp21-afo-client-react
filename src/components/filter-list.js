@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import animeGenres from "../constants/genre-id";
 import AnimeResult from "./search/anime-result";
 import '../styles/afo-filter-list.css';
+import {Link} from "react-router-dom";
 
 const FilterList = (props) => {
     const[selectedGenre, setSelectedGenre] = useState(props.filterList[0]);
@@ -25,7 +26,7 @@ const FilterList = (props) => {
                     <div className="row">
                         <div className="col-12">
                             <div className="row">
-                                <div className="col-5 col-md-4">
+                                <div className="col-4">
                                     <ul>
                                         {
                                             props.filterList &&
@@ -47,7 +48,7 @@ const FilterList = (props) => {
                                         }
                                     </ul>
                                 </div>
-                                <div className="col- col-md-8 afo-filter-result-container">
+                                <div className="col-8 afo-filter-result-container">
 
                                         <ul className="afo-filter-result-box">
                                             {
@@ -62,7 +63,9 @@ const FilterList = (props) => {
                                                                     alt={`Anime, ${anime.title}`}/>
                                                             </div>
                                                             <div className="col-6">
-                                                                <p className="btn afo-filter-result-title">{anime.title}</p>
+                                                                <Link className="afo-filter-result-title afo-black" to={`/anime/${anime.mal_id}`}>
+                                                                    {anime.title}
+                                                                </Link>
                                                             </div>
                                                         </div>
                                                     </li>
