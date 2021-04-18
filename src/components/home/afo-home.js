@@ -2,9 +2,11 @@ import React from 'react'
 import AfoNavbar from "../navbar/afo-navbar";
 import GroupDiscover from "../group-discover";
 import FilterList from "../filter-list";
+import animeGenres from "../../constants/genre-id";
 
 const AfoHome = () => {
-    const filterList = ['ACTION', 'ADVENTURE', 'COMEDY', 'FANTASY', 'HORROR', 'THRILLER', 'ROMANCE', 'SCI_FI'];
+    const filterList = [animeGenres.ACTION, animeGenres.ADVENTURE, animeGenres.COMEDY, animeGenres.FANTASY,
+        animeGenres.HORROR, animeGenres.THRILLER, animeGenres.ROMANCE, animeGenres.SCI_FI];
 
     return (
         <div className="container-fluid">
