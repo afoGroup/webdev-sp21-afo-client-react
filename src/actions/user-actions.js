@@ -16,10 +16,10 @@ export const registerUser = (dispatch, user) => {
             })
             // if the username has not been taken, register the new user
             if(flag !== -1){
-                dispatch({
+                userService.registerUser(user).then(response => dispatch({
                     type: REGISTER_USER,
-                    user: user
-                })
+                    user: response
+                }))
             }
             else{
                 alert("Username has already been taken.")
@@ -38,10 +38,10 @@ export const loginUser = (dispatch, user) => {
                 if(actualUser.username === user.username && actualUser.password === user.password){
                     // user has been found
                     flag = 0
-                    dispatch({
+                    userService.login(user).then(response => dispatch({
                         type: LOGIN_USER,
-                        user: actualUser
-                    })
+                        user: response
+                    }))
                 }
             })
             // if the user does not exist, then we should not allow the login operation
