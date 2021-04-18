@@ -80,7 +80,7 @@ export const findUserById = (dispatch, uid) => {
 };
 
 const api = {
-    registerUser, findUserById, findAllUsers, loginUser
+    registerUser, findUserById, findAllUsers, loginUser, logoutUser
 }
 
 export default api;
