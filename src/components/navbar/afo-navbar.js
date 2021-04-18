@@ -74,8 +74,8 @@ const AfoNavbar = () => {
                 <div className="col-6 profile-menu-container">
                     <nav ref={profileMenuRef} className={`menu profile-menu ${profileMenu ? 'active' : 'inactive'}`}>
                         <ul>
-                            <li><Link to="/">Profile</Link></li>
-                            <li><Link to="/">Settings</Link></li>
+                            <li><Link to="/login">Login</Link></li>
+                            <li><Link to="/register">Register</Link></li>
                             <li><Link to="/">Log Out</Link></li>
                         </ul>
                     </nav>

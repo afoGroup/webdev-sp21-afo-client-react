@@ -2,6 +2,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import AfoHome from "./components/home/afo-home";
 import AfoSearch from "./components/search/afo-search";
 import AfoAnime from "./components/animePage/afo-anime";
+import Login from "./components/login";
+import Registration from "./components/registration";
 import animeReducer from "./reducers/anime-reducer";
 import userReducer from "./reducers/user-reducer";
 import {combineReducers, createStore} from "redux";
@@ -32,6 +34,16 @@ function App() {
                     <Route path={["/anime/:animeId"]}
                            exact={true}>
                         <AfoAnime/>
+                    </Route>
+
+                    <Route path={["/login", "/login/"]}
+                           exact={true}>
+                        <Login/>
+                    </Route>
+
+                    <Route path={["/registration", "/registration/"]}
+                           exact={true}>
+                        <Registration/>
                     </Route>
 
                 </BrowserRouter>
