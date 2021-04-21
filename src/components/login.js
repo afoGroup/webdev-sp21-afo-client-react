@@ -1,7 +1,8 @@
 import React,{useState} from "react";
-import {Link, useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import {connect} from 'react-redux';
 import userActions from "../actions/user-actions";
+import AfoNavbar from "./navbar/afo-navbar";
 
 const Login = ({loginUser}) => {
     const [credentials, setCredentials] = useState({username: '', password: ''})
@@ -10,47 +11,57 @@ const Login = ({loginUser}) => {
         loginUser(credentials)
         history.push('/home')
     }
-
     return(
         <div className="container-fluid">
-            <h1 className="afo-purple">Login</h1>
             <div className="row">
-                <div className="col-2">
-                    <h3 className="afo-dark-purple">Username</h3>
-                </div>
-                <div className="col-8">
-                    <input
-                        value={credentials.username}
-                        onChange={(e) => {setCredentials({...credentials, username: e.target.value})}}
-                        className="form-control"
-                        placeholder="username"/>
-                </div>
-            </div>
+                <div className="col-12">
+                    <AfoNavbar/>
+                    <div className="row top-row">
+                        <div className="col-12">
+                            <div className="row">
+                                <div className="col-12">
+                                    <h1 className="afo-purple afo-header">Login</h1>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="form-group afo-login-box">
+                                        <label>
+                                            Username:
+                                        </label>
+                                        <input
+                                            value={credentials.username}
+                                            onChange={(e) =>
+                                            {setCredentials({...credentials, username: e.target.value})}}
+                                            type="text"
+                                            name="login-group"
+                                            className="form-control"
+                                        />
 
-            <div className="row">
-                <div className="col-2">
-                    <h3 className="afo-dark-purple">Password</h3>
-                </div>
-                <div className="col-8">
-                    <input
-                        value={credentials.password}
-                        onChange={(e) => {setCredentials({...credentials, password: e.target.value})}}
-                        className="form-control"
-                        placeholder="password"/>
-                </div>
-            </div>
+                                        <label>
+                                            Password:
+                                        </label>
+                                        <input
+                                            value={credentials.password}
+                                            onChange={(e) =>
+                                            {setCredentials({...credentials, password: e.target.value})}}
+                                            type="text"
+                                            name="login-group"
+                                            className="form-control"
+                                        />
 
-            <div className="row">
-                <div className="col-2">
-                    <button
-                        onClick={login}
-                        className="btn btn-primary">
-                        Login
-                    </button>
-
-                    <Link to="/registration">
-                        Register
-                    </Link>
+                                        <br/>
+                                        <button
+                                            onClick={login}
+                                            type="button"
+                                            className="btn btn-secondary">
+                                            Login
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

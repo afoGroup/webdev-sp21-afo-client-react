@@ -10,6 +10,8 @@ const AfoNavbar = () => {
     const mainClick = () => setMainMenu(!mainMenu);
     const profileClick = () => setProfileMenu(!profileMenu);
 
+    let testUserId = '12345';
+
     useEffect(() => {
         const pageClickEvent = (e) => {
             if(mainMenuRef.current !== null && !mainMenuRef.current.contains(e.target)){
@@ -76,6 +78,7 @@ const AfoNavbar = () => {
                         <ul>
                             <li><Link to="/login">Login</Link></li>
                             <li><Link to="/register">Register</Link></li>
+                            <li><Link to={`/profile/` + testUserId}>Profile</Link></li>
                             <li><Link to="/">Log Out</Link></li>
                         </ul>
                     </nav>
