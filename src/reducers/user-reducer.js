@@ -25,21 +25,8 @@ const userReducer = (state=initialState, action) => {
             }
         case LOGOUT_USER:
             return {
-                user: {
-                    password: '',
-                    username: '',
-                    usertype: '',
-                    bio: '',
-                    email: '',
-                    instagram: '',
-                    pictureurl: '',
-                    twitter: ''
-                }
+                user: {}
             }
-        case FIND_ALL_USERS:
-            // TODO?
-        case FIND_USER_BY_ID:
-            // TODO?
         default: return state
     }
 }

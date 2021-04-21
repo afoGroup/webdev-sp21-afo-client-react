@@ -2,53 +2,29 @@ import userService from '../services/user-service';
 import {REGISTER_USER, FIND_ALL_USERS, FIND_USER_BY_ID, LOGIN_USER, LOGOUT_USER} from "./user-constants";
 
 export const registerUser = (dispatch, user) => {
-    // retrieve all users
     userService
         .findAllUsers()
         .then(actualUsers => {
-            let flag = 0
-            // of the actual users, iterate through each and check if the username has not been taken.
-            actualUsers.forEach(actualUser => {
-                if(actualUser.username === user.username){
-                    // if taken, mark it as such.
-                    flag = -1
-                }
-            })
-            // if the username has not been taken, register the new user
-            if(flag !== -1){
-                userService.registerUser(user).then(response => dispatch({
-                    type: REGISTER_USER,
-                    user: response
-                }))
-            }
-            else{
-                alert("Username has already been taken.")
-            }
-        })
+        if(actualUsers.some(item => item.username === user.username)){
+            alert("Username has already been taken.")
+        }
+        else{
+            userService.registerUser(user).then(response => dispatch({
+                type: REGISTER_USER,
+                user: response
+            }))
+        }
+    })
 };
 
 export const loginUser = (dispatch, user) => {
-    // retrieve all users
-    userService
-        .findAllUsers()
-        .then(actualUsers => {
-            let flag = -1
-            // of the actual users, iterate through each and check if the user exists.
-            actualUsers.forEach(actualUser => {
-                if(actualUser.username === user.username && actualUser.password === user.password){
-                    // user has been found
-                    flag = 0
-                    userService.login(user).then(response => dispatch({
-                        type: LOGIN_USER,
-                        user: response
-                    }))
-                }
-            })
-            // if the user does not exist, then we should not allow the login operation
-            if(flag !== 0){
-                alert("Username/Password combination does not exist.")
-            }
-        })
+    userService.login(user).then(response => dispatch ({
+        type: LOGIN_USER,
+        user: response
+    })).catch(error => {
+        alert("Username/Password combination does not exist")
+        console.log(error)
+    })
 }
 
 export const logoutUser = (dispatch) => {
