@@ -5,3 +5,31 @@
 .afo-header{
   padding-left: 40px;
 }
+
+.afo-login-box{
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: 20px;
+  margin-left: 40px;
+  width: 400px;
+}
+
+.afo-register-box{
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: 20px;
+  margin-left: 40px;
+  background-color: white;
+  width: 60%;
+  max-width: 700px;
+}
+
+@media screen and (max-width: 650px){
+  .afo-register-box{
+    width: 400px;
+  }
+}
+
+.input-group-prepend{
+  text-decoration: none;
+}

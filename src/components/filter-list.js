@@ -46,15 +46,15 @@ const FilterList = (props) => {
                                         }
                                     </ul>
                                 </div>
-                                <div className="col-8 afo-filter-result-container text-center">
-                                    <h5>Most Popular {selectedGenreName} Anime</h5>
+                                <div className="col-8 afo-filter-result-container">
+                                    <h5 className="text-center">Most Popular {selectedGenreName} Anime</h5>
                                     <ul className="afo-filter-result-box">
                                         {
                                             props.resultsList.anime &&
                                             props.resultsList.anime.map((anime, index) =>
                                                 <li key={index} className="afo-filter-result">
                                                     <div className="row m-3">
-                                                        <div className="col-6">
+                                                        <div className="col-6 text-center">
                                                             <img
                                                                 src={anime.image_url}
                                                                 className="filter-img"

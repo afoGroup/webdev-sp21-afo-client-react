@@ -1,12 +1,17 @@
 import {BrowserRouter, Route} from "react-router-dom";
+import {Provider} from "react-redux";
+import animeReducer from "./reducers/anime-reducer";
+import {combineReducers, createStore} from "redux";
+
 import AfoHome from "./components/home/afo-home";
 import AfoSearch from "./components/search/afo-search";
 import AfoAnime from "./components/animePage/afo-anime";
 import Login from "./components/login";
 import Registration from "./components/registration";
-import animeReducer from "./reducers/anime-reducer";
-import {combineReducers, createStore} from "redux";
-import {Provider} from "react-redux";
+import Group from "./components/groupPage/afo-group";
+import Profile from "./components/profile/afo-profile";
+import Settings from "./components/profile/afo-settings";
+
 import "./styles/App.css";
 import "./styles/afo-colors.css"
 
@@ -39,9 +44,24 @@ function App() {
                         <Login/>
                     </Route>
 
-                    <Route path={["/registration", "/registration/"]}
+                    <Route path={["/register", "/register/"]}
                            exact={true}>
                         <Registration/>
+                    </Route>
+
+                    <Route path={["/group/:groupId", "/group/:groupId/"]}
+                           exact={true}>
+                        <Group/>
+                    </Route>
+
+                    <Route path={["/profile/:userId", "/profile/:userId/"]}
+                           exact={true}>
+                        <Profile/>
+                    </Route>
+
+                    <Route path={["/profile/:userId/settings", "/profile/:userId/settings/"]}
+                           exact={true}>
+                        <Settings/>
                     </Route>
 
                 </BrowserRouter>
