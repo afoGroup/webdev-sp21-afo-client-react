@@ -41,7 +41,7 @@ export const findAllUsers = () =>
 
 
 export const findUserById = (uid) =>
-    fetch(`${USER_URL}/api/user/${uid}`).then(response => response.json())
+    fetch(`${USER_URL}/api/users/${uid}`).then(response => response.json())
 
 
 const api = {

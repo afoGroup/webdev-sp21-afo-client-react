@@ -1,17 +1,24 @@
 import groupService from '../services/group-service';
-import {FIND_ALL_GROUPS} from "./group-constants";
+import {CREATE_GROUP, FIND_ALL_GROUPS} from "./group-constants";
 
-export const findAllClubs = (dispatch) => {
+export const findAllGroups = (dispatch) => {
     groupService
-        .findAllClubs()
+        .findAllGroups()
         .then(results => dispatch({
         type: FIND_ALL_GROUPS,
-            groups: results
+        groups: results
+    }))
+}
+
+export const createGroup = (dispatch, group) => {
+    groupService.createGroup(group).then(results => dispatch({
+        type: CREATE_GROUP,
+        group: results
     }))
 }
 
 const api = {
-    findAllClubs
+    findAllGroups, createGroup
 }
 
 export default api;
