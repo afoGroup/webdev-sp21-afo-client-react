@@ -1,6 +1,7 @@
 import {BrowserRouter, Route} from "react-router-dom";
 import {Provider} from "react-redux";
 import animeReducer from "./reducers/anime-reducer";
+import userReducer from "./reducers/user-reducer";
 import {combineReducers, createStore} from "redux";
 
 import AfoHome from "./components/home/afo-home";
@@ -16,7 +17,8 @@ import "./styles/App.css";
 import "./styles/afo-colors.css"
 
 const reducer = combineReducers({
-    animeReducer: animeReducer
+    animeReducer: animeReducer,
+    userReducer: userReducer
 });
 
 const store = createStore(reducer);
@@ -24,47 +26,47 @@ const store = createStore(reducer);
 function App() {
     return (
         <Provider store={store}>
-                <BrowserRouter>
-                    <Route path={["/", "/home"]} exact={true}>
-                        <AfoHome/>
-                    </Route>
+            <BrowserRouter>
+                <Route path={["/", "/home"]} exact={true}>
+                    <AfoHome/>
+                </Route>
 
-                    <Route path={["/search", "/search/:title"]}
-                           exact={true}>
-                        <AfoSearch/>
-                    </Route>
+                <Route path={["/search", "/search/:title"]}
+                       exact={true}>
+                    <AfoSearch/>
+                </Route>
 
-                    <Route path={["/anime/:animeId"]}
-                           exact={true}>
-                        <AfoAnime/>
-                    </Route>
+                <Route path={["/anime/:animeId"]}
+                       exact={true}>
+                    <AfoAnime/>
+                </Route>
 
-                    <Route path={["/login", "/login/"]}
-                           exact={true}>
-                        <Login/>
-                    </Route>
+                <Route path={["/login", "/login/"]}
+                       exact={true}>
+                    <Login/>
+                </Route>
 
-                    <Route path={["/register", "/register/"]}
-                           exact={true}>
-                        <Registration/>
-                    </Route>
+                <Route path={["/register", "/register/"]}
+                       exact={true}>
+                    <Registration/>
+                </Route>
 
-                    <Route path={["/group/:groupId", "/group/:groupId/"]}
-                           exact={true}>
-                        <Group/>
-                    </Route>
+                <Route path={["/group/:groupId", "/group/:groupId/"]}
+                       exact={true}>
+                    <Group/>
+                </Route>
 
-                    <Route path={["/profile/:userId", "/profile/:userId/"]}
-                           exact={true}>
-                        <Profile/>
-                    </Route>
+                <Route path={["/profile/:userId", "/profile/:userId/"]}
+                       exact={true}>
+                    <Profile/>
+                </Route>
 
-                    <Route path={["/profile/:userId/settings", "/profile/:userId/settings/"]}
-                           exact={true}>
-                        <Settings/>
-                    </Route>
+                <Route path={["/profile/:userId/settings", "/profile/:userId/settings/"]}
+                       exact={true}>
+                    <Settings/>
+                </Route>
 
-                </BrowserRouter>
+            </BrowserRouter>
         </Provider>
     );
 }

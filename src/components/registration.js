@@ -1,7 +1,24 @@
 import React, {useEffect, useState} from "react";
+import {Link, useHistory} from 'react-router-dom';
+import {connect} from 'react-redux';
+import userActions from "../actions/user-actions";
 import AfoNavbar from "./navbar/afo-navbar";
 
-const Registration = () => {
+const Registration = ({registerMyUser}) => {
+    const [credentials, setCredentials] = useState({
+        // req fields
+        password: '',
+        username: '',
+        usertype: '',
+
+        // opt fields
+        bio: '',
+        email: '',
+        instagram: '',
+        pictureurl: '',
+        twitter: ''
+    })
+    const history = useHistory()
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,6 +35,23 @@ const Registration = () => {
 
     const [createdStatus, setCreatedStatus] = useState(false);
     const [newUserId, setNewUserId] = useState('');
+
+    const register = () => {
+        setCredentials({
+            password: password,
+            username: username,
+            usertype: type,
+            bio: '',
+            email: email,
+            instagram: instagram,
+            pictureurl: imageUrl,
+            twitter: twitter
+        })
+        let promise = registerMyUser(credentials)
+        promise.then(res => {
+            (res === 0)? history.push('/home') : alert("Username has already been taken.")
+        })
+    }
 
     useEffect(() => {
         if(createdStatus){
@@ -56,16 +90,14 @@ const Registration = () => {
     };
 
     const registerUser = () => {
-        // add call to create user
+        // create user and call dispatch:
+        register()
 
 
 
         // once user has been successfully created and stored in the session,
         // I'll get the new user's id and then set createdStatus to true
     };
-
-
-
 
     return(
         <div className="container-fluid">
@@ -200,4 +232,12 @@ const Registration = () => {
     )
 };
 
-export default Registration;
+const stateToPropertiesManager = (state) => ({
+    user: state.userReducer.user
+})
+
+const dispatchToPropertiesManager = (dispatch) => ({
+    registerMyUser: (user) => userActions.registerUser(dispatch, user)
+})
+
+export default connect(stateToPropertiesManager, dispatchToPropertiesManager)(Registration);

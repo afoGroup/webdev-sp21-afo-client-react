@@ -1,7 +1,18 @@
-import React from "react";
+import React,{useState} from "react";
+import {useHistory} from 'react-router-dom'
+import {connect} from 'react-redux';
+import userActions from "../actions/user-actions";
 import AfoNavbar from "./navbar/afo-navbar";
 
-const Login = () => {
+const Login = ({loginUser, user = {}}) => {
+    const [credentials, setCredentials] = useState({username: '', password: ''})
+    const history = useHistory()
+    const login = () => {
+        let promise = loginUser(credentials)
+        promise.then(res => {
+            (res === 0)? history.push('/home') : alert("Username/Password combination does not exist")
+        })
+    }
     return(
         <div className="container-fluid">
             <div className="row">
@@ -20,13 +31,32 @@ const Login = () => {
                                         <label>
                                             Username:
                                         </label>
-                                        <input type="text" name="login-group" className="form-control"/>
+                                        <input
+                                            value={credentials.username}
+                                            onChange={(e) =>
+                                            {setCredentials({...credentials, username: e.target.value})}}
+                                            type="text"
+                                            name="login-group"
+                                            className="form-control"
+                                        />
+
                                         <label>
                                             Password:
                                         </label>
-                                        <input type="text" name="login-group" className="form-control"/>
+                                        <input
+                                            value={credentials.password}
+                                            onChange={(e) =>
+                                            {setCredentials({...credentials, password: e.target.value})}}
+                                            type="text"
+                                            name="login-group"
+                                            className="form-control"
+                                        />
+
                                         <br/>
-                                        <button type="button" className="btn btn-secondary">
+                                        <button
+                                            onClick={login}
+                                            type="button"
+                                            className="btn btn-secondary">
                                             Login
                                         </button>
                                     </div>
@@ -40,4 +70,14 @@ const Login = () => {
     )
 };
 
-export default Login;
+const stateToPropertiesManager = (state) => ({
+    user: state.userReducer.user
+})
+
+const dispatchToPropertiesManager = (dispatch) => ({
+    loginUser: (user) => userActions.loginUser(dispatch, user)
+})
+
+export default connect(stateToPropertiesManager, dispatchToPropertiesManager)(Login);
+
+

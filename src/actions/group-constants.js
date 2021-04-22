@@ -1,0 +1,2 @@
+export const FIND_ALL_GROUPS = "FIND_ALL_GROUPS"
+export const CREATE_GROUP = "CREATE_GROUP"
