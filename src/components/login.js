@@ -4,12 +4,14 @@ import {connect} from 'react-redux';
 import userActions from "../actions/user-actions";
 import AfoNavbar from "./navbar/afo-navbar";
 
-const Login = ({loginUser}) => {
+const Login = ({loginUser, user = {}}) => {
     const [credentials, setCredentials] = useState({username: '', password: ''})
     const history = useHistory()
     const login = () => {
-        loginUser(credentials)
-        history.push('/home')
+        let promise = loginUser(credentials)
+        promise.then(res => {
+            (res === 0)? history.push('/home') : alert("Username/Password combination does not exist")
+        })
     }
     return(
         <div className="container-fluid">

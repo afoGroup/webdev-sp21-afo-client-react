@@ -47,8 +47,10 @@ const Registration = ({registerMyUser}) => {
             pictureurl: imageUrl,
             twitter: twitter
         })
-        registerMyUser(credentials)
-        history.push('/home')
+        let promise = registerMyUser(credentials)
+        promise.then(res => {
+            (res === 0)? history.push('/home') : alert("Username has already been taken.")
+        })
     }
 
     useEffect(() => {

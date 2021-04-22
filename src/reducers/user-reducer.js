@@ -18,7 +18,6 @@ const initialState = {
 
 const userReducer = (state=initialState, action) => {
     switch(action.type){
-
         case (REGISTER_USER || LOGIN_USER):
             return {
                 user: action.user
@@ -27,7 +26,8 @@ const userReducer = (state=initialState, action) => {
             return {
                 user: {}
             }
-        default: return state
+        default:
+            return state
     }
 }
 
