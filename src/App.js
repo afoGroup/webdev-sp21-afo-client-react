@@ -1,5 +1,5 @@
 import {BrowserRouter, Route} from "react-router-dom";
-import {Provider} from "react-redux";
+import {Provider, useSelector} from "react-redux";
 import animeReducer from "./reducers/anime-reducer";
 import userReducer from "./reducers/user-reducer";
 import postReducer from "./reducers/post-reducer";
@@ -26,6 +26,7 @@ const reducer = combineReducers({
 const store = createStore(reducer);
 
 function App() {
+
     return (
         <Provider store={store}>
             <BrowserRouter>
@@ -63,7 +64,7 @@ function App() {
                     <Profile/>
                 </Route>
 
-                <Route path={["/profile/:userId/settings", "/profile/:userId/settings/"]}
+                <Route path={["/settings/:userId", "/settings/:userId/"]}
                        exact={true}>
                     <Settings/>
                 </Route>

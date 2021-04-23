@@ -1,0 +1,17 @@
+p{
+    overflow-wrap: break-word;
+}
+
+.profile-img-info{
+    width: 350px;
+}
+
+.profile-container{
+
+}
+
+.profile-img{
+    width: 350px;
+    height: 350px;
+    object-fit: scale-down;
+}

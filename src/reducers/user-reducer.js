@@ -1,34 +1,36 @@
-import {FIND_ALL_USERS, FIND_USER_BY_ID, LOGIN_USER, LOGOUT_USER, REGISTER_USER} from "../actions/user-constants";
+import {FIND_ALL_USERS, FIND_USER_BY_ID, LOGIN_USER, LOGOUT_USER, REGISTER_USER, LOGIN_STATE} from "../actions/user-constants";
 
 const initialState = {
+    loginState: '',
     user: {
-        // req fields
+        id: '',
         password: '',
         username: '',
-        usertype: '',
-
-        // opt fields
-        bio: '',
+        userType: '',
         email: '',
+        bio: '',
         instagram: '',
-        pictureurl: '',
-        twitter: ''
+        pictureUrl: '',
+        twitter: '',
+        clubs: []
     }
-}
+};
 
 const userReducer = (state=initialState, action) => {
     switch(action.type){
         case (REGISTER_USER || LOGIN_USER):
             return {
-                user: action.user
-            }
+                user: action.user,
+                loginState: LOGIN_STATE.LOGGED_IN
+            };
         case LOGOUT_USER:
             return {
-                user: {}
-            }
+                user: {},
+                loginState: LOGIN_STATE.LOGGED_OUT
+            };
         default:
             return state
     }
-}
+};
 
 export default userReducer

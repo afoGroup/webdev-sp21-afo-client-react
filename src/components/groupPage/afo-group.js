@@ -177,7 +177,7 @@ const Group = () => {
 
 const stateToPropertiesManager = (state) => ({
     posts: state.postReducer.posts
-})
+});
 
 const dispatchToPropertiesManager = (dispatch) => ({
     findAllPosts: () => postActions.findAllPosts(dispatch),
@@ -185,6 +185,6 @@ const dispatchToPropertiesManager = (dispatch) => ({
     findPostsForGroups: (gid) => postActions.findPostsForGroups(dispatch, gid),
     createPost: (post) => postActions.createPost(dispatch, post),
     deletePost: (pid) => postActions.deletePost(dispatch, pid)
-})
+});
 
 export default connect(stateToPropertiesManager, dispatchToPropertiesManager)(Group);
