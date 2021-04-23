@@ -1,0 +1,5 @@
+export const FIND_ALL_POSTS = "FIND_ALL_POSTS"
+export const FIND_POST_BY_ID = "FIND_POST_BY_ID"
+export const FIND_POSTS_FOR_GROUPS = "FIND_POSTS_FOR_GROUPS"
+export const CREATE_POST = "CREATE_POST"
+export const DELETE_POST = "DELETE_POST"
