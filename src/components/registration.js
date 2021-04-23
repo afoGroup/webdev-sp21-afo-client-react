@@ -15,7 +15,7 @@ const Registration = ({registerMyUser}) => {
         bio: '',
         email: '',
         instagram: '',
-        pictureurl: '',
+        pictureURL: '',
         twitter: ''
     })
     const history = useHistory()
