@@ -2,6 +2,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Provider} from "react-redux";
 import animeReducer from "./reducers/anime-reducer";
 import userReducer from "./reducers/user-reducer";
+import postReducer from "./reducers/post-reducer";
 import {combineReducers, createStore} from "redux";
 
 import AfoHome from "./components/home/afo-home";
@@ -18,7 +19,8 @@ import "./styles/afo-colors.css"
 
 const reducer = combineReducers({
     animeReducer: animeReducer,
-    userReducer: userReducer
+    userReducer: userReducer,
+    postReducer: postReducer
 });
 
 const store = createStore(reducer);

@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import {connect} from 'react-redux';
+import postActions from '../../actions/post-actions';
 import AfoNavbar from "../navbar/afo-navbar";
 import Post from "./afo-post";
 import '../../styles/afo-group.css';
@@ -173,4 +175,16 @@ const Group = () => {
     )
 };
 
-export default Group;
+const stateToPropertiesManager = (state) => ({
+    posts: state.postReducer.posts
+})
+
+const dispatchToPropertiesManager = (dispatch) => ({
+    findAllPosts: () => postActions.findAllPosts(dispatch),
+    findPostById: (pid) => postActions.findPostById(dispatch, pid),
+    findPostsForGroups: (gid) => postActions.findPostsForGroups(dispatch, gid),
+    createPost: (post) => postActions.createPost(dispatch, post),
+    deletePost: (pid) => postActions.deletePost(dispatch, pid)
+})
+
+export default connect(stateToPropertiesManager, dispatchToPropertiesManager)(Group);
