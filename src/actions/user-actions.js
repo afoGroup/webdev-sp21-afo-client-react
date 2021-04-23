@@ -1,5 +1,5 @@
 import userService from '../services/user-service';
-import {REGISTER_USER, FIND_ALL_USERS, FIND_USER_BY_ID, LOGIN_USER, LOGOUT_USER} from "./user-constants";
+import {REGISTER_USER, FIND_ALL_USERS, FIND_USER_BY_ID, LOGIN_USER, LOGOUT_USER, LOGIN_STATE} from "./user-constants";
 
 const ERROR = -1;
 const SUCCESS = 0;
@@ -11,7 +11,7 @@ export const registerUser = (dispatch, user) => {
             let flag = SUCCESS;
             actualUsers.forEach(actualUser => {
                 if (actualUser.username === user.username) {flag = ERROR}
-            })
+            });
             if (flag !== ERROR) {
                 userService.registerUser(user).then(response => dispatch({
                     type: REGISTER_USER,
@@ -27,13 +27,13 @@ export const loginUser = (dispatch, user) => {
         dispatch({
             type: LOGIN_USER,
             user: response
-        })
+        });
         return SUCCESS;
     })
         .catch(error => {
             return ERROR;
         })
-}
+};
 
 export const logoutUser = (dispatch) => {
     userService
@@ -42,7 +42,7 @@ export const logoutUser = (dispatch) => {
                 type: LOGOUT_USER
             })
         )
-}
+};
 
 export const findAllUsers = (dispatch) => {
     userService
@@ -66,6 +66,6 @@ export const findUserById = (dispatch, uid) => {
 
 const api = {
     registerUser, findUserById, findAllUsers, loginUser, logoutUser
-}
+};
 
 export default api;

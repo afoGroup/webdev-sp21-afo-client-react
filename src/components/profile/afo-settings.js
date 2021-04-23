@@ -1,34 +1,30 @@
 import React, {useState} from "react";
 import AfoNavbar from "../navbar/afo-navbar";
 import '../../styles/afo-profile.css';
+import userActions from "../../actions/user-actions";
+import {useDispatch} from "react-redux";
+import {useParams} from "react-router-dom";
 
 const Settings = () => {
+    const dispatch = useDispatch();
+    const {userId} = useParams();
+    const currentUser = userActions.findUserById(dispatch, userId);
 
-    const profile = {
-        username: 'kris10',
-        email: 'kris10@gmail.com',
-        password: 'kris1234',
-        image_url: 'https://cdn.pixabay.com/photo/2017/04/13/15/19/hands-2227857_960_720.jpg',
-        bio: 'This is a test bio so I am just going to type and type and type and type and type ' +
-            'and type and type and type and type and type and type and type and type and type ' +
-            'and type and type and type and type and type and type and type and type.',
-        type: 'otaku',
-        cardNum: '123456789',
-        twitter: 'kris10',
-        instagram: 'kris10'
-    };
-
-    const [imgUrl, setImageUrl] = useState(profile.image_url);
-    const [username, setUsername] = useState(profile.username);
-    const [email, setEmail] = useState(profile.email);
-    const [password, setPassword] = useState(profile.password);
-    const [type, setType] = useState(profile.type);
-    const [twitter, setTwitter] = useState(profile.twitter);
-    const [instagram, setInstagram] = useState(profile.instagram);
-    const [cardNum, setCardNum] = useState(profile.cardNum);
-    const [bio, setBio] = useState(profile.bio);
+    const [imgUrl, setImageUrl] = useState(currentUser.pictureUrl);
+    const [username, setUsername] = useState(currentUser.username);
+    const [email, setEmail] = useState(currentUser.email);
+    const [password, setPassword] = useState(currentUser.password);
+    const [type, setType] = useState(currentUser.userType);
+    const [twitter, setTwitter] = useState(currentUser.twitter);
+    const [instagram, setInstagram] = useState(currentUser.instagram);
+    const [cardNum, setCardNum] = useState('');
+    const [bio, setBio] = useState(currentUser.bio);
 
     const updateUser = () => {
+        //
+    };
+
+    const manageGroups = () => {
         //
     };
 
@@ -140,9 +136,9 @@ const Settings = () => {
                                     </div>
                                     <div className="col-12 col-md-6 p-4">
                                         <img
-                                            src={profile.image_url}
+                                            src={currentUser.pictureUrl}
                                             className="profile-img mb-2"
-                                            alt={`${profile.username} profile image`}
+                                            alt={`${currentUser.username} profile image`}
                                         />
                                         <div>
                                             <label>
@@ -161,6 +157,7 @@ const Settings = () => {
                                     </div>
 
                                 </div>
+
                                 <div className="row">
                                     <div className="col-12 my-5 pl-4">
                                         <button
@@ -168,6 +165,17 @@ const Settings = () => {
                                             type="button"
                                             className="btn btn-secondary">
                                             Update Profile
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-12 my-5 pl-4">
+                                        <button
+                                            onClick={() => manageGroups()}
+                                            type="button"
+                                            className="btn btn-secondary">
+                                            Manage Groups
                                         </button>
                                     </div>
                                 </div>

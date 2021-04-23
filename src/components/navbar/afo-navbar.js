@@ -1,5 +1,9 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
+import {LOGIN_STATE} from "../../actions/user-constants";
+import {useDispatch, useSelector} from "react-redux";
+import userActions from '../../actions/user-actions';
+
 import '../../styles/afo-navbar.css';
 
 const AfoNavbar = () => {
@@ -10,7 +14,10 @@ const AfoNavbar = () => {
     const mainClick = () => setMainMenu(!mainMenu);
     const profileClick = () => setProfileMenu(!profileMenu);
 
-    let testUserId = '12345';
+    const loginState = useSelector(state => state.userReducer.loginState);
+    const currentUser = useSelector(state => state.userReducer.user);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const pageClickEvent = (e) => {
@@ -75,13 +82,21 @@ const AfoNavbar = () => {
                 </div>
                 <div className="col-6 profile-menu-container">
                     <nav ref={profileMenuRef} className={`menu profile-menu ${profileMenu ? 'active' : 'inactive'}`}>
-                        <ul>
-                            <li><Link to="/login">Login</Link></li>
-                            <li><Link to="/register">Register</Link></li>
-                            <li><Link to={`/profile/` + testUserId}>Profile</Link></li>
-                            <li><Link to={`/profile/` + testUserId + `/settings`}>Settings</Link></li>
-                            <li><Link to="/">Log Out</Link></li>
-                        </ul>
+                        {
+                            loginState === LOGIN_STATE.LOGGED_OUT &&
+                            <ul>
+                                <li><Link to="/login">Login</Link></li>
+                                <li><Link to="/register">Register</Link></li>
+                            </ul>
+                        }
+                        {
+                            loginState === LOGIN_STATE.LOGGED_IN &&
+                            <ul>
+                                <li><Link to={`/profile/` + currentUser.id}>Profile</Link></li>
+                                <li><Link to={`/settings/` + currentUser.id}>Settings</Link></li>
+                                <li><Link to={`/home`} onClick={() => userActions.logoutUser(dispatch)}>Log Out</Link></li>
+                            </ul>
+                        }
                     </nav>
                 </div>
             </div>

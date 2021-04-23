@@ -1,30 +1,18 @@
 import React from "react";
+import {useParams} from "react-router-dom";
+import userActions from "../../actions/user-actions";
 import AfoNavbar from "../navbar/afo-navbar";
 import GroupDiscover from "../groupDiscover/group-discover";
 import SettingsPage from "./afo-settings";
 import '../../styles/afo-profile.css';
+import {useDispatch, useSelector} from "react-redux";
 
 const Profile = () => {
 
-    const profile = {
-        username: 'kris10',
-        email: 'kris10@gmail.com',
-        password: 'kris1234',
-        image_url: 'https://cdn.pixabay.com/photo/2017/04/13/15/19/hands-2227857_960_720.jpg',
-        bio: 'This is a test bio so I am just going to type and type and type and type and type ' +
-            'and type and type and type and type and type and type and type and type and type ' +
-            'and type and type and type and type and type and type and type and type.',
-        type: 'otaku',
-        cardNum: '123456789',
-        twitter: 'kris10',
-        instagram: 'kris10'
-    };
+    const dispatch = useDispatch();
+    const {userId} = useParams();
 
-    const groupList = [
-        {id: '123'},
-        {id: '456'},
-        {id: '789'}
-    ];
+    const currentUser = userActions.findUserById(dispatch, userId);
 
     return(
         <div className="container-fluid">
@@ -36,11 +24,21 @@ const Profile = () => {
 
                             <div className="row">
                                 <div className="col-12">
-                                    <h1 className="afo-purple afo-header">Profile Page</h1>
+                                    <h3 className="afo-purple afo-header">{currentUser.username}</h3>
+                                    <p>{currentUser.twitter}</p>
+                                    <p>{currentUser.instagram}</p>
+                                    {
+                                        currentUser.imageUrl === ''?
+                                            <img
+                                                src={currentUser.image_url}
+                                                className="anime-img"
+                                                alt={`${currentUser.username} profile`}/> : <></>
+
+                                    }
                                 </div>
                             </div>
 
-                            <GroupDiscover groupList={groupList}/>
+                            <GroupDiscover groupList={currentUser.clubs}/>
 
                         </div>
                     </div>
