@@ -15,7 +15,7 @@ const Registration = ({registerMyUser}) => {
         bio: '',
         email: '',
         instagram: '',
-        pictureurl: '',
+        pictureURL: '',
         twitter: ''
     })
     const history = useHistory()
@@ -44,7 +44,7 @@ const Registration = ({registerMyUser}) => {
             bio: '',
             email: email,
             instagram: instagram,
-            pictureurl: imageUrl,
+            pictureURL: imageUrl,
             twitter: twitter
         })
         let promise = registerMyUser(credentials)
