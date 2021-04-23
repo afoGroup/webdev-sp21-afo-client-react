@@ -1,7 +1,7 @@
-const GROUP_URL = "https://anifansonly-java-server.herokuapp.com"
+const GROUP_URL = "https://anifansonly-java-server.herokuapp.com";
 
 export const findAllGroups = () =>
-    fetch(`${GROUP_URL}/api/groups`).then(response => response.json())
+    fetch(`${GROUP_URL}/api/groups`).then(response => response.json());
 
 export const createGroup = (group) =>
     fetch(`${GROUP_URL}/api/groups/create`, {
@@ -11,10 +11,16 @@ export const createGroup = (group) =>
         headers: {
             'content-type' : 'application/json'
         }
-    }).then(response => response.json())
+    }).then(response => response.json());
+
+export const findGroupById = (groupId) => {
+    // need to include find by id for pages
+};
 
 const api = {
-    findAllGroups, createGroup
-}
+    findAllGroups,
+    createGroup,
+    findGroupById
+};
 
 export default api;
