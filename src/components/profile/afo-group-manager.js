@@ -1,24 +1,9 @@
 import React from "react";
 import AfoNavbar from "../navbar/afo-navbar";
-import GroupDiscover from "../groupDiscover/group-discover";
-import SettingsPage from "./afo-settings";
+import settingsPage from "./afo-settings";
 import '../../styles/afo-profile.css';
 
-const Profile = () => {
-
-    const profile = {
-        username: 'kris10',
-        email: 'kris10@gmail.com',
-        password: 'kris1234',
-        image_url: 'https://cdn.pixabay.com/photo/2017/04/13/15/19/hands-2227857_960_720.jpg',
-        bio: 'This is a test bio so I am just going to type and type and type and type and type ' +
-            'and type and type and type and type and type and type and type and type and type ' +
-            'and type and type and type and type and type and type and type and type.',
-        type: 'otaku',
-        cardNum: '123456789',
-        twitter: 'kris10',
-        instagram: 'kris10'
-    };
+const GroupManager = () => {
 
     const groupList = [
         {id: '123'},
@@ -40,8 +25,6 @@ const Profile = () => {
                                 </div>
                             </div>
 
-                            <GroupDiscover groupList={groupList}/>
-
                         </div>
                     </div>
                 </div>
@@ -50,4 +33,4 @@ const Profile = () => {
     )
 };
 
-export default Profile;
+export default GroupManager;

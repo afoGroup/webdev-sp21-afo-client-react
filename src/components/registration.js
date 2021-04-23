@@ -17,8 +17,8 @@ const Registration = ({registerMyUser}) => {
         instagram: '',
         pictureurl: '',
         twitter: ''
-    })
-    const history = useHistory()
+    });
+    const history = useHistory();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -46,7 +46,7 @@ const Registration = ({registerMyUser}) => {
             instagram: instagram,
             pictureurl: imageUrl,
             twitter: twitter
-        })
+        });
         let promise = registerMyUser(credentials)
         promise.then(res => {
             (res === 0)? history.push('/home') : alert("Username has already been taken.")

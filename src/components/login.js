@@ -34,7 +34,7 @@ const Login = ({loginUser, user = {}}) => {
                                         <input
                                             value={credentials.username}
                                             onChange={(e) =>
-                                            {setCredentials({...credentials, username: e.target.value})}}
+                                            setCredentials({...credentials, username: e.target.value})}
                                             type="text"
                                             name="login-group"
                                             className="form-control"
@@ -54,7 +54,7 @@ const Login = ({loginUser, user = {}}) => {
 
                                         <br/>
                                         <button
-                                            onClick={login}
+                                            onClick={() => login}
                                             type="button"
                                             className="btn btn-secondary">
                                             Login

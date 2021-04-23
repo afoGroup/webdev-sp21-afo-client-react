@@ -1,6 +1,6 @@
 import React from 'react'
 import AfoNavbar from "../navbar/afo-navbar";
-import GroupDiscover from "../group-discover";
+import GroupDiscover from "../groupDiscover/group-discover";
 import FilterList from "../filter-list";
 import animeGenres from "../../constants/genre-id";
 
