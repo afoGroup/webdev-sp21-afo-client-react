@@ -1,18 +1,18 @@
 import React,{useState} from "react";
-import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import userActions from "../actions/user-actions";
 import AfoNavbar from "./navbar/afo-navbar";
 
-const Login = ({loginUser, user = {}}) => {
-    const [credentials, setCredentials] = useState({username: '', password: ''})
-    const history = useHistory()
+const Login = ({loginUser, user}) => {
+    const [credentials, setCredentials] = useState({username: '', password: ''});
+    const history = useHistory();
     const login = () => {
-        let promise = loginUser(credentials)
+        let promise = loginUser(credentials);
         promise.then(res => {
             (res === 0)? history.push('/home') : alert("Username/Password combination does not exist")
         })
-    }
+    };
     return(
         <div className="container-fluid">
             <div className="row">
@@ -72,11 +72,11 @@ const Login = ({loginUser, user = {}}) => {
 
 const stateToPropertiesManager = (state) => ({
     user: state.userReducer.user
-})
+});
 
 const dispatchToPropertiesManager = (dispatch) => ({
     loginUser: (user) => userActions.loginUser(dispatch, user)
-})
+});
 
 export default connect(stateToPropertiesManager, dispatchToPropertiesManager)(Login);
 

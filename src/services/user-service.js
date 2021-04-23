@@ -9,14 +9,14 @@ export const registerUser = (user) =>
             'content-type' : 'application/json'
         }
     })
-        .then(response => response.json())
+        .then(response => response.json());
 
 export const profile = () =>
     fetch(`${USER_URL}/api/profile`, {
         method: "POST",
         credentials: "include"
     })
-        .then(response => response.json())
+        .then(response => response.json());
 
 export const login = (user) =>
     fetch(`${USER_URL}/api/login`, {
@@ -27,25 +27,25 @@ export const login = (user) =>
             'content-type' : 'application/json'
         }
     })
-        .then(response => response.json())
+        .then(response => response.json());
 
 export const logout = () =>
     fetch(`${USER_URL}/api/logout`, {
         method: "POST",
         credentials: "include"
     })
-        .then(response => response.json())
+        .then(response => response.json());
 
 export const findAllUsers = () =>
-    fetch(`${USER_URL}/api/users`).then(response => response.json())
+    fetch(`${USER_URL}/api/users`).then(response => response.json());
 
 
 export const findUserById = (uid) =>
-    fetch(`${USER_URL}/api/users/${uid}`).then(response => response.json())
+    fetch(`${USER_URL}/api/users/${uid}`).then(response => response.json());
 
 
 const api = {
     registerUser, findAllUsers, findUserById, profile, logout, login
-}
+};
 
 export default api;
