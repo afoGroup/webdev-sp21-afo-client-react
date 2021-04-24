@@ -11,7 +11,7 @@ const initialState = {
         email: '',
         bio: '',
         instagram: '',
-        pictureUrl: '',
+        pictureURL: '',
         twitter: '',
         clubs: []
     },

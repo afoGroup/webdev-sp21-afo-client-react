@@ -10,21 +10,14 @@ import {useDispatch, useSelector} from "react-redux";
 
 const Profile = () => {
     const {userId} = useParams();
-    const dispatch = useDispatch();
 
-    let tempUser = useSelector(state => state.userReducer.user);
-    const [currentUser, setCurrentUser] = useState(tempUser);
+    const [currentUser, setCurrentUser] = useState({});
 
     useEffect(() => {
-        if(userId === "profile"){
-            console.log('getting profile...' + userActions.getUserProfile(dispatch))
-        }else{
-            userActions.findUserById(dispatch,userId)
-                .then((resultUser) => {
-                    setCurrentUser(resultUser)
-                })
-        }
-        console.log(currentUser);
+        userService.findUserById(userId)
+            .then((actualUser) => {
+                setCurrentUser(actualUser)
+            })
     }, [userId]);
 
     return(

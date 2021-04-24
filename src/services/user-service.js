@@ -10,11 +10,15 @@ export const registerUser = (user) =>
         }
     }).then(response => response.json());
 
-export const profile = () =>
-    fetch(`${USER_URL}/api/profile`, {
-        method: "POST",
-        credentials: "include"
-    }).then(response => response.json());
+export const profile = () => {
+    return (
+        fetch(`${USER_URL}/api/profile`, {
+            method: "POST",
+            credentials: "include"
+        }).then(response => response.json())
+    )
+};
+
 
 export const login = (user) =>
     fetch(`${USER_URL}/api/login`, {

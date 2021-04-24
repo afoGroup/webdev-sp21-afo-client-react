@@ -2,20 +2,40 @@ import React, {useEffect, useState} from "react";
 import {useHistory} from 'react-router-dom';
 import {connect, useSelector} from 'react-redux';
 import userActions from "../actions/user-actions";
+import userService from "../services/user-service";
 import AfoNavbar from "./navbar/afo-navbar";
 
 const Login = ({loginUser, user}) => {
     const [credentials, setCredentials] = useState({username: '', password: ''});
-    const [currentUser, setUser] = useState(user);
+    const [attemptNum, setAttemptNum] = useState(0);
     const history = useHistory();
 
+
+
+    const loginClicked = () => {
+        userService.login(credentials)
+            .then((actualUser) => {
+                console.log('actualUserName: ' + actualUser.username);
+                console.log('actualUserId: ' + actualUser.id);
+                if(actualUser === 0) {
+                    alert("login failed, try again")
+                } else {
+                    history.push(`/user/${actualUser.id}`)
+                }
+            })
+    };
+
     const login = () => {
-        loginUser(credentials).then(() => {history.push("/user/profile")})
+        loginUser(credentials);
+        console.log('logged in: ' + user.username);
+        let newAttempts = attemptNum + 1;
+        setAttemptNum(newAttempts);
     };
 
     useEffect(() => {
-        console.log('logging in as ' + user);
-    }, [user]);
+        console.log('attempt: ' + attemptNum);
+        console.log('logging in as ' + user.username);
+    }, [attemptNum]);
 
 
     return(
@@ -27,7 +47,7 @@ const Login = ({loginUser, user}) => {
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-12">
-                                    <h1 className="afo-purple afo-header">Login</h1>
+                                    <h1 className="afo-purple afo-header">Login {user.username}</h1>
                                 </div>
                             </div>
                             <div className="row">
@@ -59,7 +79,7 @@ const Login = ({loginUser, user}) => {
 
                                         <br/>
                                         <button
-                                            onClick={() => login()}
+                                            onClick={() => loginClicked()}
                                             type="button"
                                             className="btn btn-secondary">
                                             Login
@@ -76,7 +96,7 @@ const Login = ({loginUser, user}) => {
 };
 
 const stateToPropertiesManager = (state) => ({
-    user: state.userReducer.user
+    user: state.userReducer.currentUser
 });
 
 const dispatchToPropertiesManager = (dispatch) => ({
