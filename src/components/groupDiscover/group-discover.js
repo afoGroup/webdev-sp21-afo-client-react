@@ -11,7 +11,7 @@ const GroupDiscover = ({groupList}) => {
                     <div className="col-12">
 
                         {
-                            groupList.map((group, index) =>
+                            groupList && groupList.map((group, index) =>
                                 <p key={index}>{group.title}</p>
                             )
                         }

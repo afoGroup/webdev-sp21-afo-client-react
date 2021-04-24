@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import userActions from "../actions/user-actions";
 import AfoNavbar from "./navbar/afo-navbar";
 
-const Login = ({loginUser, user}) => {
+const Login = ({loginUser, user={}}) => {
     const [credentials, setCredentials] = useState({username: '', password: ''});
     const history = useHistory();
     const login = () => {
@@ -54,7 +54,7 @@ const Login = ({loginUser, user}) => {
 
                                         <br/>
                                         <button
-                                            onClick={() => login}
+                                            onClick={() => login()}
                                             type="button"
                                             className="btn btn-secondary">
                                             Login

@@ -1,7 +1,7 @@
 import {FIND_ALL_USERS, FIND_USER_BY_ID, LOGIN_USER, LOGOUT_USER, REGISTER_USER, LOGIN_STATE} from "../actions/user-constants";
 
 const initialState = {
-    loginState: '',
+    loginState: LOGIN_STATE.LOGGED_OUT,
     user: {
         id: '',
         password: '',
