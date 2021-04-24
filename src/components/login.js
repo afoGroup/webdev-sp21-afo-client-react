@@ -1,18 +1,23 @@
-import React,{useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useHistory} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import userActions from "../actions/user-actions";
 import AfoNavbar from "./navbar/afo-navbar";
 
-const Login = ({loginUser, user={}}) => {
+const Login = ({loginUser, user}) => {
     const [credentials, setCredentials] = useState({username: '', password: ''});
+    const [currentUser, setUser] = useState(user);
     const history = useHistory();
+
     const login = () => {
-        let promise = loginUser(credentials);
-        promise.then(res => {
-            (res === 0)? history.push('/home') : alert("Username/Password combination does not exist")
-        })
+        loginUser(credentials).then(() => {history.push("/user/profile")})
     };
+
+    useEffect(() => {
+        console.log('logging in as ' + user);
+    }, [user]);
+
+
     return(
         <div className="container-fluid">
             <div className="row">
