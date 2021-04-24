@@ -59,7 +59,10 @@ function App() {
                     <Group/>
                 </Route>
 
-                <Route path={["/profile/:userId", "/profile/:userId/"]}
+                <Route path={[
+                    "/profile", "/profile/",
+                    "/profile/:userId", "/profile/:userId/",
+                    "/user/:userId", "/user/:userId/"]}
                        exact={true}>
                     <Profile/>
                 </Route>
@@ -72,6 +75,6 @@ function App() {
             </BrowserRouter>
         </Provider>
     );
-}
+};
 
 export default App;

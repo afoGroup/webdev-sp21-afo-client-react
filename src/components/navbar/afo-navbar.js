@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {LOGIN_STATE} from "../../actions/user-constants";
 import {useDispatch, useSelector} from "react-redux";
 import userActions from '../../actions/user-actions';
@@ -17,7 +17,13 @@ const AfoNavbar = () => {
     const loginState = useSelector(state => state.userReducer.loginState);
     const currentUser = useSelector(state => state.userReducer.user);
 
-    const dispatch = useDispatch();
+    const history = useHistory();
+    const logout = () => {
+        userActions.logoutUser()
+            .then(() => {
+                history.push("/home")
+            })
+    };
 
     useEffect(() => {
         const pageClickEvent = (e) => {
@@ -49,6 +55,11 @@ const AfoNavbar = () => {
 
     }, [profileMenu]);
 
+    useEffect(() => {
+        console.log(loginState);
+        console.log(currentUser);
+    }, [currentUser, loginState]);
+
     return(
         <>
             <div className="row navbar fixed-top navbar-expanded-lg navbar-dark afo-navbar">
@@ -56,6 +67,9 @@ const AfoNavbar = () => {
                     <i className="fa fa-bars btn afo-white navbar-btn"
                        onClick={mainClick}
                        title="main menu"></i>
+                    {
+                        loginState === LOGIN_STATE.LOGGED_IN && <span>{currentUser.username}</span>
+                    }
                 </div>
                 <div className="col-6 text-center">
                     <Link to="/home" style={{ textDecoration:'none'}}>
@@ -94,7 +108,7 @@ const AfoNavbar = () => {
                             <ul>
                                 <li><Link to={`/profile/` + currentUser.id}>Profile</Link></li>
                                 <li><Link to={`/settings/` + currentUser.id}>Settings</Link></li>
-                                <li><Link to={`/home`} onClick={() => userActions.logoutUser(dispatch)}>Log Out</Link></li>
+                                <li><span onClick={() => userActions.logoutUser()}>Log Out</span></li>
                             </ul>
                         }
                     </nav>

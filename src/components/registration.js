@@ -6,14 +6,11 @@ import AfoNavbar from "./navbar/afo-navbar";
 
 const Registration = ({registerMyUser}) => {
     const [credentials, setCredentials] = useState({
-        // req fields
         password: '',
         username: '',
         usertype: '',
-
-        // opt fields
-        bio: '',
         email: '',
+        bio: '',
         instagram: '',
         pictureURL: '',
         twitter: ''
@@ -33,9 +30,6 @@ const Registration = ({registerMyUser}) => {
     const [alertPassword, setAlertPassword] = useState(false);
     const [alertCard, setAlertCard] = useState(false);
 
-    const [createdStatus, setCreatedStatus] = useState(false);
-    const [newUserId, setNewUserId] = useState('');
-
     const register = () => {
         setCredentials({
             password: password,
@@ -47,17 +41,10 @@ const Registration = ({registerMyUser}) => {
             pictureURL: imageUrl,
             twitter: twitter
         });
-        let promise = registerMyUser(credentials)
-        promise.then(res => {
-            (res === 0)? history.push('/home') : alert("Username has already been taken.")
+        registerMyUser(credentials).then(user => {
+            (user === 0)? history.push(`user/profile`) : alert("Username has already been taken.")
         })
-    }
-
-    useEffect(() => {
-        if(createdStatus){
-            window.open('/profile/'+newUserId, '_blank');
-        }
-    }, [createdStatus]);
+    };
 
     const registerClicked = () => {
         if(username === ""){
@@ -85,18 +72,8 @@ const Registration = ({registerMyUser}) => {
         }
 
         if(username!=="" && email!=="" && password!==""){
-            registerUser();
+            register();
         }
-    };
-
-    const registerUser = () => {
-        // create user and call dispatch:
-        register()
-
-
-
-        // once user has been successfully created and stored in the session,
-        // I'll get the new user's id and then set createdStatus to true
     };
 
     return(
@@ -234,10 +211,10 @@ const Registration = ({registerMyUser}) => {
 
 const stateToPropertiesManager = (state) => ({
     user: state.userReducer.user
-})
+});
 
 const dispatchToPropertiesManager = (dispatch) => ({
     registerMyUser: (user) => userActions.registerUser(dispatch, user)
-})
+});
 
 export default connect(stateToPropertiesManager, dispatchToPropertiesManager)(Registration);
