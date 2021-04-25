@@ -14,7 +14,6 @@ const Login = ({loginUser, user}) => {
 
     const loginClicked = () => {
         userService.login(credentials)
-            .then(response => response.json())
             .then((actualUser) => {
                 console.log('actualUserName: ' + actualUser.username);
                 console.log('actualUserId: ' + actualUser._id);
