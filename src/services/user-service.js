@@ -14,11 +14,13 @@ export const getCurrentUser = () =>
          method: POST,
          credentials: INCLUDE,
          headers: HEADER
-     }).then(response => {
-         let actual = response.json();
-         console.log("(getCurrentUser) response: " + actual);
-         return actual;
-     });
+     }).then(response => response.json()
+     // {
+     //     let actual = response.json();
+     //     console.log("(getCurrentUser) response: " + actual);
+     //     return actual;
+     // }
+     );
 
 export const login = (user) =>
     fetch(`${ANIFANSONLY_URL}/api/login`, {
