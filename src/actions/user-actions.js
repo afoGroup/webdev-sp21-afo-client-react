@@ -6,7 +6,7 @@ import {
     LOGIN_USER,
     LOGOUT_USER,
     USER_PROFILE,
-    FIND_USER_BY_USERNAME, UPDATE_USER, DELETE_USER
+    FIND_USER_BY_USERNAME, UPDATE_USER, DELETE_USER, LOGIN_STATE
 } from "./user-constants";
 
 const ERROR = -1;
@@ -31,7 +31,7 @@ export const registerUser = (dispatch, user) => {
 };
 
 export const loginUser = (dispatch, user) => {
-    return userService.login(user)
+    userService.login(user)
         .then(response => {
             dispatch({
                 type: LOGIN_USER,
@@ -108,6 +108,21 @@ export const deleteUser = (dispatch, userId) => {
 
 };
 
+export const getCurrentUser = (dispatch) => {
+    userService.getCurrentUser()
+        .then((actualUser) => {
+            dispatch({
+                type: USER_PROFILE,
+                user: actualUser
+            });
+            console.log("(action getCurrent): " + actualUser);
+        })
+        .catch(error => {
+            console.log("(action getCurrent) no current user");
+            console.log(error)
+        })
+};
+
 const api = {
     registerUser,
     findUserById,
@@ -117,7 +132,8 @@ const api = {
     deleteUser,
     loginUser,
     logoutUser,
-    getUserProfile
+    getUserProfile,
+    getCurrentUser
 };
 
 export default api;

@@ -62,6 +62,12 @@ const userReducer = (state=initialState, action) => {
                 ...state,
                 searchedUserList: action.user
             };
+        case USER_PROFILE:
+            return {
+                ...state,
+                currentUser: action.user,
+                loginState: LOGIN_STATE.LOGGED_IN
+            };
         default:
             return state
     }

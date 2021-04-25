@@ -32,7 +32,7 @@ const AfoNavbar = () => {
             .then(response => response.json())
             .then((actualUser) => {
                 console.log("(navabr): " + actualUser);
-                if(actualUser === ""){
+                if(actualUser === undefined){
                     setLoginState(LOGIN_STATE.LOGGED_OUT)
                 } else {
                     console.log("(navbar) user: " + actualUser.username + " & " + actualUser._id);
