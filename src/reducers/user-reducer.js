@@ -14,15 +14,9 @@ const initialState = {
         bio: '',
         twitter: '',
         instagram: '',
-<<<<<<< HEAD
         pictureURL: '',
-        twitter: '',
-        clubs: []
-=======
-        pictureUrl: '',
         clubs: [],
         ownerOfClubs: []
->>>>>>> main
     },
     searchedUserList: [],
     searchedUser: {}
