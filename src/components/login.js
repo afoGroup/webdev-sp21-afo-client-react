@@ -14,12 +14,14 @@ const Login = ({loginUser, user}) => {
 
     const loginClicked = () => {
         userService.login(credentials)
+            .then(response => response.json())
             .then((actualUser) => {
                 console.log('actualUserName: ' + actualUser.username);
                 console.log('actualUserId: ' + actualUser.id);
                 if(actualUser === 0) {
                     alert("login failed, try again")
                 } else {
+                    console.log('logged in as: ' + actualUser);
                     history.push(`/user/${actualUser.id}`)
                 }
             })
