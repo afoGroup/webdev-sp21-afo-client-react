@@ -9,23 +9,11 @@ export const registerUser = (user) =>
         headers: HEADER
     }).then(response => response.json());
 
-<<<<<<< HEAD
-export const profile = () => {
-    return (
-        fetch(`${USER_URL}/api/profile`, {
-            method: "POST",
-            credentials: "include"
-        }).then(response => response.json())
-    )
-};
-
-=======
 // export const profile = () =>
 //     fetch(`${ANIFANSONLY_URL}/api/profile`, {
 //         method: "POST",
 //         credentials: "include"
 //     }).then(response => response.json());
->>>>>>> main
 
 export const login = (user) =>
     fetch(`${ANIFANSONLY_URL}/api/login`, {
@@ -68,6 +56,10 @@ export const deleteUser = (uid) =>
         method: DELETE
     }).then(response => response.json());
 
+export const getCurrentUser = () =>
+    fetch(`${ANIFANSONLY_URL}/api/currentUser`, {
+        method: POST
+    }).then(response => response.json());
 
 const api = {
     registerUser,
@@ -77,7 +69,8 @@ const api = {
     updateUser,
     deleteUser,
     logout,
-    login
+    login,
+    getCurrentUser
 };
 
 export default api;

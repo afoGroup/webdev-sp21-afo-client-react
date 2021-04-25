@@ -1,4 +1,4 @@
-export const POST = "POST"
+export const POST = "POST";
 export const PUT = "PUT";
 export const DELETE = "DELETE";
 

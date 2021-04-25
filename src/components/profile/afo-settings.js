@@ -1,15 +1,13 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import AfoNavbar from "../navbar/afo-navbar";
 import '../../styles/afo-profile.css';
 import userActions from "../../actions/user-actions";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
+import userService from "../../services/user-service";
 
 const Settings = () => {
-    const dispatch = useDispatch();
     const {userId} = useParams();
-    const currentUser = userActions.findUserById(dispatch, userId);
-
     const [imgUrl, setImageUrl] = useState(currentUser.pictureUrl);
     const [username, setUsername] = useState(currentUser.username);
     const [email, setEmail] = useState(currentUser.email);
@@ -19,6 +17,19 @@ const Settings = () => {
     const [instagram, setInstagram] = useState(currentUser.instagram);
     const [cardNum, setCardNum] = useState('');
     const [bio, setBio] = useState(currentUser.bio);
+    const [currentUser, setCurrentUser] = useState({});
+    const [loginState, setCurrentLoginState] = useState("logged-out");
+
+    useEffect(() => {
+        userService.getCurrentUser()
+            .then((actualUser) => {
+                if(actualUser && actualUser !== "no currentUser"){
+                    setCurrentUser(actualUser);
+                }
+            });
+
+    }, [userId]);
+
 
     const updateUser = () => {
         //
