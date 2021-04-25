@@ -114,6 +114,7 @@ const api = {
     findUserByUsername,
     findAllUsers,
     updateUser,
+    deleteUser,
     loginUser,
     logoutUser,
     getUserProfile
