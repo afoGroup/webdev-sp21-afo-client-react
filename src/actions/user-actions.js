@@ -1,5 +1,13 @@
 import userService from '../services/user-service';
-import {REGISTER_USER, FIND_ALL_USERS, FIND_USER_BY_ID, LOGIN_USER, LOGOUT_USER, USER_PROFILE} from "./user-constants";
+import {
+    REGISTER_USER,
+    FIND_ALL_USERS,
+    FIND_USER_BY_ID,
+    LOGIN_USER,
+    LOGOUT_USER,
+    USER_PROFILE,
+    FIND_USER_BY_USERNAME, UPDATE_USER, DELETE_USER
+} from "./user-constants";
 
 const ERROR = -1;
 const SUCCESS = 0;
@@ -59,6 +67,22 @@ export const findUserById = (dispatch, userId) => {
         }))
 };
 
+export const findUserByUsername = (dispatch, username) => {
+    userService.findUserByUsername(username)
+        .then(result => dispatch({
+            type: FIND_USER_BY_USERNAME,
+            user: result
+        }))
+};
+
+export const updateUser = (dispatch, userId, user) => {
+    userService.updateUser(userId, user)
+        .then(result => dispatch({
+            type: UPDATE_USER,
+            user: result
+        }))
+};
+
 export const getUserProfile = (dispatch) => {
     userService.profile()
         .then(result => {
@@ -72,10 +96,24 @@ export const getUserProfile = (dispatch) => {
         })
 };
 
+export const deleteUser = (dispatch, userId) => {
+    userService.logout()
+        .then(logoutRes => {
+            console.log(logoutRes);
+            return userService.deleteUser(userId)
+        })
+        .then(userDeleted => dispatch({
+            type: DELETE_USER
+        }))
+
+}
+
 const api = {
     registerUser,
     findUserById,
+    findUserByUsername,
     findAllUsers,
+    updateUser,
     loginUser,
     logoutUser,
     getUserProfile

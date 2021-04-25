@@ -8,7 +8,7 @@ export const findAllGroups = (dispatch) => {
         type: FIND_ALL_GROUPS,
         groups: results
     }))
-}
+};
 
 export const findGroupById = (dispatch, groupId) => {
     groupService
@@ -17,7 +17,7 @@ export const findGroupById = (dispatch, groupId) => {
         type: FIND_GROUP_BY_ID,
         group: results
     }))
-}
+};
 
 export const createGroup = (dispatch, group) => {
     groupService
@@ -26,7 +26,7 @@ export const createGroup = (dispatch, group) => {
         type: CREATE_GROUP,
         group: results
     }))
-}
+};
 
 export const updateGroup = (dispatch, groupId, group) => {
     groupService
@@ -35,7 +35,7 @@ export const updateGroup = (dispatch, groupId, group) => {
         type: UPDATE_GROUP,
         group: results
     }))
-}
+};
 
 export const deleteGroup = (dispatch, groupId) => {
     groupService
@@ -44,7 +44,7 @@ export const deleteGroup = (dispatch, groupId) => {
         type: DELETE_GROUP,
         group: results
     }))
-}
+};
 
 const api = {
     findAllGroups,
