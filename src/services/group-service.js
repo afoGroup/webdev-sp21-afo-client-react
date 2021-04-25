@@ -29,10 +29,15 @@ export const findGroupById = (groupId) =>
    fetch(`${ANIFANSONLY_URL}/api/clubs/${groupId}`)
         .then(response => response.json());
 
+export const findGroupByTitle = (groupTitle) =>
+    fetch(`${ANIFANSONLY_URL}/api/search/clubs/${groupTitle}`)
+        .then(response => response.json());
+
 const api = {
     findAllGroups,
     createGroup,
     findGroupById,
+    findGroupByTitle,
     updateGroup,
     deleteGroup
 };

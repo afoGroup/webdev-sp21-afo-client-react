@@ -6,16 +6,17 @@ import {
 const initialState = {
     loginState: LOGIN_STATE.LOGGED_OUT,
     currentUser: {
-        id: '',
-        password: '',
+        _id: '',
         username: '',
+        password: '',
         userType: '',
         email: '',
         bio: '',
+        twitter: '',
         instagram: '',
         pictureUrl: '',
-        twitter: '',
-        clubs: []
+        clubs: [],
+        ownerOfClubs: []
     },
     searchedUserList: [],
     searchedUser: {}
@@ -32,13 +33,13 @@ const userReducer = (state=initialState, action) => {
         case LOGOUT_USER:
             return {
                 ...state,
-                currentUser: initialState.user,
+                currentUser: initialState.currentUser,
                 loginState: LOGIN_STATE.LOGGED_OUT
             };
         case DELETE_USER:
             return {
                 ...state,
-                currentUser: initialState.user,
+                currentUser: initialState.currentUser,
                 loginState: LOGIN_STATE.LOGGED_OUT
             };
         case UPDATE_USER:
@@ -59,8 +60,8 @@ const userReducer = (state=initialState, action) => {
         case FIND_USER_BY_USERNAME:
             return {
                 ...state,
-                searchedUser: action.user
-            }
+                searchedUserList: action.user
+            };
         default:
             return state
     }

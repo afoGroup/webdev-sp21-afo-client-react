@@ -1,42 +1,53 @@
-import {CREATE_GROUP, DELETE_GROUP, FIND_ALL_GROUPS, UPDATE_GROUP} from "../actions/group-constants";
+import {
+    CREATE_GROUP,
+    DELETE_GROUP,
+    FIND_ALL_GROUPS,
+    FIND_GROUP_BY_ID,
+    FIND_GROUP_BY_TITLE,
+    UPDATE_GROUP
+} from "../actions/group-constants";
 
 const initialState = {
-    groups: [{
-        name: '',
-        bio: '',
+    currentGroup: {
+        _id: '',
+        title: '',
+        description: '',
         animeId: '',
-        users: ''
-    }]
-}
-
+        pictureUrl: '',
+        owner: '',
+        posts: []
+    },
+    searchedGroupList: [],
+    searchedGroup: {}
+};
 
 const groupReducer = (state=initialState, action) => {
     switch(action.type){
-        case FIND_ALL_GROUPS:
-            return{
-                groups: action.groups
-            }
-        case CREATE_GROUP:
-            return{
-                groups: [
-                    ...state.groups,
-                    action.group
-                ]
-            }
-        case UPDATE_GROUP:
+        case (CREATE_GROUP || UPDATE_GROUP):
             return {
-                groups: state.groups.map(g => {
-                    if(g.id === action.group.id){return action.group}
-                    else{return g}
-                })
-            }
+                ...state,
+                currentGroup: action.group
+            };
         case DELETE_GROUP:
             return {
-                groups: state.groups.filter(g => {
-                    if(g.id === action.group.id){return false}
-                    else{return true}
-                })
-            }
+                ...state,
+                currentGroup: initialState.currentGroup
+            };
+        case FIND_ALL_GROUPS:
+            return {
+                ...state,
+                searchedGroupList: action.groupsList
+            };
+        case FIND_GROUP_BY_ID:
+            return {
+                ...state,
+                searchedGroup: action.group
+            };
+        case FIND_GROUP_BY_TITLE:
+            return {
+                ...state,
+                searchedGroupList: action.group
+            };
         default: return state
     }
 }
