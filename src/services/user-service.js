@@ -17,7 +17,6 @@ export const registerUser = (user) =>
 
 export const login = (user) =>
     fetch(`${ANIFANSONLY_URL}/api/login`, {
-        method: POST,
         body: JSON.stringify(user),
         credentials: INCLUDE,
         headers: HEADER
