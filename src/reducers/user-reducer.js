@@ -1,19 +1,28 @@
-import {FIND_ALL_USERS, FIND_USER_BY_ID, LOGIN_USER, LOGOUT_USER, REGISTER_USER,
-    LOGIN_STATE, USER_PROFILE} from "../actions/user-constants";
+import {
+    FIND_ALL_USERS, FIND_USER_BY_ID, LOGIN_USER, LOGOUT_USER, REGISTER_USER,
+    LOGIN_STATE, USER_PROFILE, FIND_USER_BY_USERNAME, UPDATE_USER, DELETE_USER
+} from "../actions/user-constants";
 
 const initialState = {
     loginState: LOGIN_STATE.LOGGED_OUT,
     currentUser: {
-        id: '',
-        password: '',
+        _id: '',
         username: '',
+        password: '',
         userType: '',
         email: '',
         bio: '',
+        twitter: '',
         instagram: '',
+<<<<<<< HEAD
         pictureURL: '',
         twitter: '',
         clubs: []
+=======
+        pictureUrl: '',
+        clubs: [],
+        ownerOfClubs: []
+>>>>>>> main
     },
     searchedUserList: [],
     searchedUser: {}
@@ -30,8 +39,19 @@ const userReducer = (state=initialState, action) => {
         case LOGOUT_USER:
             return {
                 ...state,
-                currentUser: initialState.user,
+                currentUser: initialState.currentUser,
                 loginState: LOGIN_STATE.LOGGED_OUT
+            };
+        case DELETE_USER:
+            return {
+                ...state,
+                currentUser: initialState.currentUser,
+                loginState: LOGIN_STATE.LOGGED_OUT
+            };
+        case UPDATE_USER:
+            return {
+                ...state,
+                currentUser: action.user
             };
         case FIND_ALL_USERS:
             return {
@@ -42,6 +62,11 @@ const userReducer = (state=initialState, action) => {
             return {
                 ...state,
                 searchedUser: action.user
+            };
+        case FIND_USER_BY_USERNAME:
+            return {
+                ...state,
+                searchedUserList: action.user
             };
         default:
             return state

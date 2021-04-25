@@ -4,7 +4,6 @@ import {WHAT_ANIME_URL} from "../constants/api-urls"
 // Results are usually not accurate unless 90% similarity
 const findImageByURL = (imageURL) => {
     return fetch(`${WHAT_ANIME_URL}?url=${imageURL}`)
-        // .then(response => response.json)
         .then(response => {
             if (response.ok) {
                 return response.json()

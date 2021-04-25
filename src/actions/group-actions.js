@@ -1,14 +1,21 @@
 import groupService from '../services/group-service';
-import {CREATE_GROUP, DELETE_GROUP, FIND_ALL_GROUPS, FIND_GROUP_BY_ID, UPDATE_GROUP} from "./group-constants";
+import {
+    CREATE_GROUP,
+    DELETE_GROUP,
+    FIND_ALL_GROUPS,
+    FIND_GROUP_BY_ID,
+    FIND_GROUP_BY_TITLE,
+    UPDATE_GROUP
+} from "./group-constants";
 
 export const findAllGroups = (dispatch) => {
     groupService
         .findAllGroups()
         .then(results => dispatch({
         type: FIND_ALL_GROUPS,
-        groups: results
+        groupsList: results
     }))
-}
+};
 
 export const findGroupById = (dispatch, groupId) => {
     groupService
@@ -17,7 +24,7 @@ export const findGroupById = (dispatch, groupId) => {
         type: FIND_GROUP_BY_ID,
         group: results
     }))
-}
+};
 
 export const createGroup = (dispatch, group) => {
     groupService
@@ -26,7 +33,7 @@ export const createGroup = (dispatch, group) => {
         type: CREATE_GROUP,
         group: results
     }))
-}
+};
 
 export const updateGroup = (dispatch, groupId, group) => {
     groupService
@@ -35,7 +42,7 @@ export const updateGroup = (dispatch, groupId, group) => {
         type: UPDATE_GROUP,
         group: results
     }))
-}
+};
 
 export const deleteGroup = (dispatch, groupId) => {
     groupService
@@ -44,11 +51,21 @@ export const deleteGroup = (dispatch, groupId) => {
         type: DELETE_GROUP,
         group: results
     }))
-}
+};
+
+export const findGroupByTitle = (dispatch, groupTitle) => {
+    groupService
+        .findGroupByTitle(groupTitle)
+        .then(group => dispatch({
+            type: FIND_GROUP_BY_TITLE,
+            group: group
+        }))
+};
 
 const api = {
     findAllGroups,
     findGroupById,
+    findGroupByTitle,
     createGroup,
     updateGroup,
     deleteGroup

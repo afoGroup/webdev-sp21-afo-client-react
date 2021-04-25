@@ -1,41 +1,43 @@
-const GROUP_URL = "https://anifansonly-java-server.herokuapp.com";
+import {ANIFANSONLY_URL} from "../constants/api-urls";
+import {DELETE, HEADER, INCLUDE, POST, PUT} from "./services-constants";
 
 export const findAllGroups = () =>
-    fetch(`${GROUP_URL}/api/groups`).then(response => response.json());
+    fetch(`${ANIFANSONLY_URL}/api/clubs`).then(response => response.json());
 
 export const createGroup = (group) =>
-    fetch(`${GROUP_URL}/api/groups/create`, {
-        method: "POST",
+    fetch(`${ANIFANSONLY_URL}/api/clubs/create`, {
+        method: POST,
         body: JSON.stringify(group),
-        credentials: "include",
-        headers: {
-            'content-type' : 'application/json'
-        }
+        credentials: INCLUDE,
+        headers: HEADER
     }).then(response => response.json());
 
 export const updateGroup = (groupId, group) =>
-    fetch(`${GROUP_URL}/api/groups/${groupId}`, {
-        method: "PUT",
+    fetch(`${ANIFANSONLY_URL}/api/clubs/${groupId}/update`, {
+        method: PUT,
         body: JSON.stringify(group),
-        credentials: "include",
-        headers: {
-            'content-type' : 'application/json'
-        }
+        credentials: INCLUDE,
+        headers: HEADER
     }).then(response => response.json());
 
 export const deleteGroup = (groupId) =>
-    fetch(`${GROUP_URL}/api/groups/${groupId}`, {
-        method: "DELETE"
+    fetch(`${ANIFANSONLY_URL}/api/clubs/${groupId}/remove`, {
+        method: DELETE
     }).then(response => response.json());
 
-export const findGroupById = (groupId) => {
-    fetch(`${GROUP_URL}/api/groups/${groupId}`).then(response => response.json());
-};
+export const findGroupById = (groupId) =>
+   fetch(`${ANIFANSONLY_URL}/api/clubs/${groupId}`)
+        .then(response => response.json());
+
+export const findGroupByTitle = (groupTitle) =>
+    fetch(`${ANIFANSONLY_URL}/api/search/clubs/${groupTitle}`)
+        .then(response => response.json());
 
 const api = {
     findAllGroups,
     createGroup,
     findGroupById,
+    findGroupByTitle,
     updateGroup,
     deleteGroup
 };
