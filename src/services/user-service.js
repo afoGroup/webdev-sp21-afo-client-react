@@ -1,19 +1,24 @@
 import {ANIFANSONLY_URL} from "../constants/api-urls";
-import {DELETE, HEADER, INCLUDE, POST, PUT} from "./services-constants";
+import {DELETE, HEADER, INCLUDE, POST, PUT, GET} from "./services-constants";
 
 export const registerUser = (user) =>
-    fetch(`${ANIFANSONLY_URL}/api/users/create`, {
+    fetch(`${ANIFANSONLY_URL}/api/register`, {
         method: POST,
         body: JSON.stringify(user),
         credentials: INCLUDE,
         headers: HEADER
     }).then(response => response.json());
 
-// export const profile = () =>
-//     fetch(`${ANIFANSONLY_URL}/api/profile`, {
-//         method: "POST",
-//         credentials: "include"
-//     }).then(response => response.json());
+export const getCurrentUser = () =>
+     fetch(`${ANIFANSONLY_URL}/api/users/current`, {
+         method: POST,
+         credentials: INCLUDE,
+         headers: HEADER
+     }).then(response => {
+         let actual = response.json();
+         console.log("(getCurrentUser) response: " + actual);
+         return actual;
+     });
 
 export const login = (user) =>
     fetch(`${ANIFANSONLY_URL}/api/login`, {
@@ -26,7 +31,7 @@ export const login = (user) =>
 export const logout = () =>
     fetch(`${ANIFANSONLY_URL}/api/logout`, {
         method: POST,
-        credentials: "include"
+        credentials: INCLUDE
     });
 
 export const findAllUsers = () =>
@@ -56,10 +61,6 @@ export const deleteUser = (uid) =>
         method: DELETE
     }).then(response => response.json());
 
-export const getCurrentUser = () =>
-    fetch(`${ANIFANSONLY_URL}/api/currentUser`, {
-        method: POST
-    }).then(response => response.json());
 
 const api = {
     registerUser,

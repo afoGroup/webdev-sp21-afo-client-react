@@ -1,10 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import {LOGIN_STATE} from "../../actions/user-constants";
 import {useDispatch, useSelector} from "react-redux";
 import userActions from '../../actions/user-actions';
 
 import '../../styles/afo-navbar.css';
+import userService from "../../services/user-service";
 
 const AfoNavbar = () => {
     const mainMenuRef = useRef(null);
@@ -14,16 +15,34 @@ const AfoNavbar = () => {
     const mainClick = () => setMainMenu(!mainMenu);
     const profileClick = () => setProfileMenu(!profileMenu);
 
-    const loginState = useSelector(state => state.userReducer.loginState);
-    const currentUser = useSelector(state => state.userReducer.user);
-
     const history = useHistory();
+
     const logout = () => {
-        userActions.logoutUser()
+        userService.logout()
             .then(() => {
                 history.push("/home")
-            })
+            });
     };
+
+    const [currentUser, setCurrentUser] = useState({});
+    const [loginState, setLoginState] = useState(LOGIN_STATE.LOGGED_OUT);
+
+    useEffect(() => {
+        userService.getCurrentUser()
+            .then((actualUser) => {
+                console.log("(navabr): " + actualUser);
+                if(actualUser === "no current user"){
+                    setLoginState(LOGIN_STATE.LOGGED_OUT)
+                } else {
+                    console.log("(navbar) user: " + actualUser.username + " & " + actualUser._id);
+                    setCurrentUser(actualUser);
+                    setLoginState(LOGIN_STATE.LOGGED_IN);
+                }
+            }).catch(error => {
+                console.log("Nah...");
+                console.log(error)
+            })
+    }, []);
 
     useEffect(() => {
         const pageClickEvent = (e) => {
@@ -54,11 +73,6 @@ const AfoNavbar = () => {
         }
 
     }, [profileMenu]);
-
-    useEffect(() => {
-        console.log(loginState);
-        console.log(currentUser);
-    }, [currentUser, loginState]);
 
     return(
         <>
@@ -106,9 +120,9 @@ const AfoNavbar = () => {
                         {
                             loginState === LOGIN_STATE.LOGGED_IN &&
                             <ul>
-                                <li><Link to={`/profile/` + currentUser.id}>Profile</Link></li>
+                                <li><Link to={`/user/` + currentUser.id}>Profile</Link></li>
                                 <li><Link to={`/settings/` + currentUser.id}>Settings</Link></li>
-                                <li><span onClick={() => userActions.logoutUser()}>Log Out</span></li>
+                                <li><span onClick={() => logout()}>Log Out</span></li>
                             </ul>
                         }
                     </nav>
