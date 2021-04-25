@@ -29,7 +29,6 @@ const AfoNavbar = () => {
 
     useEffect(() => {
         userService.getCurrentUser()
-            .then(response => response.json())
             .then((actualUser) => {
                 console.log("(navabr): " + actualUser);
                 if(actualUser === undefined){
