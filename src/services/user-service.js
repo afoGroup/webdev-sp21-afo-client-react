@@ -11,6 +11,7 @@ export const registerUser = (user) =>
 
 export const getCurrentUser = () =>
      fetch(`${ANIFANSONLY_URL}/api/users/current`, {
+         method: POST,
          credentials: INCLUDE,
          headers: HEADER
      }).then(response => {
