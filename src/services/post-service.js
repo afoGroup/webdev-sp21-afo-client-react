@@ -1,16 +1,13 @@
-const POST_URL = "https://anifansonly-java-server.herokuapp.com";
+import {ANIFANSONLY_URL} from "../constants/api-urls";
 
 export const findAllPosts = () =>
-    fetch(`${POST_URL}/api/posts`).then(response => response.json());
+    fetch(`${ANIFANSONLY_URL}/api/posts`).then(response => response.json());
 
 export const findPostById = (postId) =>
-    fetch(`${POST_URL}/api/posts/${postId}`).then(response => response.json());
-
-export const findPostsForGroups = (groupId) =>
-    fetch(`${POST_URL}/api/groups/${groupId}/posts`).then(response => response.json());
+    fetch(`${ANIFANSONLY_URL}/api/posts/${postId}`).then(response => response.json());
 
 export const createPost = (groupId, post) =>
-    fetch(`${POST_URL}/api/groups/${groupId}/posts`, {
+    fetch(`${ANIFANSONLY_URL}/api/clubs/${groupId}/posts/create`, {
         method: "POST",
         body: JSON.stringify(post),
         credentials: "include",
@@ -20,12 +17,12 @@ export const createPost = (groupId, post) =>
     }).then(response => response.json());
 
 export const deletePost = (postId) =>
-    fetch(`${POST_URL}/api/posts/${postId}`, {
+    fetch(`${ANIFANSONLY_URL}/api/posts/${postId}/remove`, {
         method: "DELETE"
     }).then(response => response.json());
 
 const api = {
-    findAllPosts, findPostById, findPostsForGroups, createPost, deletePost
+    findAllPosts, findPostById, createPost, deletePost
 }
 
 export default api;

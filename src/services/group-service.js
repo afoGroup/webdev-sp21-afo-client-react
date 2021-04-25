@@ -1,10 +1,10 @@
-const GROUP_URL = "https://anifansonly-java-server.herokuapp.com";
+import {ANIFANSONLY_URL} from "../constants/api-urls";
 
 export const findAllGroups = () =>
-    fetch(`${GROUP_URL}/api/groups`).then(response => response.json());
+    fetch(`${ANIFANSONLY_URL}/api/clubs`).then(response => response.json());
 
 export const createGroup = (group) =>
-    fetch(`${GROUP_URL}/api/groups/create`, {
+    fetch(`${ANIFANSONLY_URL}/api/clubs/create`, {
         method: "POST",
         body: JSON.stringify(group),
         credentials: "include",
@@ -14,7 +14,7 @@ export const createGroup = (group) =>
     }).then(response => response.json());
 
 export const updateGroup = (groupId, group) =>
-    fetch(`${GROUP_URL}/api/groups/${groupId}`, {
+    fetch(`${ANIFANSONLY_URL}/api/clubs/${groupId}/update`, {
         method: "PUT",
         body: JSON.stringify(group),
         credentials: "include",
@@ -24,12 +24,12 @@ export const updateGroup = (groupId, group) =>
     }).then(response => response.json());
 
 export const deleteGroup = (groupId) =>
-    fetch(`${GROUP_URL}/api/groups/${groupId}`, {
+    fetch(`${ANIFANSONLY_URL}/api/clubs/${groupId}/remove`, {
         method: "DELETE"
     }).then(response => response.json());
 
 export const findGroupById = (groupId) => {
-    fetch(`${GROUP_URL}/api/groups/${groupId}`).then(response => response.json());
+    fetch(`${ANIFANSONLY_URL}/api/clubs/${groupId}`).then(response => response.json());
 };
 
 const api = {
