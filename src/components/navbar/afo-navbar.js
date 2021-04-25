@@ -38,7 +38,10 @@ const AfoNavbar = () => {
                     setCurrentUser(actualUser);
                     setLoginState(LOGIN_STATE.LOGGED_IN);
                 }
-            });
+            }).catch(error => {
+                console.log("Nah...");
+                console.log(error)
+            })
     }, []);
 
     useEffect(() => {
