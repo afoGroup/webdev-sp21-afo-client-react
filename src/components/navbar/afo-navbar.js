@@ -40,6 +40,7 @@ const AfoNavbar = () => {
                 }
             }).catch(error => {
                 console.log("Nah...");
+                setLoginState(LOGIN_STATE.LOGGED_OUT);
                 console.log(error)
             })
     }, []);

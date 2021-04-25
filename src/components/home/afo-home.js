@@ -4,7 +4,8 @@ import GroupDiscover from "../groupDiscover/group-discover";
 import FilterList from "../filter-list";
 import animeGenres from "../../constants/genre-id";
 
-const AfoHome = () => {
+
+const AfoHome = (props) => {
     const filterList = [animeGenres.ACTION, animeGenres.ADVENTURE, animeGenres.COMEDY, animeGenres.FANTASY,
         animeGenres.HORROR, animeGenres.THRILLER, animeGenres.ROMANCE, animeGenres.SCI_FI];
 
@@ -18,6 +19,7 @@ const AfoHome = () => {
                             <div className="row">
                                 <div className="col-12">
                                     <h1 className="afo-purple afo-header">AniFans Only</h1>
+                                    <p>Current Session Id: {props.currentSessionId}</p>
                                 </div>
                             </div>
                             <GroupDiscover/>

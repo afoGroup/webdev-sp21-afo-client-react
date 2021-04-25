@@ -5,7 +5,7 @@ import userActions from "../actions/user-actions";
 import userService from "../services/user-service";
 import AfoNavbar from "./navbar/afo-navbar";
 
-const Login = ({loginUser, user}) => {
+const Login = (props) => {
     const [credentials, setCredentials] = useState({username: '', password: ''});
     const [attemptNum, setAttemptNum] = useState(0);
     const history = useHistory();
@@ -26,18 +26,6 @@ const Login = ({loginUser, user}) => {
             })
     };
 
-    const login = () => {
-        loginUser(credentials);
-        console.log('logged in: ' + user.username);
-        let newAttempts = attemptNum + 1;
-        setAttemptNum(newAttempts);
-    };
-
-    useEffect(() => {
-        console.log('attempt: ' + attemptNum);
-        console.log('logging in as ' + user.username);
-    }, [attemptNum]);
-
 
     return(
         <div className="container-fluid">
@@ -48,7 +36,8 @@ const Login = ({loginUser, user}) => {
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-12">
-                                    <h1 className="afo-purple afo-header">Login {user.username}</h1>
+                                    <h1 className="afo-purple afo-header">Login</h1>
+                                    <p>Current Session Id: {props.currentSessionId}</p>
                                 </div>
                             </div>
                             <div className="row">
