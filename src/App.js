@@ -25,51 +25,49 @@ const reducer = combineReducers({
 
 const store = createStore(reducer);
 
-const sessionId = document.cookie;
-
 function App() {
 
     return (
         <Provider store={store}>
             <BrowserRouter>
                 <Route path={["/", "/home"]} exact={true}>
-                    <AfoHome currentSessionId={sessionId}/>
+                    <AfoHome/>
                 </Route>
 
                 <Route path={["/search", "/search/:title"]}
                        exact={true}>
-                    <AfoSearch currentSessionId={sessionId}/>
+                    <AfoSearch/>
                 </Route>
 
                 <Route path={["/anime/:animeId"]}
                        exact={true}>
-                    <AfoAnime currentSessionId={sessionId}/>
+                    <AfoAnime/>
                 </Route>
 
                 <Route path={["/login", "/login/"]}
                        exact={true}>
-                    <Login currentSessionId={sessionId}/>
+                    <Login/>
                 </Route>
 
                 <Route path={["/register", "/register/"]}
                        exact={true}>
-                    <Registration currentSessionId={sessionId}/>
+                    <Registration/>
                 </Route>
 
                 <Route path={["/group/:groupId", "/group/:groupId/"]}
                        exact={true}>
-                    <Group currentSessionId={sessionId}/>
+                    <Group/>
                 </Route>
 
                 <Route path={[
                     "/user/:userId", "/user/:userId/"]}
                        exact={true}>
-                    <Profile currentSessionId={sessionId}/>
+                    <Profile/>
                 </Route>
 
                 <Route path={["/settings/:userId", "/settings/:userId/"]}
                        exact={true}>
-                    <Settings currentSessionId={sessionId}/>
+                    <Settings/>
                 </Route>
 
             </BrowserRouter>

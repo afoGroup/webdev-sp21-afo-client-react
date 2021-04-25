@@ -37,7 +37,6 @@ const Login = (props) => {
                             <div className="row">
                                 <div className="col-12">
                                     <h1 className="afo-purple afo-header">Login</h1>
-                                    <p>Current Session Id: {props.currentSessionId}</p>
                                 </div>
                             </div>
                             <div className="row">
