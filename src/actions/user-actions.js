@@ -106,7 +106,7 @@ export const deleteUser = (dispatch, userId) => {
             type: DELETE_USER
         }))
 
-}
+};
 
 const api = {
     registerUser,

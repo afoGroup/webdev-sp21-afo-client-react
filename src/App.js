@@ -60,8 +60,6 @@ function App() {
                 </Route>
 
                 <Route path={[
-                    "/profile", "/profile/",
-                    "/profile/:userId", "/profile/:userId/",
                     "/user/:userId", "/user/:userId/"]}
                        exact={true}>
                     <Profile/>
