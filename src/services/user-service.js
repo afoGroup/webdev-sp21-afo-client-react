@@ -44,8 +44,7 @@ export const findUserById = (uid) =>
         .then(response => response.json());
 
 export const findUserByUsername = (username) =>
-    fetch(`${ANIFANSONLY_URL}/search/users/${username}`)
-        .then(response => response.json());
+    fetch(`${ANIFANSONLY_URL}/search/users/${username}`).then(response => response.json());
 
 
 export const updateUser = (uid, user) =>
@@ -58,7 +57,8 @@ export const updateUser = (uid, user) =>
 
 export const deleteUser = (uid) =>
     fetch(`${ANIFANSONLY_URL}/api/users/${uid}/remove`, {
-        method: DELETE
+        method: DELETE,
+        credentials: INCLUDE
     }).then(response => response.json());
 
 

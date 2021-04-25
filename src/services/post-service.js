@@ -17,11 +17,12 @@ export const createPost = (groupId, post) =>
 
 export const deletePost = (postId) =>
     fetch(`${ANIFANSONLY_URL}/api/posts/${postId}/remove`, {
-        method: DELETE
+        method: DELETE,
+        credentials: INCLUDE
     }).then(response => response.json());
 
 const api = {
     findAllPosts, findPostById, createPost, deletePost
-}
+};
 
 export default api;

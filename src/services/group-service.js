@@ -22,7 +22,8 @@ export const updateGroup = (groupId, group) =>
 
 export const deleteGroup = (groupId) =>
     fetch(`${ANIFANSONLY_URL}/api/clubs/${groupId}/remove`, {
-        method: DELETE
+        method: DELETE,
+        credentials: INCLUDE
     }).then(response => response.json());
 
 export const findGroupById = (groupId) =>
