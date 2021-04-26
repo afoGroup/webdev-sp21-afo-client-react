@@ -9,23 +9,29 @@ import {DEFAULT_USER_IMAGE} from "../../constants/api-urls";
 
 const Settings = () => {
     const {userId} = useParams();
-    const [imgUrl, setImageUrl] = useState(currentUser.pictureURL);
-    const [username, setUsername] = useState(currentUser.username);
-    const [email, setEmail] = useState(currentUser.email);
-    const [password, setPassword] = useState(currentUser.password);
-    const [type, setType] = useState(currentUser.userType);
-    const [twitter, setTwitter] = useState(currentUser.twitter);
-    const [instagram, setInstagram] = useState(currentUser.instagram);
-    const [cardNum, setCardNum] = useState('');
-    const [bio, setBio] = useState(currentUser.bio);
+    const [imgUrl, setImageUrl] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [type, setType] = useState("");
+    const [twitter, setTwitter] = useState("");
+    const [instagram, setInstagram] = useState("");
+    const [cardNum, setCardNum] = useState("");
+    const [bio, setBio] = useState("");
     const [currentUser, setCurrentUser] = useState({});
-    const [loginState, setCurrentLoginState] = useState("logged-out");
+    // const [loginState, setCurrentLoginState] = useState("logged-out");
 
     useEffect(() => {
         userService.getCurrentUser()
             .then((actualUser) => {
-                if(actualUser && actualUser !== "no currentUser"){
+                if(actualUser && actualUser.username !== "wbdv-afo-logged-out"){
                     setCurrentUser(actualUser);
+                    setUsername(actualUser.username);
+                    setPassword(actualUser.password);
+                    setType(actualUser.userType);
+                    setBio(actualUser.bio);
+                    setTwitter(actualUser.twitter);
+                    setInstagram(actualUser.instagram);
                 }
             });
 
@@ -147,14 +153,14 @@ const Settings = () => {
 
                                     </div>
                                     <div className="col-12 col-md-6 p-4">
-                                        { currentUser.pictureURL !== undefined &&
+                                        { currentUser.pictureURL !== "" &&
                                             <img
                                                 src={currentUser.pictureURL}
                                                 className="profile-img mb-2"
                                                 alt={`${currentUser.username} profile image`}
                                             />
                                         }
-                                        { currentUser.pictureURL === undefined &&
+                                        { currentUser.pictureURL === "" &&
                                         <img
                                             src={DEFAULT_USER_IMAGE}
                                             className="profile-img mb-2"
