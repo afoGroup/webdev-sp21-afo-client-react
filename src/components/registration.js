@@ -6,7 +6,7 @@ import AfoNavbar from "./navbar/afo-navbar";
 import userService from "../services/user-service";
 
 const Registration = ({registerMyUser}) => {
-    const [credentials, setCredentials] = useState({});
+    // const [credentials, setCredentials] = useState({});
     const history = useHistory();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -26,18 +26,19 @@ const Registration = ({registerMyUser}) => {
     const [alertDupeUsername, setAlertDupeUsername] = useState(false);
 
     const register = () => {
-        // setCredentials({
-        //     username: username,
-        //     email: email,
-        //     password: password,
-        //     usertype: type,
-        //     bio: '',
-        //     instagram: instagram,
-        //     twitter: twitter,
-        //     pictureURL: imageUrl
-        // });
-        console.log("registerClicked: " + JSON.stringify(credentials));
-        userService.registerUser(credentials)
+        console.log("register username: " + username);
+        const newUser = {
+            username: username,
+            email: email,
+            password: password,
+            usertype: type,
+            bio: '',
+            instagram: instagram,
+            twitter: twitter,
+            pictureURL: imageUrl
+        };
+        console.log("registerClicked: " + JSON.stringify(newUser));
+        userService.registerUser(newUser)
             .then((actualUser) => {
                 if (actualUser === "username already exists") {
                     setAlertDupeUsername(true);
@@ -91,17 +92,17 @@ const Registration = ({registerMyUser}) => {
         // }
 
         if (!(alertUsername || alertEmail || alertPassword || alertCard || alertVerifyPassword)) {
-            console.log("register: username and info setting: " + username)
-            setCredentials({
-                username: username,
-                email: email,
-                password: password,
-                userType: type,
-                description: '',
-                instagram: instagram,
-                twitter: twitter,
-                pictureURL: imageUrl
-            });
+            // console.log("register: username and info setting: " + username)
+            // setCredentials({
+            //     username: username,
+            //     email: email,
+            //     password: password,
+            //     userType: type,
+            //     description: '',
+            //     instagram: instagram,
+            //     twitter: twitter,
+            //     pictureURL: imageUrl
+            // });
             register();
         }
     };
