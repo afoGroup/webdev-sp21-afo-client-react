@@ -36,19 +36,32 @@ const Registration = ({registerMyUser}) => {
 
     const register = () => {
         setCredentials({
-            password: password,
             username: username,
+            email: email,
+            password: password,
             usertype: type,
             bio: '',
-            email: email,
             instagram: instagram,
+            twitter: twitter,
             pictureURL: imageUrl,
-            twitter: twitter
         });
-        registerMyUser(credentials).then(user => {
-            (user === 0)? history.push(`user/profile`) : alert("Username has already been taken.")
-        })
+        console.log("registerClicked" + credentials);
+        userService.registerUser(credentials)
+            .then((actualUser) => {
+                if (actualUser === "username already exists") {
+                    setAlertDupeUsername(true);
+                } else {
+                    userService.login(credentials)
+                        .then((createdUser) => {
+                            history.push(`/user/${createdUser._id}`)
+                        })
+                }
+            })
     };
+        // registerMyUser(credentials).then(user => {
+        //     (user === 0)? history.push(`user/profile`) : alert("Username has already been taken.")
+        // })
+    // };
 
     const registerClicked = () => {
         if(username === ""){
@@ -75,39 +88,41 @@ const Registration = ({registerMyUser}) => {
             setAlertCard(false);
         }
 
-        if(username !== "" && email !== "" && password !== ""){
-            register();
-        }
-
         if(password !== verifyPW) {
             setAlertVerify(true);
         }else{
             setAlertVerify(false);
         }
+
+        // if(username !== "" && email !== "" && password !== ""){
+        //     register();
+        // }
+
         if (!(alertUsername || alertEmail || alertPassword || alertCard || alertVerifyPassword)) {
-            setCredentials({
-                username: username,
-                email: email,
-                password: password,
-                usertype: type,
-                bio: '',
-                instagram: instagram,
-                twitter: twitter,
-                pictureURL: imageUrl,
-            });
-            console.log("registerClicked" + credentials);
-            userService.registerUser(credentials)
-                .then((actualUser) => {
-                    if (actualUser === "username already exists") {
-                        setAlertDupeUsername(true);
-                    } else {
-                        userService.login(credentials)
-                            .then((createdUser) => {
-                                history.push(`/user/${createdUser._id}`)
-                            })
-                    }
-                })
-        }
+            register();
+            // setCredentials({
+            //     username: username,
+            //     email: email,
+            //     password: password,
+            //     usertype: type,
+            //     bio: '',
+            //     instagram: instagram,
+            //     twitter: twitter,
+            //     pictureURL: imageUrl,
+            // });
+        //     console.log("registerClicked" + credentials);
+        //     userService.registerUser(credentials)
+        //         .then((actualUser) => {
+        //             if (actualUser === "username already exists") {
+        //                 setAlertDupeUsername(true);
+        //             } else {
+        //                 userService.login(credentials)
+        //                     .then((createdUser) => {
+        //                         history.push(`/user/${createdUser._id}`)
+        //                     })
+        //             }
+        //         })
+        // }
     };
 
     return(
