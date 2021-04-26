@@ -63,10 +63,16 @@ const Group = () => {
     return(
         <div className="container-fluid">
             <div className="row group-bg">
+
                 <div className="col-12">
                     <AfoNavbar/>
+
                     <div className="row top-row">
                         <div className="col-12 group-page-bg">
+
+
+
+
 
                             <div className="row">
                                 <div className="col-12">
@@ -85,20 +91,26 @@ const Group = () => {
 
                                             <div className="row">
                                                 <div className="col-12">
-                                                    <h4 className="group-title-box py-2"><strong>{currentGroup.title}</strong></h4>
-                                                    <p className="group-title float-right">
-                                                        <strong>{`Group Owner: `}</strong>
-                                                        <a className="afo-purple" href={`/profile/${currentGroup.owner._id}`}>
-                                                            {currentGroup.owner.username}
-                                                        </a>
-                                                    </p>
+
+                                                    {
+                                                        currentGroup && currentGroup.owner &&
+                                                        <>
+                                                            <h4 className="group-title-box py-2"><strong>{currentGroup.title}</strong></h4>
+                                                            <p className="group-title float-right">
+                                                                <strong>{`Group Owner: `}</strong>
+                                                                <a className="afo-purple" href={`/profile/${currentGroup.owner._id}`}>
+                                                                    {currentGroup.owner.username}
+                                                                </a>
+                                                            </p>
+                                                        </>
+                                                    }
                                                 </div>
                                             </div>
 
                                             <div className="row">
                                                 <div className="col-12">
                                                     {
-                                                        groupAnime.title &&
+                                                        currentGroup.animeId && groupAnime.title &&
                                                         <>
                                                             <p><strong>Group Anime: </strong>
                                                                 <a className="afo-purple" href={`/anime/${currentGroup.animeId}`}>
@@ -107,7 +119,10 @@ const Group = () => {
                                                             </p>
                                                         </>
                                                     }
-                                                    <p>{currentGroup.bio}</p>
+                                                    {
+                                                        currentGroup.bio &&
+                                                        <p>{currentGroup.bio}</p>
+                                                    }
                                                 </div>
                                             </div>
 
@@ -167,7 +182,7 @@ const Group = () => {
                                     <div className="row">
                                         <div className="col-12 mb-5">
                                             {
-                                                currentGroup.postList.length > 0 &&
+                                                currentGroup.postList && currentGroup.postList.length > 0 &&
                                                 <>
                                                     {
                                                         currentGroup.postList.map((post, index) =>
@@ -181,9 +196,14 @@ const Group = () => {
                                 </div>
                             </div>
 
+
+
+
                         </div>
                     </div>
+
                 </div>
+
             </div>
         </div>
     )
