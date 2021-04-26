@@ -20,6 +20,7 @@ const AfoNavbar = () => {
     const logout = () => {
         userService.logout()
             .then(() => {
+                setLoginState(LOGIN_STATE.LOGGED_OUT)
                 history.push("/home")
             });
     };
