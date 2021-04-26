@@ -64,33 +64,33 @@ const Registration = ({registerMyUser}) => {
     // };
 
     const registerClicked = () => {
-        if(username === ""){
+        if (username === "") {
             setAlertUsername(true);
-        } else{
+        } else {
             setAlertUsername(false);
         }
 
-        if(email === "" || password === ""){
+        if (email === "" || password === "") {
             setAlertEmail(true);
-        }else{
+        } else {
             setAlertEmail(false);
         }
 
-        if(password === ""){
+        if (password === "") {
             setAlertPassword(true);
-        }else{
+        } else {
             setAlertPassword(false);
         }
 
-        if(type === "otaku" && cardNum === ""){
+        if (type === "otaku" && cardNum === "") {
             setAlertCard(true);
-        }else{
+        } else {
             setAlertCard(false);
         }
 
-        if(password !== verifyPW) {
+        if (password !== verifyPW) {
             setAlertVerify(true);
-        }else{
+        } else {
             setAlertVerify(false);
         }
 
@@ -100,6 +100,8 @@ const Registration = ({registerMyUser}) => {
 
         if (!(alertUsername || alertEmail || alertPassword || alertCard || alertVerifyPassword)) {
             register();
+        }
+    };
             // setCredentials({
             //     username: username,
             //     email: email,
@@ -123,7 +125,7 @@ const Registration = ({registerMyUser}) => {
         //             }
         //         })
         // }
-    };
+
 
     return(
         <div className="container-fluid">
