@@ -50,7 +50,7 @@ const FilterList = (props) => {
                                     <h5 className="text-center">Most Popular {selectedGenreName} Anime</h5>
                                     <ul className="afo-filter-result-box">
                                         {
-                                            props.resultsList.anime &&
+                                            props.resultsList && props.resultsList.anime &&
                                             props.resultsList.anime.map((anime, index) =>
                                                 <li key={index} className="afo-filter-result">
                                                     <div className="row m-3">

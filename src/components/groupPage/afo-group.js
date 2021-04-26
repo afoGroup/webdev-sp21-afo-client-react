@@ -1,50 +1,56 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from 'react-redux';
 import postActions from '../../actions/post-actions';
 import AfoNavbar from "../navbar/afo-navbar";
 import Post from "./afo-post";
 import '../../styles/afo-group.css';
+import {useParams} from "react-router-dom";
+import groupService from "../../services/group-service";
+import userService from "../../services/user-service";
+import animeService from "../../services/anime-service";
+import {LOGIN_STATE} from "../../actions/user-constants";
 
 const Group = () => {
+    const {groupId} = useParams();
 
     const [postBoxStatus, setPostBoxStatus] = useState(false);
     const [postText, setPostText] = useState("");
 
-    //test group
-    const currentGroup = {
-        title: 'The Best Naruto Group on AFO!',
-        image_url: 'https://variety.com/wp-content/uploads/2015/07/naruto_movie-lionsgate.jpg?w=681%26h=383%26crop=1',
-        ownerName: 'Kris',
-        ownerId: '123',
-        animeName: 'Naruto: Shippuuden',
-        animeId: '1735',
-        bio: 'Naruto is the best anime ever! If you agree, join this group to connect with other like-minded, ' +
-            'awesome individuals! If you do not agree... you are missing out!',
-        postList: [
-            {
-                id: '123p1',
-                username: 'tiff',
-                userId: '987',
-                date: '4/20/2021',
-                text: 'I think Naruto is better than Naruto Shippuuden! I said what I said.'
-            },
-            {
-                id: '123p2',
-                username: 'tom',
-                userId: '654',
-                date: '4/21/2021',
-                text: 'Checkout this awesome link on the Shippuuden relationships: ' +
-                    'https://screenrant.com/naruto-anime-every-romance-relationship-ranked-how-long-they-lasted/'
-            },
-            {
-                id: '123p3',
-                username: 'kris',
-                userId: '321',
-                date: '4/22/2021',
-                text: 'There is going to be a virtual Shippuuden marathon next week! If anyone wants in, message me.'
-            }
-        ]
-    };
+    const [currentGroup, setCurrentGroup] = useState({});
+    const [groupAnime, setGroupAnime] = useState({});
+    const [currentUser, setCurrentUser] = useState({});
+    const [loginState, setLoginState] = useState(LOGIN_STATE.LOGGED_OUT);
+
+    useEffect(() => {
+        groupService.findGroupById(groupId)
+            .then((actualGroup) => {
+                setCurrentGroup(actualGroup)
+            });
+
+        userService.getCurrentUser()
+            .then((actualUser) => {
+                console.log("(navabr): " + actualUser);
+                if(actualUser === undefined || actualUser.username === "wbdv-afo-logged-out"){
+                    setLoginState(LOGIN_STATE.LOGGED_OUT)
+                } else {
+                    console.log("(navbar) user: " + actualUser.username + " & " + actualUser._id);
+                    setCurrentUser(actualUser);
+                    setLoginState(LOGIN_STATE.LOGGED_IN);
+                }
+            }).catch(error => {
+                console.log(error)
+            })
+
+    }, [groupId]);
+
+    useEffect(() => {
+        if(currentGroup.animeId){
+            animeService.findAnimeByID(currentGroup.animeId)
+                .then((actualAnime => {
+                    setGroupAnime(actualAnime)
+                }))
+        }
+    }, [currentGroup]);
 
     const joinGroup = () => {
         // include join group logic
@@ -71,7 +77,7 @@ const Group = () => {
                                             <div className="row">
                                                 <div className="col-12">
                                                     <img
-                                                        src={currentGroup.image_url}
+                                                        src={currentGroup.pictureURL}
                                                         className="group-img mb-4"
                                                         alt={`Group, ${currentGroup.title}`}/>
                                                 </div>
@@ -82,8 +88,8 @@ const Group = () => {
                                                     <h4 className="group-title-box py-2"><strong>{currentGroup.title}</strong></h4>
                                                     <p className="group-title float-right">
                                                         <strong>{`Group Owner: `}</strong>
-                                                        <a className="afo-purple" href={`/profile/${currentGroup.ownerId}`}>
-                                                            {currentGroup.ownerName}
+                                                        <a className="afo-purple" href={`/profile/${currentGroup.owner._id}`}>
+                                                            {currentGroup.owner.username}
                                                         </a>
                                                     </p>
                                                 </div>
@@ -91,22 +97,30 @@ const Group = () => {
 
                                             <div className="row">
                                                 <div className="col-12">
-                                                    <p><strong>Group Anime: </strong>
-                                                        <a className="afo-purple" href={`/anime/${currentGroup.animeId}`}>
-                                                            {currentGroup.animeName}
-                                                        </a>
-                                                    </p>
+                                                    {
+                                                        groupAnime.title &&
+                                                        <>
+                                                            <p><strong>Group Anime: </strong>
+                                                                <a className="afo-purple" href={`/anime/${currentGroup.animeId}`}>
+                                                                    {groupAnime.title}
+                                                                </a>
+                                                            </p>
+                                                        </>
+                                                    }
                                                     <p>{currentGroup.bio}</p>
                                                 </div>
                                             </div>
 
                                             <div className="row">
                                                 <div className="col-12">
-                                                    <button type="button"
-                                                            className="btn group-btn"
-                                                            onClick={() => joinGroup()}>
-                                                        <strong className="afo-white">JOIN</strong>
-                                                    </button>
+                                                    {
+                                                        loginState === LOGIN_STATE.LOGGED_IN &&
+                                                        <button type="button"
+                                                                className="btn group-btn"
+                                                                onClick={() => joinGroup()}>
+                                                            <strong className="afo-white">JOIN</strong>
+                                                        </button>
+                                                    }
                                                 </div>
                                             </div>
 
