@@ -26,16 +26,16 @@ const Registration = ({registerMyUser}) => {
     const [alertDupeUsername, setAlertDupeUsername] = useState(false);
 
     const register = () => {
-        setCredentials({
-            username: username,
-            email: email,
-            password: password,
-            usertype: type,
-            bio: '',
-            instagram: instagram,
-            twitter: twitter,
-            pictureURL: imageUrl
-        });
+        // setCredentials({
+        //     username: username,
+        //     email: email,
+        //     password: password,
+        //     usertype: type,
+        //     bio: '',
+        //     instagram: instagram,
+        //     twitter: twitter,
+        //     pictureURL: imageUrl
+        // });
         console.log("registerClicked: " + JSON.stringify(credentials));
         userService.registerUser(credentials)
             .then((actualUser) => {
@@ -91,19 +91,21 @@ const Registration = ({registerMyUser}) => {
         // }
 
         if (!(alertUsername || alertEmail || alertPassword || alertCard || alertVerifyPassword)) {
+            console.log("register: username and info setting: " + username)
+            setCredentials({
+                username: username,
+                email: email,
+                password: password,
+                userType: type,
+                description: '',
+                instagram: instagram,
+                twitter: twitter,
+                pictureURL: imageUrl
+            });
             register();
         }
     };
-            // setCredentials({
-            //     username: username,
-            //     email: email,
-            //     password: password,
-            //     usertype: type,
-            //     bio: '',
-            //     instagram: instagram,
-            //     twitter: twitter,
-            //     pictureURL: imageUrl,
-            // });
+
         //     console.log("registerClicked" + credentials);
         //     userService.registerUser(credentials)
         //         .then((actualUser) => {
