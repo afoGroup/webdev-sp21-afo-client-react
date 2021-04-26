@@ -31,9 +31,7 @@ const AfoNavbar = () => {
         userService.getCurrentUser()
             .then((actualUser) => {
                 console.log("(navbar info)" + actualUser);
-                if(actualUser.username === undefined){
-                    setLoginState(LOGIN_STATE.LOGGED_OUT)
-                } else {
+                if(actualUser.username !== undefined){
                     console.log("(navbar) user: " + actualUser.username + " & " + actualUser._id);
                     setCurrentUser(actualUser);
                     setLoginState(LOGIN_STATE.LOGGED_IN);
