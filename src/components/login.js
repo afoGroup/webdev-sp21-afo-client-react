@@ -20,7 +20,6 @@ const Login = (props) => {
                 if(actualUser === 0) {
                     alert("login failed, try again")
                 } else {
-                    console.log('logged in as: ' + actualUser);
                     history.push(`/user/${actualUser._id}`)
                 }
             })

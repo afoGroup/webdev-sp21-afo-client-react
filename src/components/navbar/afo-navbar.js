@@ -30,6 +30,7 @@ const AfoNavbar = () => {
     useEffect(() => {
         userService.getCurrentUser()
             .then((actualUser) => {
+                console.log("(navbar info)" + actualUser);
                 if(actualUser.username === undefined){
                     setLoginState(LOGIN_STATE.LOGGED_OUT)
                 } else {
