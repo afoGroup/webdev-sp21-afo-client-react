@@ -30,8 +30,7 @@ const AfoNavbar = () => {
     useEffect(() => {
         userService.getCurrentUser()
             .then((actualUser) => {
-                console.log("(navabr): " + actualUser);
-                if(actualUser === undefined){
+                if(actualUser.username === undefined){
                     setLoginState(LOGIN_STATE.LOGGED_OUT)
                 } else {
                     console.log("(navbar) user: " + actualUser.username + " & " + actualUser._id);
@@ -39,8 +38,6 @@ const AfoNavbar = () => {
                     setLoginState(LOGIN_STATE.LOGGED_IN);
                 }
             }).catch(error => {
-                console.log("Nah...");
-                setLoginState(LOGIN_STATE.LOGGED_OUT);
                 console.log(error)
             })
     }, []);
@@ -82,9 +79,6 @@ const AfoNavbar = () => {
                     <i className="fa fa-bars btn afo-white navbar-btn"
                        onClick={mainClick}
                        title="main menu"></i>
-                    {
-                        loginState === LOGIN_STATE.LOGGED_IN && <span>{currentUser.username}</span>
-                    }
                 </div>
                 <div className="col-6 text-center">
                     <Link to="/home" style={{ textDecoration:'none'}}>
@@ -94,6 +88,9 @@ const AfoNavbar = () => {
                     </Link>
                 </div>
                 <div className="col-3 text-right">
+                    {
+                        loginState === LOGIN_STATE.LOGGED_IN && <span>{currentUser.username}</span>
+                    }
                     <i className="fa fa-user-circle btn afo-white navbar-btn"
                        onClick={profileClick}
                        title="profile menu"></i>
