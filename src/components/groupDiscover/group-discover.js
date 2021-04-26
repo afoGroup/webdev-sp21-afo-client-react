@@ -1,5 +1,4 @@
 import React from "react";
-import Carousel from "bootstrap/js/src/carousel";
 import '../../styles/afo-group-discover.css';
 
 const GroupDiscover = ({groupList}) => {
