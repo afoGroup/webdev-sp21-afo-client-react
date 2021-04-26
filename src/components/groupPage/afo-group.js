@@ -23,6 +23,7 @@ const Group = () => {
     const [loginState, setLoginState] = useState(LOGIN_STATE.LOGGED_OUT);
 
     useEffect(() => {
+
         groupService.findGroupById(groupId)
             .then((actualGroup) => {
                 setCurrentGroup(actualGroup)
@@ -45,6 +46,7 @@ const Group = () => {
     }, [groupId]);
 
     useEffect(() => {
+        console.log('CurrentGroup: ' + currentGroup);
         if(currentGroup.animeId){
             animeService.findAnimeByID(currentGroup.animeId)
                 .then((actualAnime) => {
@@ -52,6 +54,7 @@ const Group = () => {
                 })
         }
         if(currentGroup.owner){
+            console.log('GroupOwner: ' + currentGroup.owner);
             userService.findUserById(currentGroup.owner)
                 .then((actualOwner) => {
                     setGroupOwner(actualOwner)
@@ -100,13 +103,13 @@ const Group = () => {
                                                 <div className="col-12">
 
                                                     {
-                                                        currentGroup && currentGroup.owner &&
+                                                        currentGroup && groupOwner.username &&
                                                         <>
                                                             <h4 className="group-title-box py-2"><strong>{currentGroup.title}</strong></h4>
                                                             <p className="group-title float-right">
                                                                 <strong>{`Group Owner: `}</strong>
                                                                 <a className="afo-purple" href={`/profile/${currentGroup.owner}`}>
-                                                                    {currentGroup.owner.username}
+                                                                    {groupOwner.username}
                                                                 </a>
                                                             </p>
                                                         </>
@@ -127,8 +130,8 @@ const Group = () => {
                                                         </>
                                                     }
                                                     {
-                                                        currentGroup.bio &&
-                                                        <p>{currentGroup.bio}</p>
+                                                        currentGroup.description &&
+                                                        <p>{currentGroup.description}</p>
                                                     }
                                                 </div>
                                             </div>
