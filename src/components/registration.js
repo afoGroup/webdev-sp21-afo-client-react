@@ -6,16 +6,7 @@ import AfoNavbar from "./navbar/afo-navbar";
 import userService from "../services/user-service";
 
 const Registration = ({registerMyUser}) => {
-    const [credentials, setCredentials] = useState({
-        username: '',
-        email: '',
-        password: '',
-        usertype: '',
-        bio: '',
-        instagram: '',
-        twitter: '',
-        pictureURL: ''
-    });
+    const [credentials, setCredentials] = useState({});
     const history = useHistory();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -43,7 +34,7 @@ const Registration = ({registerMyUser}) => {
             bio: '',
             instagram: instagram,
             twitter: twitter,
-            pictureURL: imageUrl,
+            pictureURL: imageUrl
         });
         console.log("registerClicked: " + JSON.stringify(credentials));
         userService.registerUser(credentials)
