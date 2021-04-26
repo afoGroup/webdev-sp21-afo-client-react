@@ -8,7 +8,7 @@ import userService from "../../services/user-service";
 
 const Settings = () => {
     const {userId} = useParams();
-    const [imgUrl, setImageUrl] = useState(currentUser.pictureUrl);
+    const [imgUrl, setImageUrl] = useState(currentUser.pictureURL);
     const [username, setUsername] = useState(currentUser.username);
     const [email, setEmail] = useState(currentUser.email);
     const [password, setPassword] = useState(currentUser.password);
@@ -147,7 +147,7 @@ const Settings = () => {
                                     </div>
                                     <div className="col-12 col-md-6 p-4">
                                         <img
-                                            src={currentUser.pictureUrl}
+                                            src={currentUser.pictureURL}
                                             className="profile-img mb-2"
                                             alt={`${currentUser.username} profile image`}
                                         />

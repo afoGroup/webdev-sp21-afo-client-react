@@ -3,17 +3,18 @@ import {Link, useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import userActions from "../actions/user-actions";
 import AfoNavbar from "./navbar/afo-navbar";
+import userService from "../services/user-service";
 
 const Registration = ({registerMyUser}) => {
     const [credentials, setCredentials] = useState({
-        password: '',
         username: '',
-        usertype: '',
         email: '',
+        password: '',
+        usertype: '',
         bio: '',
         instagram: '',
-        pictureURL: '',
-        twitter: ''
+        twitter: '',
+        pictureURL: ''
     });
     const history = useHistory();
     const [username, setUsername] = useState("");
@@ -31,6 +32,7 @@ const Registration = ({registerMyUser}) => {
     const [alertPassword, setAlertPassword] = useState(false);
     const [alertCard, setAlertCard] = useState(false);
     const [alertVerifyPassword, setAlertVerify] = useState(false);
+    const [alertDupeUsername, setAlertDupeUsername] = useState(false);
 
     const register = () => {
         setCredentials({
@@ -82,6 +84,30 @@ const Registration = ({registerMyUser}) => {
         }else{
             setAlertVerify(false);
         }
+        if (!(alertUsername || alertEmail || alertPassword || alertCard || alertVerifyPassword)) {
+            setCredentials({
+                username: username,
+                email: email,
+                password: password,
+                usertype: type,
+                bio: '',
+                instagram: instagram,
+                twitter: twitter,
+                pictureURL: imageUrl,
+            });
+            console.log("registerClicked" + credentials);
+            userService.registerUser(credentials)
+                .then((actualUser) => {
+                    if (actualUser === "username already exists") {
+                        setAlertDupeUsername(true);
+                    } else {
+                        userService.login(credentials)
+                            .then((createdUser) => {
+                                history.push(`/user/${createdUser._id}`)
+                            })
+                    }
+                })
+        }
     };
 
     return(
@@ -111,6 +137,12 @@ const Registration = ({registerMyUser}) => {
                                             alertVerifyPassword &&
                                             <div className="alert alert-danger" role="alert">
                                                 Please make sure your passwords match
+                                            </div>
+                                        }
+                                        {
+                                            alertDupeUsername &&
+                                            <div className="alert alert-danger" role="alert">
+                                                Please select different username. Username taken
                                             </div>
                                         }
                                         <br/>
