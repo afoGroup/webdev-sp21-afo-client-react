@@ -26,7 +26,7 @@ const Registration = ({registerMyUser}) => {
     const [instagram, setInstagram] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [cardNum, setCardNum] = useState("");
-    
+
     const [alertUsername, setAlertUsername] = useState(false);
     const [alertEmail, setAlertEmail] = useState(false);
     const [alertPassword, setAlertPassword] = useState(false);
@@ -51,11 +51,12 @@ const Registration = ({registerMyUser}) => {
                 if (actualUser === "username already exists") {
                     setAlertDupeUsername(true);
                 } else {
-                    userService.login(actualUser)
-                        .then((createdUser) => {
-                            history.push(`/user/${createdUser._id}`)
-                        })
+                    history.push(`/user/${actualUser._id}`)
                 }
+                    // userService.login(actualUser)
+                    //     .then((createdUser) => {
+                    //         history.push(`/user/${createdUser._id}`)
+                        // })
             })
     };
         // registerMyUser(credentials).then(user => {
