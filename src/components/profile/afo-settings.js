@@ -146,11 +146,20 @@ const Settings = () => {
 
                                     </div>
                                     <div className="col-12 col-md-6 p-4">
+                                        { currentUser.pictureURL &&
+                                            <img
+                                                src={currentUser.pictureURL}
+                                                className="profile-img mb-2"
+                                                alt={`${currentUser.username} profile image`}
+                                            />
+                                        }
+                                        { currentUser.pictureURL === undefined &&
                                         <img
-                                            src={currentUser.pictureURL}
+                                            src="https://www.iotric.com/assets/images/dummy.png"
                                             className="profile-img mb-2"
                                             alt={`${currentUser.username} profile image`}
                                         />
+                                        }
                                         <div>
                                             <label>
                                                 <strong>Profile Image Url: </strong>
