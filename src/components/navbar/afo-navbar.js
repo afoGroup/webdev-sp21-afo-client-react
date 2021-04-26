@@ -39,8 +39,6 @@ const AfoNavbar = () => {
                     setLoginState(LOGIN_STATE.LOGGED_IN);
                 }
             }).catch(error => {
-            console.log("Nah...");
-            setLoginState(LOGIN_STATE.LOGGED_OUT);
             console.log(error)
         })
     }, []);
