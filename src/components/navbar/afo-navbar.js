@@ -30,7 +30,7 @@ const AfoNavbar = () => {
     useEffect(() => {
         userService.getCurrentUser()
             .then((actualUser) => {
-                console.log("(navbar info)" + actualUser);
+                console.log("(navbar info)" + actualUser.username);
                 if(actualUser.username !== undefined){
                     console.log("(navbar) user: " + actualUser.username + " & " + actualUser._id);
                     setCurrentUser(actualUser);
