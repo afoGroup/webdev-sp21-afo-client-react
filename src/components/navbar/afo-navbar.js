@@ -30,15 +30,19 @@ const AfoNavbar = () => {
     useEffect(() => {
         userService.getCurrentUser()
             .then((actualUser) => {
-                console.log("(navbar info)" + actualUser.username);
-                if(actualUser.username !== "wbdv-afo-logged-out"){
+                console.log("(navabr): " + actualUser);
+                if(actualUser === undefined){
+                    setLoginState(LOGIN_STATE.LOGGED_OUT)
+                } else {
                     console.log("(navbar) user: " + actualUser.username + " & " + actualUser._id);
                     setCurrentUser(actualUser);
                     setLoginState(LOGIN_STATE.LOGGED_IN);
                 }
             }).catch(error => {
-                console.log(error)
-            })
+            console.log("Nah...");
+            setLoginState(LOGIN_STATE.LOGGED_OUT);
+            console.log(error)
+        })
     }, []);
 
     useEffect(() => {
