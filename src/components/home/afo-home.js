@@ -18,7 +18,7 @@ const AfoHome = (props) => {
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-12">
-                                    <h1 className="afo-purple afo-header">AniFans Only</h1>
+                                    <h1 className="afo-purple afo-header my-4">AniFans Only</h1>
                                 </div>
                             </div>
                             <GroupDiscover/>

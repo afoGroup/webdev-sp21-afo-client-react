@@ -1,7 +1,11 @@
 import React from "react";
 
-const DiscoverCard = ({card}) => {
-    //
+const DiscoverCard = ({group}) => {
+    return(
+        <>
+
+        </>
+    )
 };
 
 export default DiscoverCard;
