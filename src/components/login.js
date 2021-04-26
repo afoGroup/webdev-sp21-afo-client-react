@@ -47,7 +47,7 @@ const Login = (props) => {
                                         <input
                                             value={credentials.username}
                                             onChange={(e) =>
-                                            setCredentials({...credentials, username: e.target.value})}
+                                                setCredentials({...credentials, username: e.target.value})}
                                             type="text"
                                             name="login-group"
                                             className="form-control"
@@ -92,5 +92,3 @@ const dispatchToPropertiesManager = (dispatch) => ({
 });
 
 export default connect(stateToPropertiesManager, dispatchToPropertiesManager)(Login);
-
-
