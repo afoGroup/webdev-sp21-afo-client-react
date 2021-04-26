@@ -26,7 +26,6 @@ const Registration = ({registerMyUser}) => {
     const [alertDupeUsername, setAlertDupeUsername] = useState(false);
 
     const register = () => {
-        console.log("register username: " + username);
         const newUser = {
             username: username,
             password: password,
@@ -36,7 +35,6 @@ const Registration = ({registerMyUser}) => {
             twitter: twitter,
             pictureURL: imageUrl
         };
-        console.log("registerClicked: " + newUser.username);
         userService.registerUser(newUser)
             .then((actualUser) => {
                 if (actualUser === "username already exists") {
