@@ -37,7 +37,7 @@ const Registration = ({registerMyUser}) => {
             twitter: twitter,
             pictureURL: imageUrl
         };
-        console.log("registerClicked: " + JSON.stringify(newUser));
+        console.log("registerClicked: " + newUser.username);
         userService.registerUser(newUser)
             .then((actualUser) => {
                 if (actualUser === "username already exists") {
