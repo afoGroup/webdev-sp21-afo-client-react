@@ -30,8 +30,8 @@ const AfoNavbar = () => {
     useEffect(() => {
         userService.getCurrentUser()
             .then((actualUser) => {
-                console.log("(navbar info)" + actualUser);
-                if(actualUser.currentUser !== undefined){
+                console.log("(navbar info)" + actualUser.username);
+                if(actualUser.username !== "wbdv-afo-logged-out"){
                     console.log("(navbar) user: " + actualUser.username + " & " + actualUser._id);
                     setCurrentUser(actualUser);
                     setLoginState(LOGIN_STATE.LOGGED_IN);
@@ -117,8 +117,8 @@ const AfoNavbar = () => {
                         {
                             loginState === LOGIN_STATE.LOGGED_IN &&
                             <ul>
-                                <li><Link to={`/user/` + currentUser.id}>Profile</Link></li>
-                                <li><Link to={`/settings/` + currentUser.id}>Settings</Link></li>
+                                <li><Link to={`/user/` + currentUser._id}>Profile</Link></li>
+                                <li><Link to={`/settings/` + currentUser._id}>Settings</Link></li>
                                 <li><span className="btn" onClick={() => logout()}>Log Out</span></li>
                             </ul>
                         }
