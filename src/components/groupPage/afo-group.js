@@ -18,6 +18,7 @@ const Group = () => {
 
     const [currentGroup, setCurrentGroup] = useState({});
     const [groupAnime, setGroupAnime] = useState({});
+    const [groupOwner, setGroupOwner] = useState({});
     const [currentUser, setCurrentUser] = useState({});
     const [loginState, setLoginState] = useState(LOGIN_STATE.LOGGED_OUT);
 
@@ -46,9 +47,15 @@ const Group = () => {
     useEffect(() => {
         if(currentGroup.animeId){
             animeService.findAnimeByID(currentGroup.animeId)
-                .then((actualAnime => {
+                .then((actualAnime) => {
                     setGroupAnime(actualAnime)
-                }))
+                })
+        }
+        if(currentGroup.owner){
+            userService.findUserById(currentGroup.owner)
+                .then((actualOwner) => {
+                    setGroupOwner(actualOwner)
+                })
         }
     }, [currentGroup]);
 
@@ -98,7 +105,7 @@ const Group = () => {
                                                             <h4 className="group-title-box py-2"><strong>{currentGroup.title}</strong></h4>
                                                             <p className="group-title float-right">
                                                                 <strong>{`Group Owner: `}</strong>
-                                                                <a className="afo-purple" href={`/profile/${currentGroup.owner._id}`}>
+                                                                <a className="afo-purple" href={`/profile/${currentGroup.owner}`}>
                                                                     {currentGroup.owner.username}
                                                                 </a>
                                                             </p>
