@@ -31,7 +31,7 @@ const AfoNavbar = () => {
         userService.getCurrentUser()
             .then((actualUser) => {
                 console.log("(navabr): " + actualUser);
-                if(actualUser === undefined){
+                if(actualUser.username === "wbdv-afo-logged-out"){
                     setLoginState(LOGIN_STATE.LOGGED_OUT)
                 } else {
                     console.log("(navbar) user: " + actualUser.username + " & " + actualUser._id);
