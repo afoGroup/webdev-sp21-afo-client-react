@@ -29,10 +29,9 @@ const Registration = ({registerMyUser}) => {
         console.log("register username: " + username);
         const newUser = {
             username: username,
-            email: email,
             password: password,
-            usertype: type,
-            bio: '',
+            userType: type,
+            email: email,
             instagram: instagram,
             twitter: twitter,
             pictureURL: imageUrl
@@ -45,16 +44,8 @@ const Registration = ({registerMyUser}) => {
                 } else {
                     history.push(`/user/${actualUser._id}`)
                 }
-                    // userService.login(actualUser)
-                    //     .then((createdUser) => {
-                    //         history.push(`/user/${createdUser._id}`)
-                        // })
             })
     };
-        // registerMyUser(credentials).then(user => {
-        //     (user === 0)? history.push(`user/profile`) : alert("Username has already been taken.")
-        // })
-    // };
 
     const registerClicked = () => {
         if (username === "") {
@@ -87,39 +78,10 @@ const Registration = ({registerMyUser}) => {
             setAlertVerify(false);
         }
 
-        // if(username !== "" && email !== "" && password !== ""){
-        //     register();
-        // }
-
         if (!(alertUsername || alertEmail || alertPassword || alertCard || alertVerifyPassword)) {
-            // console.log("register: username and info setting: " + username)
-            // setCredentials({
-            //     username: username,
-            //     email: email,
-            //     password: password,
-            //     userType: type,
-            //     description: '',
-            //     instagram: instagram,
-            //     twitter: twitter,
-            //     pictureURL: imageUrl
-            // });
             register();
         }
     };
-
-        //     console.log("registerClicked" + credentials);
-        //     userService.registerUser(credentials)
-        //         .then((actualUser) => {
-        //             if (actualUser === "username already exists") {
-        //                 setAlertDupeUsername(true);
-        //             } else {
-        //                 userService.login(credentials)
-        //                     .then((createdUser) => {
-        //                         history.push(`/user/${createdUser._id}`)
-        //                     })
-        //             }
-        //         })
-        // }
 
 
     return(
