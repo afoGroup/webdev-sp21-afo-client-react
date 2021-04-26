@@ -19,6 +19,7 @@ const Registration = ({registerMyUser}) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [verifyPW, setVerifyPW] = useState("");
     const [type, setType] = useState("weeb");
     const [twitter, setTwitter] = useState("");
     const [instagram, setInstagram] = useState("");
@@ -29,6 +30,7 @@ const Registration = ({registerMyUser}) => {
     const [alertEmail, setAlertEmail] = useState(false);
     const [alertPassword, setAlertPassword] = useState(false);
     const [alertCard, setAlertCard] = useState(false);
+    const [alertVerifyPassword, setAlertVerify] = useState(false);
 
     const register = () => {
         setCredentials({
@@ -71,8 +73,14 @@ const Registration = ({registerMyUser}) => {
             setAlertCard(false);
         }
 
-        if(username!=="" && email!=="" && password!==""){
+        if(username !== "" && email !== "" && password !== ""){
             register();
+        }
+
+        if(password !== verifyPW) {
+            setAlertVerify(true);
+        }else{
+            setAlertVerify(false);
         }
     };
 
@@ -91,7 +99,7 @@ const Registration = ({registerMyUser}) => {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="form-group afo-register-box">
-                                        <p className="float-right">* required</p>
+                                        <p className="float-right text-danger font-weight-bold">* required</p>
                                         <br/>
                                         {
                                             (alertUsername || alertEmail || alertPassword || alertCard) &&
@@ -99,9 +107,15 @@ const Registration = ({registerMyUser}) => {
                                                 Please complete the required fields
                                             </div>
                                         }
+                                        {
+                                            alertVerifyPassword &&
+                                            <div className="alert alert-danger" role="alert">
+                                                Please make sure your passwords match
+                                            </div>
+                                        }
                                         <br/>
                                         <label>
-                                            *Username:
+                                            <span className="text-danger font-weight-bold">*</span> Username:
                                         </label>
                                         <input type="text"
                                                name="login-group"
@@ -109,23 +123,31 @@ const Registration = ({registerMyUser}) => {
                                                value={username}
                                                onChange={(e) => setUsername(e.target.value)}/>
                                         <label>
-                                            *Email:
+                                            <span className="text-danger font-weight-bold">*</span> Email:
                                         </label>
-                                        <input type="text"
+                                        <input type="email"
                                                name="login-group"
                                                className="form-control mb-2"
                                                value={email}
                                                onChange={(e) => setEmail(e.target.value)}/>
                                         <label>
-                                            *Password:
+                                            <span className="text-danger font-weight-bold">*</span> Password:
                                         </label>
-                                        <input type="text"
+                                        <input type="password"
                                                name="login-group"
                                                className="form-control mb-2"
                                                value={password}
                                                onChange={(e) => setPassword(e.target.value)}/>
                                         <label>
-                                            *Account Type:
+                                            <span className="text-danger font-weight-bold">*</span> Verify Password:
+                                        </label>
+                                        <input type="password"
+                                               name="login-group"
+                                               className="form-control mb-2"
+                                               value={verifyPW}
+                                               onChange={(e) => setVerifyPW(e.target.value)}/>
+                                        <label>
+                                            <span className="text-danger font-weight-bold">*</span> Account Type:
                                         </label>
                                         <select name="login-group"
                                                 className="form-control mb-2"
@@ -187,7 +209,7 @@ const Registration = ({registerMyUser}) => {
                                         <label>
                                             Profile Photo Link:
                                         </label>
-                                        <input type="text"
+                                        <input type="url"
                                                name="login-group"
                                                value={imageUrl}
                                                onChange={(e) => setImageUrl(e.target.value)}

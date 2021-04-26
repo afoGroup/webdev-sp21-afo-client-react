@@ -60,7 +60,7 @@ const Login = (props) => {
                                             value={credentials.password}
                                             onChange={(e) =>
                                             {setCredentials({...credentials, password: e.target.value})}}
-                                            type="text"
+                                            type="password"
                                             name="login-group"
                                             className="form-control"
                                         />
