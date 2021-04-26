@@ -5,6 +5,7 @@ import userActions from "../../actions/user-actions";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 import userService from "../../services/user-service";
+import {DEFAULT_USER_IMAGE} from "../../constants/api-urls";
 
 const Settings = () => {
     const {userId} = useParams();
@@ -146,7 +147,7 @@ const Settings = () => {
 
                                     </div>
                                     <div className="col-12 col-md-6 p-4">
-                                        { currentUser.pictureURL &&
+                                        { currentUser.pictureURL !== undefined &&
                                             <img
                                                 src={currentUser.pictureURL}
                                                 className="profile-img mb-2"
@@ -155,7 +156,7 @@ const Settings = () => {
                                         }
                                         { currentUser.pictureURL === undefined &&
                                         <img
-                                            src="https://www.iotric.com/assets/images/dummy.png"
+                                            src={DEFAULT_USER_IMAGE}
                                             className="profile-img mb-2"
                                             alt={`${currentUser.username} profile image`}
                                         />
