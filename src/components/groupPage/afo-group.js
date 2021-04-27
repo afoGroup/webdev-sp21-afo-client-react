@@ -192,11 +192,16 @@ const Group = () => {
                                     <div className="row">
                                         <div className="col-12 mb-5">
                                             {
-                                                currentGroup.postList && currentGroup.postList.length > 0 &&
+                                                currentGroup.posts && currentGroup.posts.length > 0 &&
                                                 <>
                                                     {
-                                                        currentGroup.postList.map((post, index) =>
-                                                            <Post key={index} post={post}/>)
+                                                        currentGroup.posts.map((postId, index) =>
+                                                                <Post
+                                                                    key={index}
+                                                                    ownerStatus={groupOwner._id === currentUser._id}
+                                                                    group={currentGroup}
+                                                                    postId={postId}/>
+                                                                )
                                                     }
                                                 </>
                                             }
