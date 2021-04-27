@@ -68,6 +68,8 @@ const Group = () => {
             ...currentUser,
             clubs: currentUser.clubs.push(groupId)
         }
+        console.log("updateUser in JoinGroup:" + updateUser.clubs)
+        console.log("currentGroupPosts:" + currentGroup.posts)
         userService.updateUser(currentUser._id, updateUser)
             .then(() => {
                 setCurrentUser(updateUser)
@@ -99,6 +101,7 @@ const Group = () => {
         postService.createPost(groupId, newPost)
             .then((post) => {
                 console.log("newPost's ID", post._id)
+                console.log("currentGroupPosts:" + currentGroup.posts)
                 const postInGroup = {
                     ...currentGroup,
                     posts: currentGroup.posts.push(post._id)
