@@ -33,8 +33,10 @@ const Settings = () => {
                     setPassword(actualUser.password);
                     setType(actualUser.userType);
                     setBio(actualUser.bio);
+                    setImageUrl(actualUser.imageURL)
                     setTwitter(actualUser.twitter);
                     setInstagram(actualUser.instagram);
+                    console.log("USE EFFECT: " + JSON.stringify(currentUser))
                 }
             });
 
@@ -42,17 +44,27 @@ const Settings = () => {
 
     const update = () => {
         console.log("Update Insta:" + instagram)
-        setCurrentUser({
+        const updatedUser = {
             password: password,
             userType: type,
             email: email,
+            bio: bio,
             instagram: instagram,
             twitter: twitter,
             pictureURL: imgUrl
-        })
-        console.log("Updating User: " + JSON.stringify(currentUser))
+        }
+        // setCurrentUser({
+        //     ...currentUser,
+        //     password: password,
+        //     userType: type,
+        //     email: email,
+        //     instagram: instagram,
+        //     twitter: twitter,
+        //     pictureURL: imgUrl
+        // })
+        console.log("Updating User: " + JSON.stringify(updatedUser))
         console.log("Updating UserID: " + userId)
-        userService.updateUser(userId, currentUser)
+        userService.updateUser(userId, updatedUser)
             .then(() => {
                 setUpdateSuccess(true);
             })
