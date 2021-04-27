@@ -61,7 +61,7 @@ const FilterList = (props) => {
                                                                 alt={`Anime, ${anime.title}`}/>
                                                         </div>
                                                         <div className="col-6">
-                                                            <Link className="afo-filter-result-title afo-black" to={`/anime/${anime.mal_id}`}>
+                                                            <Link className="afo-filter-result-title afo-black" to={`/details/anime/${anime.mal_id}`}>
                                                                 {anime.title}
                                                             </Link>
                                                         </div>

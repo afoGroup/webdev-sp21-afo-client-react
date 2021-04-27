@@ -121,9 +121,9 @@ const AfoNavbar = () => {
                         {
                             loginState === LOGIN_STATE.LOGGED_IN &&
                             <ul>
-                                <li><Link to={`/user/` + currentUser._id}>Profile</Link></li>
-                                <li><Link to={`/settings/` + currentUser._id}>Settings</Link></li>
-                                <li><Link to={`/group-manager/` + currentUser._id}>Group Manager</Link></li>
+                                <li><Link to={`/profile`}>Profile</Link></li>
+                                <li><Link to={`/profile/settings/` + currentUser._id}>Settings</Link></li>
+                                <li><Link to={`/profile/group-manager/` + currentUser._id}>Group Manager</Link></li>
                                 <li><span className="btn p-2" onClick={() => logout()}>Log Out</span></li>
                             </ul>
                         }

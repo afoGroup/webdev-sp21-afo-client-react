@@ -35,12 +35,12 @@ function App() {
                     <AfoHome/>
                 </Route>
 
-                <Route path={["/search", "/search/:title"]}
+                <Route path={["/search", "/search/:criteria"]}
                        exact={true}>
                     <AfoSearch/>
                 </Route>
 
-                <Route path={["/anime/:animeId"]}
+                <Route path={["/details/anime/:animeId"]}
                        exact={true}>
                     <AfoAnime/>
                 </Route>
@@ -55,17 +55,17 @@ function App() {
                     <Registration/>
                 </Route>
 
-                <Route path={["/group/:groupId", "/group/:groupId/"]}
+                <Route path={["/details/group/:groupId", "/details/group/:groupId/"]}
                        exact={true}>
                     <Group/>
                 </Route>
 
-                <Route path={["/profile", "/profile/:userId", "/profile/:userId/"]}
+                <Route path={["/profile", "/profile/", "/profile/:userId", "/profile/:userId/"]}
                        exact={true}>
                     <Profile/>
                 </Route>
 
-                <Route path={["/profile/setings", "/profile/settings/:userId", "/profile/settings/:userId/"]}
+                <Route path={["/profile/settings", "/profile/settings/", "/profile/settings/:userId", "/profile/settings/:userId/"]}
                        exact={true}>
                     <Settings/>
                 </Route>
