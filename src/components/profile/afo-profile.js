@@ -48,12 +48,12 @@ const Profile = () => {
                                 currentUser &&
                                 <>
                                     <div className="row">
-                                        <div className="col-12">
+                                        <div className="col-12 m-4">
                                             <h3 className="afo-purple afo-header">{currentUser.username}</h3>
-                                            <p>{currentUser.twitter}</p>
-                                            <p>{currentUser.instagram}</p>
+                                            <p><strong>Twitter: @</strong> {currentUser.twitter}</p>
+                                            <p><strong>Instagram: @</strong> {currentUser.instagram}</p>
                                             {
-                                                currentUser.pictureUrl === ''?
+                                                currentUser.pictureUrl !== ''?
                                                     <img
                                                         src={currentUser.pictureUrl}
                                                         className="anime-img"
