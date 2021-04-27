@@ -61,13 +61,13 @@ const Profile = () => {
                                 currentUser &&
                                 <>
                                     <div className="row">
-                                        <div className="col-12 col-md-6 m-4">
+                                        <div className="col-6 m-4">
                                             <h3 className="afo-purple afo-header">{currentUser.username}</h3>
                                             <p><strong>Twitter: @</strong> {currentUser.twitter}</p>
                                             <p><strong>Instagram: @</strong> {currentUser.instagram}</p>
                                             <p>{currentUser.bio}</p>
                                         </div>
-                                        <div className="col-12 col-md-6 m-4">
+                                        <div className="col-6 m-4">
                                             {
                                                 currentUser.pictureUrl !== ''?
                                                     <img
@@ -78,9 +78,18 @@ const Profile = () => {
                                             }
                                         </div>
                                     </div>
-                                    <h6>{currentUser.username} Groups:</h6>
+                                    <div className="row">
+                                        <div className="col-12 text-center">
+                                            <h6>{currentUser.username} Groups:</h6>
+                                        </div>
+                                    </div>
                                     {
-                                        currentUser.clubs && <GroupDiscover groupList={groupList}/>
+                                        currentUser.clubs &&
+                                        <>
+                                            <div className="mb-5">
+                                                <GroupDiscover groupList={groupList}/>
+                                            </div>
+                                        </>
                                     }
 
                                     {
