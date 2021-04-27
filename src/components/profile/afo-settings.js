@@ -44,7 +44,17 @@ const Settings = () => {
 
     const update = () => {
         console.log("Update Insta:" + instagram)
-        const updatedUser = {
+        // const updatedUser = {
+        //     password: password,
+        //     userType: type,
+        //     email: email,
+        //     bio: bio,
+        //     instagram: instagram,
+        //     twitter: twitter,
+        //     pictureURL: imgUrl
+        // }
+        setCurrentUser({
+            ...currentUser,
             password: password,
             userType: type,
             email: email,
@@ -52,19 +62,10 @@ const Settings = () => {
             instagram: instagram,
             twitter: twitter,
             pictureURL: imgUrl
-        }
-        // setCurrentUser({
-        //     ...currentUser,
-        //     password: password,
-        //     userType: type,
-        //     email: email,
-        //     instagram: instagram,
-        //     twitter: twitter,
-        //     pictureURL: imgUrl
-        // })
-        console.log("Updating User: " + JSON.stringify(updatedUser))
+        })
+        console.log("Updating User: " + JSON.stringify(currentUser))
         console.log("Updating UserID: " + userId)
-        userService.updateUser(userId, updatedUser)
+        userService.updateUser(userId, currentUser)
             .then(() => {
                 setUpdateSuccess(true);
             })
