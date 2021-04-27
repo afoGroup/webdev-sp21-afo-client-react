@@ -267,7 +267,7 @@ const GroupManager = () => {
                                                                 {oGroup.title}{` `}
                                                             </Link>
                                                             <i className="fa fa-times float-right afo-group-delete"
-                                                               onClick={() => deleteGroup()}></i>
+                                                               onClick={() => deleteGroup(oGroup._id)}></i>
                                                         </li>
                                                     )
                                                 }
