@@ -58,7 +58,11 @@ const GroupManager = () => {
         };
         groupService.createGroup(newGroup)
             .then(group => {
-                let updatedOwnerClubs = JSON.stringify(currentUser.ownerClubs.push(group._id));
+                console.log('current list: (' + currentUser.clubs.length + ') ' + currentUser.clubs);
+                let updatedOwnerClubs = currentUser.clubs.slice();
+                console.log('sliced: '+ updatedOwnerClubs);
+                console.log('adding: '+ group._id);
+                updatedOwnerClubs.push(group._id);
                 console.log('new ownerClubs: ' + updatedOwnerClubs);
                 let updatedUser = {...currentUser, ownerClubs: updatedOwnerClubs};
                 console.log('new user info: ' + updatedUser.username, updatedUser.ownerClubs);
