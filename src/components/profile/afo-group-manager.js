@@ -26,11 +26,13 @@ const GroupManager = () => {
             console.log('currentUser clubs: ' + currentUser.clubs);
             groupService.findGroupsById(currentUser.clubs)
                 .then(memberResults => setMemberGroups(memberResults))
+                .catch(error => console.log(error))
         }
         if(currentUser.ownerClubs && currentUser.userType === "otaku"){
             console.log('currentUser ownerClubs: ' + currentUser.ownerClubs);
             groupService.findGroupsById(currentUser.ownerClubs)
                 .then(ownerResults => setOwnerGroups(ownerResults))
+                .catch(error => console.log(error))
         }
     }, [currentUser]);
 
@@ -44,7 +46,7 @@ const GroupManager = () => {
 
                             <div className="row">
                                 <div className="col-12">
-                                    <h1 className="afo-purple afo-header">Group Manager: {currentUser.username}</h1>
+                                    <h1 className="afo-purple afo-header pt-4">Group Manager: {currentUser.username}</h1>
                                 </div>
                             </div>
 
@@ -58,7 +60,7 @@ const GroupManager = () => {
                                                     <button
                                                         type="button"
                                                         className="btn btn-secondary">
-                                                        Manage Groups
+                                                        + Add Group
                                                     </button>
                                                 </div>
                                             </div>
@@ -70,7 +72,7 @@ const GroupManager = () => {
                             <div className="row">
                                 <div className="col-6">
                                     <p className="afo-dark-purple"><strong>Member Groups</strong></p>
-                                    <span>total: {memberGroups.length}</span>
+                                    <p>total: {memberGroups.length}</p>
                                     <ul>
                                         {
                                             memberGroups.map((mGroup, index) =>
@@ -88,7 +90,7 @@ const GroupManager = () => {
                                         currentUser && currentUser.userType && currentUser.userType === "otaku" &&
                                         <>
                                             <p className="afo-dark-purple"><strong>Owner Groups</strong></p>
-                                            <span>total: {ownerGroups.length}</span>
+                                            <p>total: {ownerGroups.length}</p>
                                             <ul>
                                                 {
                                                     ownerGroups.map((oGroup, index) =>
