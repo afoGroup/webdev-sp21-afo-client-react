@@ -2,9 +2,9 @@ import React, {useEffect, useState} from "react";
 import AfoNavbar from "../navbar/afo-navbar";
 import settingsPage from "./afo-settings";
 import '../../styles/afo-profile.css';
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import userService from "../../services/user-service";
-import animeService from "../../services/anime-service";
+import groupService from "../../services/group-service";
 
 const GroupManager = () => {
 
@@ -23,20 +23,16 @@ const GroupManager = () => {
 
     useEffect(() => {
         if(currentUser.clubs){
-            clubService
-            animeService.findAnimeByID(currentGroup.animeId)
-                .then((actualAnime) => {
-                    setGroupAnime(actualAnime)
-                })
+            console.log('currentUser clubs: ' + currentUser.clubs);
+            groupService.findGroupsById(currentUser.clubs)
+                .then(memberResults => setMemberGroups(memberResults))
         }
-        if(currentUser.ownerClubs){
-            console.log('GroupOwner: ' + currentGroup.owner);
-            userService.findUserById(currentGroup.owner)
-                .then((actualOwner) => {
-                    setGroupOwner(actualOwner)
-                })
+        if(currentUser.ownerClubs && currentUser.userType === "otaku"){
+            console.log('currentUser ownerClubs: ' + currentUser.ownerClubs);
+            groupService.findGroupsById(currentUser.ownerClubs)
+                .then(ownerResults => setOwnerGroups(ownerResults))
         }
-    }, [currentGroup]);
+    }, [currentUser]);
 
     return(
         <div className="container-fluid">
@@ -66,6 +62,44 @@ const GroupManager = () => {
                                                     </button>
                                                 </div>
                                             </div>
+                                        </>
+                                    }
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-6">
+                                    <p className="afo-dark-purple"><strong>Member Groups</strong></p>
+                                    <span>total: {memberGroups.length}</span>
+                                    <ul>
+                                        {
+                                            memberGroups.map((mGroup, index) =>
+                                                <li key={index}>
+                                                    <Link to={`/group/${mGroup._id}`}>
+                                                        {mGroup.title}
+                                                    </Link>
+                                                </li>
+                                            )
+                                        }
+                                    </ul>
+                                </div>
+                                <div className="col-6">
+                                    {
+                                        currentUser && currentUser.userType && currentUser.userType === "otaku" &&
+                                        <>
+                                            <p className="afo-dark-purple"><strong>Owner Groups</strong></p>
+                                            <span>total: {ownerGroups.length}</span>
+                                            <ul>
+                                                {
+                                                    ownerGroups.map((oGroup, index) =>
+                                                        <li key={index*2}>
+                                                            <Link to={`/group/${oGroup._id}`}>
+                                                                {oGroup.title}
+                                                            </Link>
+                                                        </li>
+                                                    )
+                                                }
+                                            </ul>
                                         </>
                                     }
                                 </div>
