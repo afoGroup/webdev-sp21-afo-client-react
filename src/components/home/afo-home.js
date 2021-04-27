@@ -41,7 +41,7 @@ const AfoHome = (props) => {
                     }).catch(error => {
                         console.log(error)
                     }))
-    }, []);
+    }, [loginState]);
 
     return (
         <div className="container-fluid">
