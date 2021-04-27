@@ -21,6 +21,12 @@ const Settings = () => {
     const [currentUser, setCurrentUser] = useState({});
     // const [loginState, setCurrentLoginState] = useState("logged-out");
 
+    const [alertEmail, setAlertEmail] = useState(false);
+    const [alertPassword, setAlertPassword] = useState(false);
+    const [alertCard, setAlertCard] = useState(false);
+    const [alertVerifyPassword, setAlertVerify] = useState(false);
+    const [alertDupeUsername, setAlertDupeUsername] = useState(false);
+
     useEffect(() => {
         userService.getCurrentUser()
             .then((actualUser) => {
@@ -39,7 +45,7 @@ const Settings = () => {
 
 
     const updateUser = () => {
-        //
+
     };
 
     const manageGroups = () => {
@@ -55,20 +61,22 @@ const Settings = () => {
                         <div className="col-12">
                             <div className="profile-container">
                                 <div className="row">
-                                    <div className="col-12 col-md-6 p-4">
+                                    <div className="form col-12 col-md-6 p-4">
 
 
+                                        <p className="float-right text-danger font-weight-bold">* required</p>
                                         <br/>
                                         <label>
-                                            <strong>Username: </strong>
+                                            <strong><span className="text-danger">*</span> Username: </strong>
                                         </label>
-                                        <input type="text"
+                                        <input
                                                name="login-group"
-                                               className="form-control mb-2"
+                                               className="mb-2 form-control-plaintext bg-light"
                                                value={username}
-                                               onChange={(e) => setUsername(e.target.value)}/>
+                                               disabled={true}
+                                               />
                                         <label>
-                                            <strong>Email: </strong>
+                                            <strong><span className="text-danger">*</span> Email: </strong>
                                         </label>
                                         <input type="text"
                                                name="login-group"
@@ -76,7 +84,7 @@ const Settings = () => {
                                                value={email}
                                                onChange={(e) => setEmail(e.target.value)}/>
                                         <label>
-                                            <strong>Password: </strong>
+                                            <strong><span className="text-danger">*</span> Password: </strong>
                                         </label>
                                         <input type="text"
                                                name="login-group"
@@ -84,7 +92,7 @@ const Settings = () => {
                                                value={password}
                                                onChange={(e) => setPassword(e.target.value)}/>
                                         <label>
-                                            <strong>Account Type: </strong>
+                                            <strong><span className="text-danger">*</span> Account Type: </strong>
                                         </label>
                                         <select name="login-group"
                                                 className="form-control mb-2"
@@ -98,7 +106,7 @@ const Settings = () => {
                                             type === "otaku" &&
                                             <>
                                                 <label>
-                                                    <strong>Credit Card Info: </strong>
+                                                    <strong><span className="text-danger">*</span> Credit Card Info: </strong>
                                                 </label>
                                                 <input type="text"
                                                        name="login-group"
@@ -147,9 +155,6 @@ const Settings = () => {
                                             <strong>Bio: </strong>
                                         </label>
                                         <textarea rows="4" className="form-control">{bio}</textarea>
-
-
-
 
                                     </div>
                                     <div className="col-12 col-md-6 p-4">

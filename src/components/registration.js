@@ -37,7 +37,7 @@ const Registration = ({registerMyUser}) => {
         };
         userService.registerUser(newUser)
             .then((actualUser) => {
-                if (actualUser === "username already exists") {
+                if (actualUser.message === "username already exists") {
                     setAlertDupeUsername(true);
                 } else {
                     history.push(`/user/${actualUser._id}`)
@@ -165,7 +165,7 @@ const Registration = ({registerMyUser}) => {
                                             type === "otaku" &&
                                             <>
                                                 <label>
-                                                    *Credit Card Info:
+                                                    <span className="text-danger font-weight-bold">*</span> Credit Card Info:
                                                 </label>
                                                 <input type="text"
                                                        name="login-group"
