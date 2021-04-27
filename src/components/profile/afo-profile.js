@@ -13,6 +13,7 @@ const Profile = () => {
     const {userId} = useParams();
 
     const [currentUser, setCurrentUser] = useState({});
+    const [currentUserStatus, setCurrentUserStatus] = useState(false);
 
     useEffect(() => {
         console.log('userId-1: ' + userId);
@@ -20,19 +21,22 @@ const Profile = () => {
         userService.getCurrentUser()
             .then((actualUser) => {
                 if(userId === undefined || actualUser._id !== userId){
-                    setCurrentUser(actualUser)
+                    setCurrentUser(actualUser);
+                    setCurrentUserStatus(true);
                 }
             })
     }, []);
 
     useEffect(() => {
         console.log('userId-2: ' + userId);
-        userService.findUserById(userId)
-            .then((actualUser) => {
-                if(actualUser._id === userId){
-                    setCurrentUser(actualUser)
-                }
-            })
+        if(userId !== undefined){
+            userService.findUserById(userId)
+                .then((actualUser) => {
+                    if(actualUser._id === userId){
+                        setCurrentUser(actualUser)
+                    }
+                })
+        }
     }, [userId]);
 
 
@@ -48,10 +52,13 @@ const Profile = () => {
                                 currentUser &&
                                 <>
                                     <div className="row">
-                                        <div className="col-12 m-4">
+                                        <div className="col-12 col-md-6 m-4">
                                             <h3 className="afo-purple afo-header">{currentUser.username}</h3>
                                             <p><strong>Twitter: @</strong> {currentUser.twitter}</p>
                                             <p><strong>Instagram: @</strong> {currentUser.instagram}</p>
+                                            <p>{currentUser.bio}</p>
+                                        </div>
+                                        <div className="col-12 col-md-6 m-4">
                                             {
                                                 currentUser.pictureUrl !== ''?
                                                     <img
