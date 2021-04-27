@@ -30,15 +30,16 @@ const GroupDiscover = ({groupList}) => {
             <div className="col-12 p-3">
 
                 <Carousel responsive={responsive}
-                          ssr
+                          showDots={true}
                           infinite={true}
-                          containerClass="first-carousel-container container">
+                          renderButtonGroupOutside={true}
+                          containerClass="carousel-container">
                     {
                         groupList && groupList.map((group, index) =>
                             <DiscoverCard group={group}/>
                         )
                     }
-                </Carousel>;
+                </Carousel>
 
 
             </div>
