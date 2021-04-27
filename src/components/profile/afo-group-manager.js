@@ -68,7 +68,6 @@ const GroupManager = () => {
         userService.updateUser(currentUser._id, updateUser)
             .then(() => {
                     setCurrentUser(updateUser);
-                    console.log("SET LEAVE GROUP BUTTON - Owner CAN NEVER SEE LEAVE GROUP")
                 }
             )
     };
@@ -98,8 +97,12 @@ const GroupManager = () => {
             }).catch(error => console.log(error))
     };
 
-    const deleteGroup = () => {
-        //
+    const deleteGroup = (groupId) => {
+        groupService.deleteGroup(groupId)
+            .then(() => {
+                setCurrentUser(currentUser);
+            })
+            .catch(error => console.log(error))
     };
 
     const searchAnime = () => {
