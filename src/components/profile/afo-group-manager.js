@@ -55,13 +55,13 @@ const GroupManager = () => {
 
     const joinGroup = (group, groupId) => {
         console.log('groupId: ' + groupId);
-        console.log('clubsList:' + currentUser.clubs);
-        console.log('clubsList JSON.stringify:' + JSON.stringify(currentUser.clubs));
-        let newClubs = [...currentUser.clubs, groupId];
+        console.log('clubsList:' + currentUser.ownerClubs);
+        console.log('clubsList JSON.stringify:' + JSON.stringify(currentUser.ownerClubs));
+        let newClubs = [...currentUser.ownerClubs, groupId];
         console.log('newClubs: ' + newClubs.toString());
         const updateUser = {
             ...currentUser,
-            clubs: newClubs
+            ownerClubs: newClubs
         };
         console.log('updated Club: ' + JSON.stringify(updateUser));
         console.log("updateUser in JoinGroup:" + updateUser.clubs.toString());
@@ -88,14 +88,21 @@ const GroupManager = () => {
             }).catch(error => console.log(error))
     };
 
+    const deleteGroup = () => {
+        //
+    };
+
     const searchAnime = () => {
         animeService.findAnimeByTitle(animeSelected)
             .then(result => {
+                console.log('anime resuts: ' + result);
                 setAnimeSearchResult(result);
                 setAniSearchStatus(true);
             })
             .catch(error => console.log(error))
     };
+
+
 
     return(
         <div className="container-fluid">
@@ -170,6 +177,7 @@ const GroupManager = () => {
                                                    onChange={(e) => setAnimeInput(e.target.value)}/>
                                             <button
                                                 type="button"
+                                                disabled={aniSearchStatus}
                                                 onClick={() => searchAnime()}
                                                 className="btn afo-purple">
                                                 Search Anime
@@ -239,11 +247,14 @@ const GroupManager = () => {
                                             <p>total: {ownerGroups.length}</p>
                                             <ul>
                                                 {
-                                                    ownerGroups.map((oGroup, index) =>
+                                                    ownerGroups.results &&
+                                                    ownerGroups.results.map((oGroup, index) =>
                                                         <li key={index*2}>
                                                             <Link to={`/details/group/${oGroup._id}`}>
-                                                                {oGroup.title}
+                                                                {oGroup.title}{` `}
                                                             </Link>
+                                                            <i className="fa fa-times float-right afo-group-delete"
+                                                               onClick={() => deleteGroup()}></i>
                                                         </li>
                                                     )
                                                 }
