@@ -7,6 +7,7 @@ import '../../styles/afo-group.css';
 import {useParams} from "react-router-dom";
 import groupService from "../../services/group-service";
 import userService from "../../services/user-service";
+import postService from "../../services/post-service";
 import animeService from "../../services/anime-service";
 import {LOGIN_STATE} from "../../actions/user-constants";
 
@@ -63,11 +64,50 @@ const Group = () => {
     }, [currentGroup]);
 
     const joinGroup = () => {
-        // include join group logic - updateUser
+        const updateUser = {
+            ...currentUser,
+            clubs: currentUser.clubs.push(groupId)
+        }
+        userService.updateUser(currentUser._id, updateUser)
+            .then(() => {
+                setCurrentUser(updateUser)
+                console.log("SET LEAVE GROUP BUTTON - Owner CAN NEVER SEE LEAVE GROUP")
+                }
+            )
     };
 
+    const leaveGroup = () => {
+        const userLeaving = {
+            ...currentUser,
+            clubs: currentUser.clubs.filter(clubId => clubId === groupId)
+        }
+        userService.updateUser(currentUser._id, userLeaving)
+            .then(() => {
+                setCurrentUser(userLeaving)
+                console.log("SET LEAVE GROUP BUTTON - to FALSE")
+            })
+    }
+
     const submitPost = () => {
-        //include add post logic - createPost
+        const newPost = {
+            text: postText,
+            owner: currentUser._id,
+            createdDate: Date.now()
+        }
+        console.log("(afo-group-creating new post: " + JSON.stringify(newPost))
+        console.log("(afo-group-creating new post, groupID: " + groupId)
+        postService.createPost(groupId, newPost)
+            .then((post) => {
+                const postInGroup = {
+                    ...currentGroup,
+                    posts: currentGroup.posts.push(post._id)
+                }
+                console.log("(afo-group-creating new post-updatingGroup: " + JSON.stringify(postInGroup))
+                groupService.updateGroup(groupId, postInGroup)
+                    .then(() => {
+                        setCurrentGroup(postInGroup)
+                    })
+            })
     };
 
     return(
