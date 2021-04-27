@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import AfoNavbar from "../navbar/afo-navbar";
 import '../../styles/afo-profile.css';
-import {useParams} from "react-router-dom";
+import {useParams, useHistory} from "react-router-dom";
 import userService from "../../services/user-service";
 import {DEFAULT_USER_IMAGE} from "../../constants/api-urls";
 
 const Settings = () => {
     const {userId} = useParams();
+    const history = useHistory();
     const [imgUrl, setImageUrl] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -88,7 +89,7 @@ const Settings = () => {
     };
 
     const deleteUser = () => {
-        if (confirm("Are you sure you want to delete your account?")) {
+        if (window.confirm("Are you sure you want to delete your account?")) {
             userService.deleteUser(userId)
                 .then((response) => {
                     console.log(JSON.stringify(response))

@@ -60,17 +60,17 @@ function App() {
                     <Group/>
                 </Route>
 
-                <Route path={["/user/:userId", "/user/:userId/"]}
+                <Route path={["/profile", "/profile/:userId", "/profile/:userId/"]}
                        exact={true}>
                     <Profile/>
                 </Route>
 
-                <Route path={["/settings/:userId", "/settings/:userId/"]}
+                <Route path={["/profile/setings", "/profile/settings/:userId", "/profile/settings/:userId/"]}
                        exact={true}>
                     <Settings/>
                 </Route>
 
-                <Route path={["/group-manager/:userId", "/group-manager/:userId/"]}
+                <Route path={["/profile/group-manager/:userId", "/profile/group-manager/:userId/"]}
                        exact={true}>
                     <GroupManager/>
                 </Route>
