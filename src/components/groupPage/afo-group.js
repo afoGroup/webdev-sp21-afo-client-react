@@ -116,8 +116,8 @@ const Group = () => {
                 console.log("(afo-group-creating new post-updatingGroup: " + JSON.stringify(postInGroup));
                 console.log("continued only posts" + postInGroup.posts.toString())
                 groupService.updateGroup(groupId, postInGroup)
-                    .then((actualGroup) => {
-                        setCurrentGroup(actualGroup);
+                    .then(() => {
+                        setCurrentGroup(postInGroup);
                         setPostBoxStatus(false);
                         setPostText("");
                     }).catch(error => console.log(error))
