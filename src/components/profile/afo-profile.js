@@ -16,9 +16,12 @@ const Profile = () => {
 
     useEffect(() => {
         console.log('userId-1: ' + userId);
+
         userService.getCurrentUser()
             .then((actualUser) => {
-                setCurrentUser(actualUser)
+                if(actualUser._id === userId){
+                    setCurrentUser(actualUser)
+                }
             })
     }, []);
 
@@ -26,11 +29,13 @@ const Profile = () => {
         console.log('userId-2: ' + userId);
         userService.findUserById(userId)
             .then((actualUser) => {
-                setCurrentUser(actualUser)
+                if(actualUser._id === userId){
+                    setCurrentUser(actualUser)
+                }
             })
     }, [userId]);
 
-    
+
     return(
         <div className="container-fluid">
             <div className="row">
