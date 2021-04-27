@@ -117,7 +117,9 @@ const Group = () => {
                 console.log("continued only posts" + postInGroup.posts.toString())
                 groupService.updateGroup(groupId, postInGroup)
                     .then(() => {
-                        setCurrentGroup(postInGroup)
+                        setCurrentGroup(postInGroup);
+                        setPostBoxStatus(false);
+                        setPostText("");
                     })
             })
     };
