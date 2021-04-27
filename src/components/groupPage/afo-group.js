@@ -67,11 +67,11 @@ const Group = () => {
         console.log('groupId: ' + groupId);
         console.log('clubsList:' + currentUser.clubs)
         console.log('clubsList JSON.stringify:' + JSON.stringify(currentUser.clubs))
-        let newClubs = [currentUser.clubs.push(groupId)];
+        let newClubs = [...currentUser.clubs, groupId];
         console.log('newClubs: ' + newClubs.toString());
         const updateUser = {
             ...currentUser,
-            clubs: JSON.stringify(newClubs)
+            clubs: newClubs
         };
         console.log('updated Club: ' + JSON.stringify(updateUser));
         console.log("updateUser in JoinGroup:" + updateUser.clubs.toString());
