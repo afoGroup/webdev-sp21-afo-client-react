@@ -53,6 +53,26 @@ const GroupManager = () => {
         }
     }, [currentUser]);
 
+    const joinGroup = (group, groupId) => {
+        console.log('groupId: ' + groupId);
+        console.log('clubsList:' + currentUser.clubs);
+        console.log('clubsList JSON.stringify:' + JSON.stringify(currentUser.clubs));
+        let newClubs = [...currentUser.clubs, groupId];
+        console.log('newClubs: ' + newClubs.toString());
+        const updateUser = {
+            ...currentUser,
+            clubs: newClubs
+        };
+        console.log('updated Club: ' + JSON.stringify(updateUser));
+        console.log("updateUser in JoinGroup:" + updateUser.clubs.toString());
+        userService.updateUser(currentUser._id, updateUser)
+            .then(() => {
+                    setCurrentUser(updateUser);
+                    console.log("SET LEAVE GROUP BUTTON - Owner CAN NEVER SEE LEAVE GROUP")
+                }
+            )
+    };
+
     const addGroup = () => {
         let newGroup = {
             title: newTitle,
@@ -64,26 +84,16 @@ const GroupManager = () => {
         };
         groupService.createGroup(newGroup)
             .then(group => {
-                console.log('current list: (' + currentUser.clubs.length + ') ' + currentUser.clubs);
-                let updatedOwnerClubs = currentUser.clubs.slice();
-                console.log('sliced: '+ updatedOwnerClubs);
-                console.log('adding: '+ group._id);
-                updatedOwnerClubs.push(group._id);
-                console.log('new ownerClubs: ' + updatedOwnerClubs);
-                let updatedUser = {...currentUser, ownerClubs: updatedOwnerClubs};
-                console.log('new user info: ' + updatedUser.username, updatedUser.ownerClubs);
-                userService.updateUser(currentUser._id, updatedUser)
-                    .then(returnedUser => {
-                        console.log("created new group for: " + returnedUser.username);
-                    }).catch(error => console.log(error))
-            }).then(() => {
-                //
+                joinGroup(group, group._id)
             }).catch(error => console.log(error))
     };
 
     const searchAnime = () => {
         animeService.findAnimeByTitle(animeSelected)
-            .then(result => setAnimeSearchResult(result))
+            .then(result => {
+                setAnimeSearchResult(result);
+                setAniSearchStatus(true);
+            })
             .catch(error => console.log(error))
     };
 
@@ -169,38 +179,28 @@ const GroupManager = () => {
                                                 animeInput !== "" && animeSearchResult && aniSearchStatus &&
                                                 <>
                                                     <p>{animeSearchResult.length} Results for {animeInput}</p>
-                                                    <div className="mini-anime-search">
-
-                                                        <ul >
-                                                            {
-                                                                animeSearchResult.map((result, index) =>
-                                                                    <li key={index}>
-                                                                        <p onClick={() => {
-                                                                            setNewAnimeId(result.mal_id);
-                                                                            setAnimeSelected(result.title);
-                                                                        }}>
-                                                                            {result.title}
-                                                                        </p>
-                                                                    </li>
-                                                                )
-                                                            }
-                                                        </ul>
+                                                    <ul className="mini-anime-search">
                                                         {
-                                                            newAnimeId !== "" &&
-                                                            <>
-                                                                <p>Selected Group Anime: {animeSelected}</p>
-                                                            </>
+                                                            animeSearchResult.map((result, index) =>
+                                                                <li key={index}>
+                                                                    <p onClick={() => {
+                                                                        setNewAnimeId(result.mal_id);
+                                                                        setAnimeSelected(result.title);
+                                                                    }}>
+                                                                        {result.title}
+                                                                    </p>
+                                                                </li>
+                                                            )
                                                         }
-                                                    </div>
+                                                    </ul>
+                                                    {
+                                                        newAnimeId !== "" &&
+                                                        <>
+                                                            <p>Selected Group Anime: {animeSelected}</p>
+                                                        </>
+                                                    }
                                                 </>
                                             }
-
-
-
-
-
-
-
 
 
                                             <button
