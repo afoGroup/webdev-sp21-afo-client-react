@@ -71,7 +71,7 @@ const Settings = () => {
                                         </label>
                                         <input
                                                name="login-group"
-                                               className="mb-2 form-control-plaintext bg-light"
+                                               className="px-3 mb-2 form-control-plaintext bg-light"
                                                value={username}
                                                disabled={true}
                                                />

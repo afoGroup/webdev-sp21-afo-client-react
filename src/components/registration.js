@@ -114,7 +114,7 @@ const Registration = ({registerMyUser}) => {
                                         {
                                             alertDupeUsername &&
                                             <div className="alert alert-danger" role="alert">
-                                                Please select different username. Username taken
+                                                Username taken, please select different username
                                             </div>
                                         }
                                         <br/>
