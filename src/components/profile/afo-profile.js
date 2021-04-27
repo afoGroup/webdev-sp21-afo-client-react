@@ -16,11 +16,10 @@ const Profile = () => {
     const [currentUserStatus, setCurrentUserStatus] = useState(false);
 
     useEffect(() => {
-        console.log('userId-1: ' + userId);
-
         userService.getCurrentUser()
             .then((actualUser) => {
                 if(userId === undefined || actualUser._id !== userId){
+                    console.log('1: ' + actualUser.clubs);
                     setCurrentUser(actualUser);
                     setCurrentUserStatus(true);
                 }
@@ -28,11 +27,11 @@ const Profile = () => {
     }, []);
 
     useEffect(() => {
-        console.log('userId-2: ' + userId);
         if(userId !== undefined){
             userService.findUserById(userId)
                 .then((actualUser) => {
                     if(actualUser._id === userId){
+                        console.log('2: ' + actualUser.clubs);
                         setCurrentUser(actualUser)
                     }
                 })
