@@ -19,7 +19,7 @@ const Profile = () => {
 
         userService.getCurrentUser()
             .then((actualUser) => {
-                if(actualUser._id === userId){
+                if(userId === undefined || actualUser._id !== userId){
                     setCurrentUser(actualUser)
                 }
             })
