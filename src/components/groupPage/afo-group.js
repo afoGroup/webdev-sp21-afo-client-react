@@ -265,7 +265,9 @@ const Group = () => {
                                                                     key={index}
                                                                     ownerStatus={groupOwner._id === currentUser._id}
                                                                     group={currentGroup}
-                                                                    postId={postId}/>
+                                                                    postId={postId}
+                                                                    setCurrentGroup={setCurrentGroup}
+                                                                />
                                                                 )
                                                     }
                                                 </>

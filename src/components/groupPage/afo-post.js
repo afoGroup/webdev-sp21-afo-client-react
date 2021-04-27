@@ -6,7 +6,7 @@ import {LOGIN_STATE} from "../../actions/user-constants";
 import animeService from "../../services/anime-service";
 import {useHistory} from "react-router-dom";
 
-const Post = ({group, ownerStatus, postId}) => {
+const Post = ({group, ownerStatus, postId, setCurrentGroup}) => {
 
     const[currentPost, setCurrentPost] = useState({});
     const[postOwner, setPostOwner] = useState({});
@@ -36,7 +36,7 @@ const Post = ({group, ownerStatus, postId}) => {
             .then((returnedGroup) => {
                 postService.deletePost(postId)
                     .then(() => {
-                        history.push(`/details/group/${returnedGroup._id}`)
+                        setCurrentGroup(updatedGroup)
                     })
             })
 
