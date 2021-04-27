@@ -19,7 +19,7 @@ const GroupManager = () => {
     const [newDescription, setNewDescription] = useState("");
     const [newPictureURL, setNewPictureURL] = useState("");
     const [newAnimeId, setNewAnimeId] = useState("");
-    const [animeSearched, setAnimeSearched] = useState("");
+    const [animeInput, setAnimeInput] = useState("");
     const [animeSearchResult, setAnimeSearchResult] = useState([]);
     const [animeSelected, setAnimeSelected] = useState("");
 
@@ -143,13 +143,13 @@ const GroupManager = () => {
                                                    value={newPictureURL}
                                                    onChange={(e) => setNewPictureURL(e.target.value)}/>
                                             <label>
-                                                <strong>Search and Select Group Anime: </strong>
+                                                <strong>Group Anime: </strong>
                                             </label>
                                             <input type="text"
                                                    name="new-group"
                                                    className="form-control mb-2"
-                                                   value={animeSearched}
-                                                   onChange={(e) => setAnimeSearched(e.target.value)}/>
+                                                   value={animeInput}
+                                                   onChange={(e) => setAnimeInput(e.target.value)}/>
 
 
                                             <button
