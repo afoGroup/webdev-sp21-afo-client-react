@@ -90,7 +90,7 @@ const GroupManager = () => {
             pictureURL: newPictureURL,
             createdDate: Date.now(),
             animeId: newAnimeId,
-            owner: currentUser._id
+            ownerId: currentUser._id
         };
         groupService.createGroup(newGroup)
             .then(group => {

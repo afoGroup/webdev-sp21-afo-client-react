@@ -91,7 +91,8 @@ const Group = () => {
     const submitPost = () => {
         const newPost = {
             text: postText,
-            owner: currentUser._id,
+            ownerId: currentUser._id,
+            groupId: groupId,
             createdDate: Date.now()
         };
         postService.createPost(groupId, newPost)

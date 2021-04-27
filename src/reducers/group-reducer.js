@@ -14,7 +14,7 @@ const initialState = {
         description: '',
         animeId: '',
         pictureUrl: '',
-        owner: '',
+        ownerId: '',
         posts: []
     },
     searchedGroupList: [],
