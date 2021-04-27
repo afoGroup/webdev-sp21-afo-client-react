@@ -98,6 +98,7 @@ const Group = () => {
         console.log("(afo-group-creating new post, groupID: " + groupId)
         postService.createPost(groupId, newPost)
             .then((post) => {
+                console.log("newPost's ID", post._id)
                 const postInGroup = {
                     ...currentGroup,
                     posts: currentGroup.posts.push(post._id)
