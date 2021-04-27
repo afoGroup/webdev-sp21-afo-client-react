@@ -67,12 +67,13 @@ const Group = () => {
         const updateUser = {
             ...currentUser,
             clubs: currentUser.clubs.push(groupId)
-        }
-        console.log("updateUser in JoinGroup:" + updateUser.clubs)
-        console.log("currentGroupPosts:" + currentGroup.posts)
+        };
+
+        console.log("updateUser in JoinGroup:" + updateUser.clubs);
+        console.log("currentGroupPosts:" + currentGroup.posts);
         userService.updateUser(currentUser._id, updateUser)
             .then(() => {
-                setCurrentUser(updateUser)
+                setCurrentUser(updateUser);
                 console.log("SET LEAVE GROUP BUTTON - Owner CAN NEVER SEE LEAVE GROUP")
                 }
             )
@@ -82,30 +83,31 @@ const Group = () => {
         const userLeaving = {
             ...currentUser,
             clubs: currentUser.clubs.filter(clubId => clubId === groupId)
-        }
+        };
         userService.updateUser(currentUser._id, userLeaving)
             .then(() => {
-                setCurrentUser(userLeaving)
+                setCurrentUser(userLeaving);
                 console.log("SET LEAVE GROUP BUTTON - to FALSE")
             })
-    }
+    };
 
     const submitPost = () => {
         const newPost = {
             text: postText,
             owner: currentUser._id,
             createdDate: Date.now()
-        }
-        console.log("(afo-group-creating new post: " + JSON.stringify(newPost))
-        console.log("(afo-group-creating new post, groupID: " + groupId)
+        };
+
+        console.log("(afo-group-creating new post: " + JSON.stringify(newPost));
+        console.log("(afo-group-creating new post, groupID: " + groupId);
         postService.createPost(groupId, newPost)
             .then((post) => {
-                console.log("newPost's ID", post._id)
-                console.log("currentGroupPosts:" + currentGroup.posts)
+                console.log("newPost's ID", post._id);
+                console.log("currentGroupPosts:" + currentGroup.posts);
                 const postInGroup = {
                     ...currentGroup,
                     posts: currentGroup.posts.push(post._id)
-                }
+                };
                 console.log("(afo-group-creating new post-updatingGroup: " + JSON.stringify(postInGroup))
                 groupService.updateGroup(groupId, postInGroup)
                     .then(() => {
@@ -183,12 +185,29 @@ const Group = () => {
                                             <div className="row">
                                                 <div className="col-12">
                                                     {
+                                                        (currentUser._id !== groupOwner._id) &&
                                                         loginState === LOGIN_STATE.LOGGED_IN &&
+                                                        (!currentUser.clubs.includes(currentGroup._id)) &&
                                                         <button type="button"
                                                                 className="btn group-btn"
                                                                 onClick={() => joinGroup()}>
                                                             <strong className="afo-white">JOIN</strong>
                                                         </button>
+                                                    }
+                                                    {
+                                                        (currentUser._id !== groupOwner._id) &&
+                                                        loginState === LOGIN_STATE.LOGGED_IN &&
+                                                        (currentUser.clubs.includes(currentGroup._id)) &&
+                                                        <button type="button"
+                                                                className="btn group-btn"
+                                                                onClick={() => leaveGroup()}>
+                                                            <strong className="afo-white">LEAVE GROUP</strong>
+                                                        </button>
+                                                    }
+                                                    {
+                                                        (currentUser._id !== groupOwner._id) &&
+                                                        loginState === LOGIN_STATE.LOGGED_OUT &&
+                                                        <p className="my-2"><strong>Login to join group & post</strong></p>
                                                     }
                                                 </div>
                                             </div>
@@ -204,11 +223,16 @@ const Group = () => {
 
                                     <div className="row">
                                         <div className="col-12 mb-4">
-                                            <button type="button"
-                                                    className="btn btn-outline-secondary float-right"
-                                                    onClick={() => setPostBoxStatus(!postBoxStatus)}>
-                                                <strong>+ POST</strong>
-                                            </button>
+                                            {
+                                                ((currentUser._id === groupOwner._id) ||
+                                                    (loginState === LOGIN_STATE.LOGGED_IN &&
+                                                    (currentUser.clubs.includes(currentGroup._id)))) &&
+                                                <button type="button"
+                                                        className="btn btn-outline-secondary float-right"
+                                                        onClick={() => setPostBoxStatus(!postBoxStatus)}>
+                                                    <strong>+ POST</strong>
+                                                </button>
+                                            }
                                         </div>
                                     </div>
                                     {

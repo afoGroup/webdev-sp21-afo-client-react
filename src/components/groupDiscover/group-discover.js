@@ -12,15 +12,15 @@ const GroupDiscover = ({groupList}) => {
             items: 5
         },
         desktop: {
-            breakpoint: { max: 3000, min: 1545 },
+            breakpoint: { max: 3000, min: 1555 },
             items: 3
         },
         tablet: {
-            breakpoint: { max: 1545, min: 950 },
+            breakpoint: { max: 1555, min: 995 },
             items: 2
         },
         mobile: {
-            breakpoint: { max: 950, min: 0 },
+            breakpoint: { max: 995, min: 0 },
             items: 1
         }
     };
@@ -34,6 +34,7 @@ const GroupDiscover = ({groupList}) => {
                               showDots={true}
                               infinite={true}
                               renderButtonGroupOutside={true}
+                              renderDotsOutside={true}
                               containerClass="carousel-container">
                         {
                             groupList && groupList.map((group, index) =>
