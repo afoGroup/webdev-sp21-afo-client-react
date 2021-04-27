@@ -9,7 +9,7 @@ const AnimeResult = (props) => {
                 <div className="row pt-3 result-header">
                     <div className="col-9">
                         <h4>
-                            <Link className="result-header-title" to={`/anime/${props.anime.mal_id}`}>
+                            <Link className="result-header-title" to={`/details/anime/${props.anime.mal_id}`}>
                                 {props.anime.title}
                             </Link>
                         </h4>
@@ -27,7 +27,7 @@ const AnimeResult = (props) => {
                     </div>
                     <div className="col-6 col-md-8">
                         <p className="afo-black" >{props.anime.synopsis}
-                        <Link className="result-read-more" to={`/anime/${props.anime.mal_id}`}>
+                        <Link className="result-read-more" to={`/details/anime/${props.anime.mal_id}`}>
                             (read more)
                         </Link>
                         </p>

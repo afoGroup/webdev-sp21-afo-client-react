@@ -246,7 +246,7 @@ const AfoSearch = (props) => {
                                             {
                                                 searchResults.map((result, index) =>
                                                     <li key={index}>
-                                                        <Link to={`/api/group/${result._id}`}>
+                                                        <Link to={`/details/group/${result._id}`}>
                                                             {result.title}
                                                         </Link>
                                                     </li>
@@ -270,7 +270,7 @@ const AfoSearch = (props) => {
                                             {
                                                 searchResults.map((result, index) =>
                                                     <li key={index}>
-                                                        <Link to={`/api/user/${result._id}`}>
+                                                        <Link to={`/profile/${result._id}`}>
                                                             {result.username}
                                                         </Link>
                                                     </li>
