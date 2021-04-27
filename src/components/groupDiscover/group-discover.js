@@ -12,28 +12,26 @@ const GroupDiscover = ({groupList}) => {
             items: 5
         },
         desktop: {
-            breakpoint: { max: 3000, min: 1024 },
+            breakpoint: { max: 3000, min: 1025 },
             items: 3
         },
         tablet: {
-            breakpoint: { max: 1024, min: 464 },
+            breakpoint: { max: 1025, min: 800 },
             items: 2
         },
         mobile: {
-            breakpoint: { max: 464, min: 0 },
+            breakpoint: { max: 800, min: 0 },
             items: 1
         }
     };
 
     return(
         <div className="row discover-row">
-            <div className="col-12">
+            <div className="col-12 p-3">
 
                 <Carousel responsive={responsive}
                           ssr
-                          infinite={false}
-                          beforeChange={() => this.setState({ isMoving: true })}
-                          afterChange={() => this.setState({ isMoving: false })}
+                          infinite={true}
                           containerClass="first-carousel-container container">
                     {
                         groupList && groupList.map((group, index) =>

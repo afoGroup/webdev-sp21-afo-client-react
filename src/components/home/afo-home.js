@@ -4,6 +4,8 @@ import GroupDiscover from "../groupDiscover/group-discover";
 import FilterList from "../filter-list";
 import animeGenres from "../../constants/genre-id";
 import groupService from "../../services/group-service";
+import {LOGIN_STATE} from "../../actions/user-constants";
+import userService from "../../services/user-service";
 
 
 const AfoHome = (props) => {
@@ -11,10 +13,27 @@ const AfoHome = (props) => {
         animeGenres.HORROR, animeGenres.THRILLER, animeGenres.ROMANCE, animeGenres.SCI_FI];
 
     const [groupList, setGroupList] = useState([]);
+    const [currentUser, setCurrentUser] = useState({});
+    const [loginState, setLoginState] = useState(LOGIN_STATE.LOGGED_OUT);
 
     useEffect(() => {
-        groupService.findAllGroups().then((groups) => setGroupList(groups));
-    });
+        groupService.findAllGroups()
+            .then((groups) => setGroupList(groups))
+            .then(() =>
+                userService.getCurrentUser()
+                    .then((actualUser) => {
+                        console.log("(home): " + actualUser);
+                        if(actualUser === undefined || actualUser.username === "wbdv-afo-logged-out"){
+                            setLoginState(LOGIN_STATE.LOGGED_OUT)
+                        } else {
+                            console.log("(home) user: " + actualUser.username + " & " + actualUser._id);
+                            setCurrentUser(actualUser);
+                            setLoginState(LOGIN_STATE.LOGGED_IN);
+                        }
+                    }).catch(error => {
+                        console.log(error)
+                    }))
+    }, []);
 
     return (
         <div className="container-fluid">
