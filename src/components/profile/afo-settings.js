@@ -62,7 +62,7 @@ const Settings = () => {
             instagram: instagram,
             twitter: twitter,
             pictureURL: imgUrl
-        })
+        }
         console.log("Updating User: " + JSON.stringify(updatedUser))
         console.log("Updating UserID: " + userId)
         userService.updateUser(userId, updatedUser)
