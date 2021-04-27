@@ -21,9 +21,9 @@ const Post = ({group, ownerStatus, postId, setCurrentGroup}) => {
     }, [postId]);
 
     useEffect(() => {
-        if(currentPost.owner){
+        if(currentPost.ownerId){
             console.log('GroupOwner: ' + currentPost.ownerId);
-            userService.findUserById(currentPost.owner)
+            userService.findUserById(currentPost.ownerId)
                 .then((actualOwner) => {
                     setPostOwner(actualOwner)
                 })
