@@ -88,12 +88,11 @@ const Settings = () => {
     const deleteUser = () => {
         if (window.confirm("Are you sure you want to delete your account?")) {
             userService.deleteUser(userId)
-                .then((response) => {
-                    console.log(JSON.stringify(response))
+                .then(() => {
                     history.push(`/home`);
                 })
                 .catch((error) => {
-                    console.log("Some Error from DELETE:",)
+                    console.log("Some Error from DELETE:" + error)
                 })
         }
     }
