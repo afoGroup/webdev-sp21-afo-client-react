@@ -24,8 +24,7 @@ const Settings = () => {
     const [alertEmail, setAlertEmail] = useState(false);
     const [alertPassword, setAlertPassword] = useState(false);
     const [alertCard, setAlertCard] = useState(false);
-    const [alertVerifyPassword, setAlertVerify] = useState(false);
-    const [alertDupeUsername, setAlertDupeUsername] = useState(false);
+    const [alertUpdateSuccess, setUpdateSuccess] = useState(false);
 
     useEffect(() => {
         userService.getCurrentUser()
@@ -43,8 +42,48 @@ const Settings = () => {
 
     }, [userId]);
 
+    const update = () => {
+        setCurrentUser({
+            password: password,
+            userType: type,
+            email: email,
+            instagram: instagram,
+            twitter: twitter,
+            pictureURL: imgUrl
+        })
+        console.log("Updating User: " + JSON.stringify(currentUser))
+        console.log("Updating UserID: " + userId)
+        userService.updateUser(userId, currentUser)
+            .then(() => {
+                setUpdateSuccess(true);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    };
+
 
     const updateUser = () => {
+        if (email === "") {
+            setAlertEmail(true);
+        } else {
+            setAlertEmail(false);
+        }
+
+        if (password === "") {
+            setAlertPassword(true);
+        } else {
+            setAlertPassword(false);
+        }
+
+        if (type === "otaku" && cardNum === "") {
+            setAlertCard(true);
+        } else {
+            setAlertCard(false);
+        }
+        if (!(alertEmail || alertPassword || alertCard)) {
+            update();
+        }
 
     };
 
@@ -58,10 +97,20 @@ const Settings = () => {
                             <div className="profile-container">
                                 <div className="row">
                                     <div className="form col-12 col-md-6 p-4">
-
-
                                         <p className="float-right text-danger font-weight-bold">* required</p>
                                         <br/>
+                                        {
+                                            (alertEmail || alertPassword || alertCard) &&
+                                            <div className="alert alert-danger" role="alert">
+                                                Please make sure the the required fields aren't empty
+                                            </div>
+                                        }
+                                        {
+                                            alertUpdateSuccess &&
+                                            <div className="alert alert-success" role="alert">
+                                                User information has been updated
+                                            </div>
+                                        }
                                         <label>
                                             <strong><span className="text-danger">*</span> Username: </strong>
                                         </label>
@@ -78,7 +127,10 @@ const Settings = () => {
                                                name="login-group"
                                                className="form-control mb-2"
                                                value={email}
-                                               onChange={(e) => setEmail(e.target.value)}/>
+                                               onChange={(e) => {
+                                                   setUpdateSuccess(false)
+                                                   setEmail(e.target.value)
+                                               }}/>
                                         <label>
                                             <strong><span className="text-danger">*</span> Password: </strong>
                                         </label>
@@ -86,14 +138,20 @@ const Settings = () => {
                                                name="login-group"
                                                className="form-control mb-2"
                                                value={password}
-                                               onChange={(e) => setPassword(e.target.value)}/>
+                                               onChange={(e) => {
+                                                   setUpdateSuccess(false)
+                                                   setPassword(e.target.value)
+                                               }}/>
                                         <label>
                                             <strong><span className="text-danger">*</span> Account Type: </strong>
                                         </label>
                                         <select name="login-group"
                                                 className="form-control mb-2"
                                                 value={type}
-                                                onChange={(e) => setType(e.target.value)}>
+                                                onChange={(e) => {
+                                                    setUpdateSuccess(false)
+                                                    setType(e.target.value)
+                                                }}>
                                             <option value="weeb">Weeb (Default)</option>
                                             <option value="otaku">Otaku (Paid)</option>
                                         </select>
@@ -108,7 +166,10 @@ const Settings = () => {
                                                        name="login-group"
                                                        className="form-control mb-2"
                                                        value={cardNum}
-                                                       onChange={(e) => setCardNum(e.target.value)}/>
+                                                       onChange={(e) => {
+                                                           setCardNum(e.target.value)
+                                                           setUpdateSuccess(false)
+                                                       }}/>
                                             </>
                                         }
 
