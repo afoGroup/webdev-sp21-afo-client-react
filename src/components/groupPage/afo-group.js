@@ -3,16 +3,17 @@ import {connect} from 'react-redux';
 import postActions from '../../actions/post-actions';
 import AfoNavbar from "../navbar/afo-navbar";
 import Post from "./afo-post";
-import '../../styles/afo-group.css';
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import groupService from "../../services/group-service";
 import userService from "../../services/user-service";
 import postService from "../../services/post-service";
 import animeService from "../../services/anime-service";
 import {LOGIN_STATE} from "../../actions/user-constants";
+import '../../styles/afo-group.css';
 
 const Group = () => {
     const {groupId} = useParams();
+    const history = useHistory();
 
     const [postBoxStatus, setPostBoxStatus] = useState(false);
     const [postText, setPostText] = useState("");
@@ -28,7 +29,7 @@ const Group = () => {
         groupService.findGroupById(groupId)
             .then((actualGroup) => {
                 setCurrentGroup(actualGroup)
-            }).catch(error => console.log(error))
+            }).catch(error => console.log(error));
 
         userService.getCurrentUser()
             .then((actualUser) => {
@@ -199,7 +200,11 @@ const Group = () => {
                                                     {
                                                         (currentUser._id !== groupOwner._id) &&
                                                         loginState === LOGIN_STATE.LOGGED_OUT &&
-                                                        <p className="my-2"><strong>Login to join group & post</strong></p>
+                                                        <button type="button"
+                                                                className="btn group-btn btn-block my-3"
+                                                                onClick={() => {history.push("/login")}}>
+                                                            <strong className="afo-white">Login to join group & post</strong>
+                                                        </button>
                                                     }
                                                 </div>
                                             </div>

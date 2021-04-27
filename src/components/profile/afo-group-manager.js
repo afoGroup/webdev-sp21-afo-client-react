@@ -75,6 +75,15 @@ const GroupManager = () => {
 
     const addGroup = () => {
         setGroupFormStatus(false);
+        setNewTitle("");
+        setNewDescription("");
+        setNewPictureURL("");
+        setNewAnimeId("");
+        setAnimeInput("");
+        setAnimeSearchResult([]);
+        setAnimeSelected("");
+        setAniSearchStatus(false);
+
         let newGroup = {
             title: newTitle,
             description: newDescription,
@@ -206,7 +215,7 @@ const GroupManager = () => {
                                                     {
                                                         newAnimeId !== "" &&
                                                         <>
-                                                            <p>Selected Group Anime: {animeSelected}</p>
+                                                            <p className={}>Selected Group Anime: {animeSelected}</p>
                                                         </>
                                                     }
                                                 </>
