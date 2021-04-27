@@ -215,7 +215,7 @@ const GroupManager = () => {
                                                     {
                                                         newAnimeId !== "" &&
                                                         <>
-                                                            <p className={}>Selected Group Anime: {animeSelected}</p>
+                                                            <p className="mt-3">Selected Group Anime: {animeSelected}</p>
                                                         </>
                                                     }
                                                 </>
