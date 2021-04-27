@@ -6,7 +6,6 @@ import AfoNavbar from "./navbar/afo-navbar";
 import userService from "../services/user-service";
 
 const Registration = ({registerMyUser}) => {
-    // const [credentials, setCredentials] = useState({});
     const history = useHistory();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -125,6 +124,7 @@ const Registration = ({registerMyUser}) => {
                                                name="login-group"
                                                className="form-control mb-2"
                                                value={username}
+                                               placeholder="aliceInWonderland"
                                                onChange={(e) => setUsername(e.target.value)}/>
                                         <label>
                                             <span className="text-danger font-weight-bold">*</span> Email:
@@ -133,6 +133,7 @@ const Registration = ({registerMyUser}) => {
                                                name="login-group"
                                                className="form-control mb-2"
                                                value={email}
+                                               placeholder="alice@website.com"
                                                onChange={(e) => setEmail(e.target.value)}/>
                                         <label>
                                             <span className="text-danger font-weight-bold">*</span> Password:
@@ -141,6 +142,7 @@ const Registration = ({registerMyUser}) => {
                                                name="login-group"
                                                className="form-control mb-2"
                                                value={password}
+                                               placeholder="r@bbitHo1es"
                                                onChange={(e) => setPassword(e.target.value)}/>
                                         <label>
                                             <span className="text-danger font-weight-bold">*</span> Verify Password:
@@ -149,6 +151,7 @@ const Registration = ({registerMyUser}) => {
                                                name="login-group"
                                                className="form-control mb-2"
                                                value={verifyPW}
+                                               placeholder="r@bbitHo1es"
                                                onChange={(e) => setVerifyPW(e.target.value)}/>
                                         <label>
                                             <span className="text-danger font-weight-bold">*</span> Account Type:
@@ -171,6 +174,7 @@ const Registration = ({registerMyUser}) => {
                                                        name="login-group"
                                                        className="form-control mb-2"
                                                        value={cardNum}
+                                                       placeholder="1111 2222 3333 4444"
                                                        onChange={(e) => setCardNum(e.target.value)}/>
                                             </>
                                         }
@@ -190,7 +194,7 @@ const Registration = ({registerMyUser}) => {
                                                        id="twitterHandle"
                                                        value={twitter}
                                                        onChange={(e) => setTwitter(e.target.value)}
-                                                       placeholder="Username"/>
+                                                       placeholder="twitterHandle"/>
                                             </div>
                                         </div>
                                         <label>
@@ -207,7 +211,7 @@ const Registration = ({registerMyUser}) => {
                                                        id="igHandle"
                                                        value={instagram}
                                                        onChange={(e) => setInstagram(e.target.value)}
-                                                       placeholder="Username"/>
+                                                       placeholder="insta-handle"/>
                                             </div>
                                         </div>
                                         <label>
@@ -216,6 +220,7 @@ const Registration = ({registerMyUser}) => {
                                         <input type="url"
                                                name="login-group"
                                                value={imageUrl}
+                                               placeholder="https://some-public-picture.com"
                                                onChange={(e) => setImageUrl(e.target.value)}
                                                className="form-control mb-2"/>
                                         <br/>

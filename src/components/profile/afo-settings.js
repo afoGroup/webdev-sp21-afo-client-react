@@ -27,7 +27,6 @@ const Settings = () => {
     useEffect(() => {
         userService.getCurrentUser()
             .then((actualUser) => {
-                console.log("USE EFFECT: ")
                 if(actualUser && actualUser.username !== "wbdv-afo-logged-out"){
                     setCurrentUser(actualUser);
                     setUsername(actualUser.username);
@@ -38,7 +37,6 @@ const Settings = () => {
                     setImageUrl(actualUser.pictureURL);
                     setTwitter(actualUser.twitter);
                     setInstagram(actualUser.instagram);
-                    console.log("USE EFFECT: " + JSON.stringify(currentUser))
                 }
             });
 
@@ -63,7 +61,6 @@ const Settings = () => {
                 console.log(error);
             })
     };
-
 
     const updateUser = () => {
         if (email === "") {
@@ -141,6 +138,7 @@ const Settings = () => {
                                                name="login-group"
                                                className="form-control mb-2"
                                                value={email}
+                                               placeholder="alice@website.com"
                                                onChange={(e) => {
                                                    setUpdateSuccess(false)
                                                    setEmail(e.target.value)
@@ -152,6 +150,7 @@ const Settings = () => {
                                                name="login-group"
                                                className="form-control mb-2"
                                                value={password}
+                                               placeholder="r@bbitHo1es"
                                                onChange={(e) => {
                                                    setUpdateSuccess(false)
                                                    setPassword(e.target.value)
@@ -180,6 +179,7 @@ const Settings = () => {
                                                        name="login-group"
                                                        className="form-control mb-2"
                                                        value={cardNum}
+                                                       placeholder="1111 2222 3333 4444"
                                                        onChange={(e) => {
                                                            setCardNum(e.target.value)
                                                            setUpdateSuccess(false)
@@ -205,7 +205,7 @@ const Settings = () => {
                                                            setUpdateSuccess(false)
                                                            setTwitter(e.target.value)
                                                        }}
-                                                       placeholder="Username"/>
+                                                       placeholder="twitterHandle"/>
                                             </div>
                                         </div>
                                         <label>
@@ -225,13 +225,14 @@ const Settings = () => {
                                                            setUpdateSuccess(false)
                                                            setInstagram(e.target.value)
                                                        }}
-                                                       placeholder="Username"/>
+                                                       placeholder="insta-handle"/>
                                             </div>
                                         </div>
                                         <label>
                                             <strong>Bio: </strong>
                                         </label>
                                         <textarea rows="4" className="form-control" value={bio}
+                                                  placeholder="Write your bio here..."
                                                   onChange={(e) => {
                                                       setUpdateSuccess(false)
                                                       setBio(e.target.value)
@@ -261,6 +262,7 @@ const Settings = () => {
                                                 <input
                                                     type="text"
                                                     value={imgUrl}
+                                                    placeholder="https://some-public-picture.com"
                                                     onChange={(e) => {
                                                         setUpdateSuccess(false)
                                                         setImageUrl(e.target.value)

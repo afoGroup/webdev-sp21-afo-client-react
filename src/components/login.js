@@ -55,6 +55,7 @@ const Login = (props) => {
                                             type="text"
                                             name="login-group"
                                             className="form-control"
+                                            placeholder="aliceInWonderland"
                                         />
 
                                         <label>
@@ -70,6 +71,7 @@ const Login = (props) => {
                                             type="password"
                                             name="login-group"
                                             className="form-control"
+                                            placeholder="r@bbitHo1es"
                                         />
 
                                         <br/>
