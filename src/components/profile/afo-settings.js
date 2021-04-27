@@ -53,7 +53,7 @@ const Settings = () => {
         //     twitter: twitter,
         //     pictureURL: imgUrl
         // }
-        setCurrentUser({
+        const updatedUser = {
             ...currentUser,
             password: password,
             userType: type,
@@ -63,9 +63,9 @@ const Settings = () => {
             twitter: twitter,
             pictureURL: imgUrl
         })
-        console.log("Updating User: " + JSON.stringify(currentUser))
+        console.log("Updating User: " + JSON.stringify(updatedUser))
         console.log("Updating UserID: " + userId)
-        userService.updateUser(userId, currentUser)
+        userService.updateUser(userId, updatedUser)
             .then(() => {
                 setUpdateSuccess(true);
             })
