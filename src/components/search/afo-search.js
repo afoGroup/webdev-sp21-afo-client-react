@@ -20,6 +20,7 @@ const AfoSearch = (props) => {
     const [pcThird, setPcThird] = useState(0);
     const [titleAlert, setTitleAlert] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
+    const [searchedValue, setSearchedValue] = useState("");
 
     useEffect(() => {
         makePageLists();
@@ -41,19 +42,29 @@ const AfoSearch = (props) => {
                 setTitleAlert(true);
             } else{
                 props.findAnimeByTitle(searchTitle);
+                setSearchedValue(searchTitle);
+                setSearchTitle("");
             }
         } else if(searchType === 'url'){
             props.findAnimeByURL(searchURL);
+            setSearchedValue(searchTitle);
+            setSearchTitle("");
         } else if(searchType === 'group'){
             groupService.findGroupsByTitle(searchTitle)
                 .then(result => {
-                    setSearchResults(result)
-                })
+                    console.log('title result: ' + result);
+                    setSearchResults(result);
+                    setSearchedValue(searchTitle);
+                    setSearchTitle("");
+                }).catch(error => console.log(error))
         } else if(searchType === 'user'){
             userService.findUserByUsername(searchTitle)
                 .then(result => {
-                    setSearchResults(result)
-                })
+                    console.log('user result: ' + result);
+                    setSearchResults(result);
+                    setSearchedValue(searchTitle);
+                    setSearchTitle("");
+                }).catch(error => console.log(error))
         }
     };
 
@@ -226,7 +237,7 @@ const AfoSearch = (props) => {
                                     <div className="row my-4">
                                         <div className="col-12 text-center">
                                             <h4 className="afo-purple afo-header">
-                                                0 Results for {searchTitle}
+                                                0 Results for {searchedValue}
                                             </h4>
                                         </div>
                                     </div>
@@ -241,7 +252,7 @@ const AfoSearch = (props) => {
                                     <div className="row">
                                         <div className="col-12">
                                             <h4 className="afo-purple afo-header">
-                                                {searchResults.length} Results for {searchTitle}
+                                                {searchResults.length} Results for {searchedValue}
                                             </h4>
                                             {
                                                 searchResults.map((result, index) =>
@@ -265,7 +276,7 @@ const AfoSearch = (props) => {
                                     <div className="row">
                                         <div className="col-12">
                                             <h4 className="afo-purple afo-header">
-                                                {searchResults.length} Results for {searchTitle}
+                                                {searchResults.length} Results for {searchedValue}
                                             </h4>
                                             {
                                                 searchResults.map((result, index) =>
