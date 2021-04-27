@@ -26,6 +26,7 @@ const Settings = () => {
     useEffect(() => {
         userService.getCurrentUser()
             .then((actualUser) => {
+                console.log("USE EFFECT: ")
                 if(actualUser && actualUser.username !== "wbdv-afo-logged-out"){
                     setCurrentUser(actualUser);
                     setUsername(actualUser.username);
@@ -43,16 +44,6 @@ const Settings = () => {
     }, [userId]);
 
     const update = () => {
-        console.log("Update Insta:" + instagram)
-        // const updatedUser = {
-        //     password: password,
-        //     userType: type,
-        //     email: email,
-        //     bio: bio,
-        //     instagram: instagram,
-        //     twitter: twitter,
-        //     pictureURL: imgUrl
-        // }
         const updatedUser = {
             ...currentUser,
             password: password,
@@ -63,8 +54,6 @@ const Settings = () => {
             twitter: twitter,
             pictureURL: imgUrl
         }
-        console.log("Updating User: " + JSON.stringify(updatedUser))
-        console.log("Updating UserID: " + userId)
         userService.updateUser(userId, updatedUser)
             .then(() => {
                 setUpdateSuccess(true);

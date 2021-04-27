@@ -8,6 +8,7 @@ import AfoNavbar from "./navbar/afo-navbar";
 const Login = (props) => {
     const [credentials, setCredentials] = useState({username: '', password: ''});
     const [attemptNum, setAttemptNum] = useState(0);
+    const [alertError, setAlertError] = useState(false);
     const history = useHistory();
 
 
@@ -23,6 +24,10 @@ const Login = (props) => {
                     history.push(`/user/${actualUser._id}`)
                 }
             })
+            .catch(() => {
+                setAlertError(true)
+            })
+
     };
 
 
@@ -39,15 +44,17 @@ const Login = (props) => {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-12">
+                                <div className="col-12 form">
                                     <div className="form-group afo-login-box">
                                         <label>
                                             Username:
                                         </label>
                                         <input
                                             value={credentials.username}
-                                            onChange={(e) =>
-                                                setCredentials({...credentials, username: e.target.value})}
+                                            onChange={(e) => {
+                                                setAlertError(false)
+                                                setCredentials({...credentials, username: e.target.value})
+                                            }}
                                             type="text"
                                             name="login-group"
                                             className="form-control"
@@ -59,7 +66,10 @@ const Login = (props) => {
                                         <input
                                             value={credentials.password}
                                             onChange={(e) =>
-                                            {setCredentials({...credentials, password: e.target.value})}}
+                                            {
+                                                setAlertError(false)
+                                                setCredentials({...credentials, password: e.target.value})
+                                            }}
                                             type="password"
                                             name="login-group"
                                             className="form-control"
@@ -72,6 +82,12 @@ const Login = (props) => {
                                             className="btn btn-secondary">
                                             Login
                                         </button>
+                                        {
+                                            alertError &&
+                                            <div className="mt-4 alert alert-danger" role="alert">
+                                                Username/password is incorrect
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
