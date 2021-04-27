@@ -4,6 +4,7 @@ import settingsPage from "./afo-settings";
 import '../../styles/afo-profile.css';
 import {useParams} from "react-router-dom";
 import userService from "../../services/user-service";
+import animeService from "../../services/anime-service";
 
 const GroupManager = () => {
 
@@ -19,6 +20,23 @@ const GroupManager = () => {
                 setCurrentUser(actualUser)
             })
     }, [userId]);
+
+    useEffect(() => {
+        if(currentUser.clubs){
+            clubService
+            animeService.findAnimeByID(currentGroup.animeId)
+                .then((actualAnime) => {
+                    setGroupAnime(actualAnime)
+                })
+        }
+        if(currentUser.ownerClubs){
+            console.log('GroupOwner: ' + currentGroup.owner);
+            userService.findUserById(currentGroup.owner)
+                .then((actualOwner) => {
+                    setGroupOwner(actualOwner)
+                })
+        }
+    }, [currentGroup]);
 
     return(
         <div className="container-fluid">
