@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import userActions from "../../actions/user-actions";
 import userService from "../../services/user-service";
 import AfoNavbar from "../navbar/afo-navbar";
@@ -69,8 +69,17 @@ const Profile = () => {
                                             }
                                         </div>
                                     </div>
-
+                                    <h5>{currentUser.username} Groups:</h5>
                                     <GroupDiscover groupList={currentUser.clubs}/>
+
+                                    {
+                                        currentUser.userType === "otaku" &&
+                                        <>
+                                            <p className="my-2">{currentUser.username} - you can view the groups you own in your
+                                                <Link classname="afo-purple" to={`/profile/group-manager/${currentUser._id}`}> Group Manager</Link>
+                                            </p>
+                                        </>
+                                    }
                                 </>
                             }
 

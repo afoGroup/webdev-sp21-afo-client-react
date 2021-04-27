@@ -9,5 +9,17 @@
 
 .afo-card-style{
     width: 18rem;
-    height: 25rem;
+    height: 500px;
+    margin: auto;
+}
+
+.afo-card-img{
+    width: 18rem;
+    height: 150px;
+    object-fit: cover;
+}
+
+.afo-card-info{
+    height: 150px;
+    overflow: scroll;
 }

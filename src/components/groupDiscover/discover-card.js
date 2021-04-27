@@ -5,10 +5,10 @@ const DiscoverCard = ({group}) => {
     return(
         <>
             <div className="card afo-card-style">
-                <img className="card-img-top" src={group.pictureURL} alt="Group Image"/>
+                <img className="card-img-top afo-card-img" src={group.pictureURL} alt="Group Image"/>
                     <div className="card-body">
                         <h5 className="card-title">Card title</h5>
-                        <p className="card-text">{group.description}</p>
+                        <p className="card-text afo-card-info">{group.description}</p>
                         <a href={`/details/group/${group._id}`} className="btn btn-primary">View Group</a>
                     </div>
             </div>

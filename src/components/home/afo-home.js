@@ -47,6 +47,27 @@ const AfoHome = (props) => {
                                     <h1 className="afo-purple afo-header my-4">AniFans Only</h1>
                                 </div>
                             </div>
+                            {
+                                loginState === LOGIN_STATE.LOGGED_OUT &&
+                                <>
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <h5>Discover & Discussion Anime</h5>
+                                        </div>
+                                    </div>
+                                </>
+                            }
+                            {
+                                loginState === LOGIN_STATE.LOGGED_IN &&
+                                <>
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <h5>Welcome Back!</h5>
+                                            <p>{currentUser.username} groups:</p>
+                                        </div>
+                                    </div>
+                                </>
+                            }
                             <GroupDiscover groupList={groupList}/>
                             <FilterList
                                 filterList={filterList}/>
