@@ -24,7 +24,16 @@
     overflow: scroll;
 }
 
-@media screen and (max-width: 1400px){
+@media screen and (min-width: 1400px){
+    .afo-card-style{
+        width: 20rem;
+    }
+    .afo-card-img{
+        width: 20rem;
+    }
+}
+
+@media screen and (max-width: 995px){
     .afo-card-style{
         width: 20rem;
     }

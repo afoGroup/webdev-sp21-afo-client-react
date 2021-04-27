@@ -52,7 +52,7 @@ const AfoHome = (props) => {
                                 <>
                                     <div className="row">
                                         <div className="col-12 text-center">
-                                            <h6>Discover & Discussion Anime</h6>
+                                            <h6>Discover AFO Anime Discussion Board</h6>
                                         </div>
                                     </div>
                                 </>
