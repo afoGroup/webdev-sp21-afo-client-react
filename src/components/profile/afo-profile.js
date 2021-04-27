@@ -70,7 +70,9 @@ const Profile = () => {
                                         </div>
                                     </div>
                                     <h6>{currentUser.username} Groups:</h6>
-                                    <GroupDiscover groupList={currentUser.clubs}/>
+                                    {
+                                        currentUser.clubs && <GroupDiscover groupList={currentUser.clubs}/>
+                                    }
 
                                     {
                                         currentUser.userType === "otaku" &&
