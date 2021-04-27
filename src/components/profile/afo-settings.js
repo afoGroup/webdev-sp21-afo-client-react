@@ -232,6 +232,7 @@ const Settings = () => {
                                             <strong>Bio: </strong>
                                         </label>
                                         <textarea rows="4" className="form-control" value={bio}
+                                                  placeholder="Write your bio here:"
                                                   onChange={(e) => {
                                                       setUpdateSuccess(false)
                                                       setBio(e.target.value)
