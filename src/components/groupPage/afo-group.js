@@ -64,15 +64,15 @@ const Group = () => {
     }, [currentGroup]);
 
     const joinGroup = () => {
-        console.log('goupId: ' + groupId);
+        console.log('groupId: ' + groupId);
         let newClubs = currentUser.clubs.push(groupId);
-        console.log('newClubs: ' + newClubs);
+        console.log('newClubs: ' + newClubs.toString());
         const updateUser = {
             ...currentUser,
-            clubs: newClubs
+            clubs: JSON.stringify(newClubs)
         };
-        console.log('updated Club: ' + updateUser);
-        console.log("updateUser in JoinGroup:" + updateUser.clubs);
+        console.log('updated Club: ' + JSON.stringify(updateUser));
+        console.log("updateUser in JoinGroup:" + updateUser.clubs.toString());
         userService.updateUser(currentUser._id, updateUser)
             .then(() => {
                 setCurrentUser(updateUser);
@@ -84,7 +84,7 @@ const Group = () => {
     const leaveGroup = () => {
         const userLeaving = {
             ...currentUser,
-            clubs: currentUser.clubs.filter(clubId => clubId === groupId)
+            clubs: JSON.stringify(currentUser.clubs.filter(clubId => clubId === groupId))
         };
         userService.updateUser(currentUser._id, userLeaving)
             .then(() => {
@@ -105,13 +105,13 @@ const Group = () => {
         postService.createPost(groupId, newPost)
             .then((post) => {
                 console.log("newPost's ID", post._id);
-                console.log("currentGroupPosts:" + currentGroup.posts);
+                console.log("currentGroupPosts:" + currentGroup.posts.toString());
                 const postInGroup = {
                     ...currentGroup,
-                    posts: currentGroup.posts.push(post._id)
+                    posts: JSON.stringify(currentGroup.posts.push(post._id))
                 };
                 console.log("(afo-group-creating new post-updatingGroup: " + JSON.stringify(postInGroup));
-                console.log("continued only posts" + postInGroup.posts)
+                console.log("continued only posts" + postInGroup.posts.toString())
                 groupService.updateGroup(groupId, postInGroup)
                     .then(() => {
                         setCurrentGroup(postInGroup)
