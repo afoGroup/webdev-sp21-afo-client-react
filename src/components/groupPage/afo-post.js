@@ -10,6 +10,7 @@ const Post = ({group, ownerStatus, postId, setCurrentGroup}) => {
 
     const[currentPost, setCurrentPost] = useState({});
     const[postOwner, setPostOwner] = useState({});
+    const[deletedOwner, setDeletedOwner] = useState(true);
 
     const history = useHistory();
 
@@ -25,7 +26,11 @@ const Post = ({group, ownerStatus, postId, setCurrentGroup}) => {
             console.log('GroupOwner: ' + currentPost.ownerId);
             userService.findUserById(currentPost.ownerId)
                 .then((actualOwner) => {
-                    setPostOwner(actualOwner)
+                    setPostOwner(actualOwner);
+                    setDeletedOwner(false);
+                })
+                .catch(error => {
+                    console.log(error)
                 })
         }
     }, [currentPost]);
@@ -58,11 +63,17 @@ const Post = ({group, ownerStatus, postId, setCurrentGroup}) => {
                     <div className="row">
                         <div className="col-6">
                             {
-                                postOwner && postOwner._id &&
+                                !deletedOwner &&
                                 <p>
                                     <a className="afo-purple" href={`/profile/${postOwner._id}`}>
                                         {postOwner.username}
                                     </a>
+                                </p>
+                            }
+                            {
+                                deletedOwner &&
+                                <p className="afo-purple">
+                                    deleted user
                                 </p>
                             }
                         </div>
