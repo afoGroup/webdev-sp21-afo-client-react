@@ -72,9 +72,7 @@ const Group = () => {
             clubs: newClubs
         };
         console.log('updated Club: ' + updateUser);
-
         console.log("updateUser in JoinGroup:" + updateUser.clubs);
-        console.log("currentGroupPosts:" + currentGroup.posts);
         userService.updateUser(currentUser._id, updateUser)
             .then(() => {
                 setCurrentUser(updateUser);
@@ -113,6 +111,7 @@ const Group = () => {
                     posts: currentGroup.posts.push(post._id)
                 };
                 console.log("(afo-group-creating new post-updatingGroup: " + JSON.stringify(postInGroup));
+                console.log("continued only posts" + postInGroup.posts)
                 groupService.updateGroup(groupId, postInGroup)
                     .then(() => {
                         setCurrentGroup(postInGroup)
