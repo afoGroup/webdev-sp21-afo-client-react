@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import AfoNavbar from "../navbar/afo-navbar";
 import settingsPage from "./afo-settings";
-import {Link, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import userService from "../../services/user-service";
 import groupService from "../../services/group-service";
 import animeService from "../../services/anime-service";
@@ -10,6 +10,8 @@ import '../../styles/afo-profile.css';
 const GroupManager = () => {
 
     const {userId} = useParams();
+
+    const history = useHistory();
 
     const [currentUser, setCurrentUser] = useState({});
     const [memberGroups, setMemberGroups] = useState([]);
@@ -22,6 +24,9 @@ const GroupManager = () => {
     const [animeInput, setAnimeInput] = useState("");
     const [animeSearchResult, setAnimeSearchResult] = useState([]);
     const [animeSelected, setAnimeSelected] = useState("");
+    const [aniSearchStatus, setAniSearchStatus] = useState(false);
+
+    const [createdGroup, setCreatedGroup] = useState({});
 
     const [groupFormStatus, setGroupFormStatus] = useState(false);
 
@@ -33,6 +38,7 @@ const GroupManager = () => {
     }, [userId]);
 
     useEffect(() => {
+        console.log('curentUser: ' + currentUser.username);
         if(currentUser.clubs){
             console.log('currentUser clubs: ' + currentUser.clubs);
             groupService.findGroupsById(currentUser.clubs)
@@ -70,7 +76,9 @@ const GroupManager = () => {
                     .then(returnedUser => {
                         console.log("created new group for: " + returnedUser.username);
                     }).catch(error => console.log(error))
-            })
+            }).then(() => {
+                //
+            }).catch(error => console.log(error))
     };
 
     const searchAnime = () => {
@@ -150,6 +158,49 @@ const GroupManager = () => {
                                                    className="form-control mb-2"
                                                    value={animeInput}
                                                    onChange={(e) => setAnimeInput(e.target.value)}/>
+                                            <button
+                                                type="button"
+                                                onClick={() => searchAnime()}
+                                                className="btn afo-purple">
+                                                Search Anime
+                                            </button>
+
+                                            {
+                                                animeInput !== "" && animeSearchResult && aniSearchStatus &&
+                                                <>
+                                                    <p>{animeSearchResult.length} Results for {animeInput}</p>
+                                                    <div className="mini-anime-search">
+
+                                                        <ul >
+                                                            {
+                                                                animeSearchResult.map((result, index) =>
+                                                                    <li key={index}>
+                                                                        <p onClick={() => {
+                                                                            setNewAnimeId(result.mal_id);
+                                                                            setAnimeSelected(result.title);
+                                                                        }}>
+                                                                            {result.title}
+                                                                        </p>
+                                                                    </li>
+                                                                )
+                                                            }
+                                                        </ul>
+                                                        {
+                                                            newAnimeId !== "" &&
+                                                            <>
+                                                                <p>Selected Group Anime: {animeSelected}</p>
+                                                            </>
+                                                        }
+                                                    </div>
+                                                </>
+                                            }
+
+
+
+
+
+
+
 
 
                                             <button

@@ -28,7 +28,7 @@ const Group = () => {
         groupService.findGroupById(groupId)
             .then((actualGroup) => {
                 setCurrentGroup(actualGroup)
-            });
+            }).catch(error => console.log(error))
 
         userService.getCurrentUser()
             .then((actualUser) => {
