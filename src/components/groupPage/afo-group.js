@@ -86,8 +86,9 @@ const Group = () => {
     const leaveGroup = () => {
         const userLeaving = {
             ...currentUser,
-            clubs: JSON.stringify(currentUser.clubs.filter(clubId => clubId === groupId))
+            clubs: currentUser.clubs.filter(clubId => clubId === groupId)
         };
+        console.log('LEAVE Club: ' + JSON.stringify(userLeaving));
         userService.updateUser(currentUser._id, userLeaving)
             .then(() => {
                 setCurrentUser(userLeaving);
@@ -110,7 +111,7 @@ const Group = () => {
                 console.log("currentGroupPosts:" + currentGroup.posts.toString());
                 const postInGroup = {
                     ...currentGroup,
-                    posts: JSON.stringify(currentGroup.posts.push(post._id))
+                    posts: [...currentGroup.posts, post._id]
                 };
                 console.log("(afo-group-creating new post-updatingGroup: " + JSON.stringify(postInGroup));
                 console.log("continued only posts" + postInGroup.posts.toString())
