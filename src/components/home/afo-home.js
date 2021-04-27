@@ -13,6 +13,7 @@ const AfoHome = (props) => {
         animeGenres.HORROR, animeGenres.THRILLER, animeGenres.ROMANCE, animeGenres.SCI_FI];
 
     const [groupList, setGroupList] = useState([]);
+    const [groupIdList, setGroupIdList] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
     const [loginState, setLoginState] = useState(LOGIN_STATE.LOGGED_OUT);
 
@@ -29,12 +30,18 @@ const AfoHome = (props) => {
                             console.log("(home) user clubs: " + actualUser.username + " & " + actualUser.clubs);
                             setCurrentUser(actualUser);
                             setLoginState(LOGIN_STATE.LOGGED_IN);
-                            setGroupList(actualUser.clubs);
+                            setGroupIdList(actualUser.clubs);
                         }
                     }).catch(error => {
                         console.log(error)
                     }))
     }, []);
+
+    useEffect(() => {
+        groupService.findGroupsById(groupIdList)
+            .then((actualGroupList) => setGroupList(actualGroupList))
+            .catch(error => console.log(error))
+    }, [groupIdList]);
 
     return (
         <div className="container-fluid">

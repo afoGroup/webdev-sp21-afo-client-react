@@ -7,6 +7,7 @@ import GroupDiscover from "../groupDiscover/group-discover";
 import SettingsPage from "./afo-settings";
 import '../../styles/afo-profile.css';
 import {useDispatch, useSelector} from "react-redux";
+import groupService from "../../services/group-service";
 
 const Profile = () => {
 
@@ -14,6 +15,8 @@ const Profile = () => {
 
     const [currentUser, setCurrentUser] = useState({});
     const [currentUserStatus, setCurrentUserStatus] = useState(false);
+    const [groupList, setGroupList] = useState([]);
+    const [groupIdList, setGroupIdList] = useState([]);
 
     useEffect(() => {
         userService.getCurrentUser()
@@ -21,6 +24,7 @@ const Profile = () => {
                 if(userId === undefined || actualUser._id !== userId){
                     console.log('1: ' + actualUser.clubs);
                     setCurrentUser(actualUser);
+                    setGroupIdList(actualUser.clubs);
                     setCurrentUserStatus(true);
                 }
             })
@@ -32,12 +36,18 @@ const Profile = () => {
                 .then((actualUser) => {
                     if(actualUser._id === userId){
                         console.log('2: ' + actualUser.clubs);
-                        setCurrentUser(actualUser)
+                        setCurrentUser(actualUser);
+                        setGroupIdList(actualUser.clubs);
                     }
                 })
         }
     }, [userId]);
 
+    useEffect(() => {
+        groupService.findGroupsById(groupIdList)
+            .then((actualGroupList) => setGroupList(actualGroupList))
+            .catch(error => console.log(error))
+    }, [groupIdList]);
 
     return(
         <div className="container-fluid">
@@ -70,7 +80,7 @@ const Profile = () => {
                                     </div>
                                     <h6>{currentUser.username} Groups:</h6>
                                     {
-                                        currentUser.clubs && <GroupDiscover groupList={currentUser.clubs}/>
+                                        currentUser.clubs && <GroupDiscover groupList={groupList}/>
                                     }
 
                                     {
