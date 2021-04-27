@@ -29,21 +29,20 @@ const AfoHome = (props) => {
                             setLoginState(LOGIN_STATE.LOGGED_OUT)
                         } else {
                             console.log("(home) user clubs: " + actualUser.username + " & " + actualUser.clubs);
-                            setCurrentUser(actualUser);
-                            setLoginState(LOGIN_STATE.LOGGED_IN);
-                            setGroupIdList(actualUser.clubs);
+
+                            groupService.findGroupsById(actualUser.clubs)
+                                .then((actualGroupList) => {
+                                    setCurrentUser(actualUser);
+                                    setLoginState(LOGIN_STATE.LOGGED_IN);
+                                    setGroupIdList(actualUser.clubs);
+                                    setGroupList(actualGroupList);
+                                })
                         }
                     }).catch(error => {
                         console.log(error)
                     }))
     }, []);
-
-    useEffect(() => {
-        groupService.findGroupsById(groupIdList)
-            .then((actualGroupList) => setGroupList(actualGroupList))
-            .catch(error => console.log(error))
-    }, [groupIdList]);
-
+    
     return (
         <div className="container-fluid">
             <div className="row">

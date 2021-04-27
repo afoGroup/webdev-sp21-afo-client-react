@@ -142,41 +142,7 @@ const GroupManager = () => {
                                                    className="form-control mb-2"
                                                    value={animeSearched}
                                                    onChange={(e) => setAnimeSearched(e.target.value)}/>
-                                            <button
-                                                type="button"
-                                                onClick={() => searchAnime()}
-                                                className="btn afo-purple">
-                                                Search Anime
-                                            </button>
 
-                                            {
-                                                animeSearched !== "" &&
-                                                <>
-                                                    <div className="mini-anime-search">
-                                                        <p>{animeSearchResult.length} Results for {animeSearched}</p>
-                                                        <ul>
-                                                            {
-                                                                animeSearchResult.map((result, index) =>
-                                                                    <li key={index}>
-                                                                        <p onClick={() => {
-                                                                            setNewAnimeId(result.mal_id);
-                                                                            setAnimeSelected(result.title);
-                                                                        }}>
-                                                                            {result.title}
-                                                                        </p>
-                                                                    </li>
-                                                                )
-                                                            }
-                                                        </ul>
-                                                        {
-                                                            newAnimeId !== "" &&
-                                                            <>
-                                                                <p>Selected Group Anime: {animeSelected}</p>
-                                                            </>
-                                                        }
-                                                    </div>
-                                                </>
-                                            }
 
                                             <button
                                                 type="button"
