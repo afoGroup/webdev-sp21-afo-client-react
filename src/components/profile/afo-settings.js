@@ -33,7 +33,7 @@ const Settings = () => {
                     setPassword(actualUser.password);
                     setType(actualUser.userType);
                     setBio(actualUser.bio);
-                    setImageUrl(actualUser.imageURL)
+                    setImageUrl(actualUser.pictureURL)
                     setTwitter(actualUser.twitter);
                     setInstagram(actualUser.instagram);
                     console.log("USE EFFECT: " + JSON.stringify(currentUser))
@@ -256,6 +256,7 @@ const Settings = () => {
                                             </label>
                                             <div className="profile-img-info">
                                                 <input
+                                                    type="text"
                                                     value={imgUrl}
                                                     onChange={(e) => {
                                                         setUpdateSuccess(false)
