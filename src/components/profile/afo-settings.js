@@ -232,7 +232,7 @@ const Settings = () => {
                                             <strong>Bio: </strong>
                                         </label>
                                         <textarea rows="4" className="form-control" value={bio}
-                                                  placeholder="Write your bio here:"
+                                                  placeholder="Write your bio here..."
                                                   onChange={(e) => {
                                                       setUpdateSuccess(false)
                                                       setBio(e.target.value)
@@ -262,6 +262,7 @@ const Settings = () => {
                                                 <input
                                                     type="text"
                                                     value={imgUrl}
+                                                    placeholder="https://some-public-picture.com"
                                                     onChange={(e) => {
                                                         setUpdateSuccess(false)
                                                         setImageUrl(e.target.value)
