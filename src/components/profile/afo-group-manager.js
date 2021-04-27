@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import AfoNavbar from "../navbar/afo-navbar";
 import settingsPage from "./afo-settings";
-import '../../styles/afo-profile.css';
 import {Link, useParams} from "react-router-dom";
 import userService from "../../services/user-service";
 import groupService from "../../services/group-service";
+import animeService from "../../services/anime-service";
+import '../../styles/afo-profile.css';
 
 const GroupManager = () => {
 
@@ -15,6 +16,12 @@ const GroupManager = () => {
     const [ownerGroups, setOwnerGroups] = useState([]);
 
     const [newTitle, setNewTitle] = useState("");
+    const [newDescription, setNewDescription] = useState("");
+    const [newPictureURL, setNewPictureURL] = useState("");
+    const [newAnimeId, setNewAnimeId] = useState("");
+    const [animeSearched, setAnimeSearched] = useState("");
+    const [animeSearchResult, setAnimeSearchResult] = useState([]);
+    const [animeSelected, setAnimeSelected] = useState("");
 
     const [groupFormStatus, setGroupFormStatus] = useState(false);
 
@@ -41,7 +48,27 @@ const GroupManager = () => {
     }, [currentUser]);
 
     const addGroup = () => {
-        //
+        let newGroup = {
+            title: newTitle,
+            description: newDescription,
+            pictureURL: newPictureURL,
+            createdDate: Date.now(),
+            animeId: newAnimeId,
+            owner: currentUser._id
+        };
+        groupService.createGroup(newGroup)
+            .then(group => {
+                userService.updateUser(currentUser._id, {...currentUser, ownerClubs: currentUser.ownerClubs.push(group._id)})
+                    .then(updatedUser => {
+                        console.log("created new group for: " + updatedUser)
+                    }).catch(error => console.log(error))
+            })
+    };
+
+    const searchAnime = () => {
+        animeService.findAnimeByTitle(animeSelected)
+            .then(result => setAnimeSearchResult(result))
+            .catch(error => console.log(error))
     };
 
     return(
@@ -69,7 +96,7 @@ const GroupManager = () => {
                                                         type="button"
                                                         onClick={() => setGroupFormStatus(!groupFormStatus)}
                                                         className="btn btn-outline-secondary float-right">
-                                                        + Add Group
+                                                        Create New Group
                                                     </button>
                                                 </div>
                                             </div>
@@ -79,7 +106,7 @@ const GroupManager = () => {
                             </div>
 
                             <div className="row">
-                                <div className="col-12">
+                                <div className="col-12 mb-4">
                                     {
                                         groupFormStatus &&
                                         <>
@@ -91,6 +118,71 @@ const GroupManager = () => {
                                                    className="form-control mb-2"
                                                    value={newTitle}
                                                    onChange={(e) => setNewTitle(e.target.value)}/>
+                                            <label>
+                                                <strong>New Group Description: </strong>
+                                            </label>
+                                            <textarea name="new-group"
+                                                      value={newDescription}
+                                                      onChange={(e) => setNewDescription(e.target.value)}
+                                                      className="form-control"></textarea>
+                                            <label>
+                                                <strong>New Group Image URL: </strong>
+                                            </label>
+                                            <input type="text"
+                                                   name="new-group"
+                                                   className="form-control mb-2"
+                                                   value={newPictureURL}
+                                                   onChange={(e) => setNewPictureURL(e.target.value)}/>
+                                            <label>
+                                                <strong>Search and Select Group Anime: </strong>
+                                            </label>
+                                            <input type="text"
+                                                   name="new-group"
+                                                   className="form-control mb-2"
+                                                   value={animeSearched}
+                                                   onChange={(e) => setAnimeSearched(e.target.value)}/>
+                                            <button
+                                                type="button"
+                                                onClick={() => searchAnime()}
+                                                className="btn afo-purple">
+                                                Search Anime
+                                            </button>
+                                            <div className="mini-anime-search">
+                                                {
+                                                    animeSearched !== "" &&
+                                                    <>
+                                                        <p>{animeSearchResult.length} Results for {animeSearched}</p>
+                                                        <ul>
+                                                            {
+                                                                animeSearchResult.map((result, index) =>
+                                                                    <li key={index}>
+                                                                        <p onClick={() => {
+                                                                            setNewAnimeId(result.mal_id);
+                                                                            setAnimeSelected(result.title);
+                                                                        }}>
+                                                                            {result.title}
+                                                                        </p>
+                                                                    </li>
+                                                                )
+                                                            }
+                                                        </ul>
+                                                        {
+                                                            newAnimeId !== "" &&
+                                                            <>
+                                                                <p>Selected Group Anime: {animeSelected}</p>
+                                                            </>
+                                                        }
+                                                    </>
+                                                }
+                                            </div>
+
+                                            <button
+                                                type="button"
+                                                onClick={() => addGroup()}
+                                                className="btn btn-secondary">
+                                                + Add Group
+                                            </button>
+
                                         </>
                                     }
                                 </div>

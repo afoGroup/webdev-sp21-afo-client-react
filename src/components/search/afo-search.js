@@ -4,7 +4,10 @@ import animeActions from "../../actions/anime-actions";
 import AfoNavbar from "../navbar/afo-navbar";
 import SearchForm from "./search-form";
 import SearchResults from "./search-results";
+import userService from "../../services/user-service";
+import groupService from "../../services/group-service";
 import "../../styles/afo-search.css"
+import {Link} from "react-router-dom";
 
 const AfoSearch = (props) => {
     const [searchType, setSearchType] = useState('init');
@@ -16,6 +19,7 @@ const AfoSearch = (props) => {
     const [pcSecond, setPcSecond] = useState(0);
     const [pcThird, setPcThird] = useState(0);
     const [titleAlert, setTitleAlert] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
         makePageLists();
@@ -40,6 +44,16 @@ const AfoSearch = (props) => {
             }
         } else if(searchType === 'url'){
             props.findAnimeByURL(searchURL);
+        } else if(searchType === 'group'){
+            groupService.findGroupsByTitle(searchTitle)
+                .then(result => {
+                    setSearchResults(result)
+                })
+        } else if(searchType === 'user'){
+            userService.findUserByUsername(searchTitle)
+                .then(result => {
+                    setSearchResults(result)
+                })
         }
     };
 
@@ -184,7 +198,7 @@ const AfoSearch = (props) => {
                                 titleAlert={titleAlert}
                             />
                             {
-                                searchType !== 'init' &&
+                                (searchType === 'title' || searchType === 'url') &&
                                 props.resultsList &&
                                 props.resultsList.results &&
                                 resultPages.length === 0 &&
@@ -205,7 +219,71 @@ const AfoSearch = (props) => {
                                 </>
                             }
                             {
-                                searchType !== 'init' &&
+                                (searchType === 'group' || searchType === 'user') &&
+                                searchResults &&
+                                searchResults.length === 0 &&
+                                <>
+                                    <div className="row my-4">
+                                        <div className="col-12 text-center">
+                                            <h4 className="afo-purple afo-header">
+                                                0 Results for {searchTitle}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </>
+                            }
+
+                            {
+                                searchType === 'group' &&
+                                searchResults &&
+                                searchResults.length >= 1 &&
+                                <>
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <h4 className="afo-purple afo-header">
+                                                {searchResults.length} Results for {searchTitle}
+                                            </h4>
+                                            {
+                                                searchResults.map((result, index) =>
+                                                    <li key={index}>
+                                                        <Link to={`/api/group/${result._id}`}>
+                                                            {result.title}
+                                                        </Link>
+                                                    </li>
+                                                )
+                                            }
+                                        </div>
+                                    </div>
+                                </>
+                            }
+
+                            {
+                                searchType === 'user' &&
+                                searchResults &&
+                                searchResults.length >= 1 &&
+                                <>
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <h4 className="afo-purple afo-header">
+                                                {searchResults.length} Results for {searchTitle}
+                                            </h4>
+                                            {
+                                                searchResults.map((result, index) =>
+                                                    <li key={index}>
+                                                        <Link to={`/api/user/${result._id}`}>
+                                                            {result.username}
+                                                        </Link>
+                                                    </li>
+                                                )
+                                            }
+                                        </div>
+                                    </div>
+                                </>
+                            }
+
+
+                            {
+                                (searchType === 'title' || searchType === 'url')&&
                                 props.resultsList &&
                                 props.resultsList.results &&
                                 resultPages.length >= 1 &&
