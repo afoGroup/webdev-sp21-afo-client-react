@@ -86,7 +86,7 @@ const Group = () => {
     const leaveGroup = () => {
         const userLeaving = {
             ...currentUser,
-            clubs: currentUser.clubs.filter(clubId => clubId === groupId)
+            clubs: currentUser.clubs.filter(clubId => clubId !== groupId)
         };
         console.log('LEAVE Club: ' + JSON.stringify(userLeaving));
         userService.updateUser(currentUser._id, userLeaving)
