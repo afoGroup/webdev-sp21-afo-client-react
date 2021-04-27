@@ -23,3 +23,12 @@
     height: 150px;
     overflow: scroll;
 }
+
+@media screen and (max-width: 1400px){
+    .afo-card-style{
+        width: 20rem;
+    }
+    .afo-card-img{
+        width: 20rem;
+    }
+}
