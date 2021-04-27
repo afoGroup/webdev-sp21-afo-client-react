@@ -26,9 +26,10 @@ const AfoHome = (props) => {
                         if(actualUser === undefined || actualUser.username === "wbdv-afo-logged-out"){
                             setLoginState(LOGIN_STATE.LOGGED_OUT)
                         } else {
-                            console.log("(home) user: " + actualUser.username + " & " + actualUser._id);
+                            console.log("(home) user clubs: " + actualUser.username + " & " + actualUser.clubs);
                             setCurrentUser(actualUser);
                             setLoginState(LOGIN_STATE.LOGGED_IN);
+                            setGroupList(actualUser.clubs);
                         }
                     }).catch(error => {
                         console.log(error)
