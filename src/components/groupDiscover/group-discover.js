@@ -1,62 +1,47 @@
 import React from "react";
+import Carousel from "react-multi-carousel";
+import 'react-multi-carousel/lib/styles.css';
 import '../../styles/afo-group-discover.css';
+import DiscoverCard from "./discover-card";
 
 const GroupDiscover = ({groupList}) => {
+
+    let responsive = {
+        largeDesktop: {
+            breakpoint: { max: 4000, min: 3000 },
+            items: 5
+        },
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 2
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+        }
+    };
 
     return(
         <div className="row discover-row">
             <div className="col-12">
 
-                <div className="row">
-                    <div className="col-12">
+                <Carousel responsive={responsive}
+                          ssr
+                          infinite={false}
+                          beforeChange={() => this.setState({ isMoving: true })}
+                          afterChange={() => this.setState({ isMoving: false })}
+                          containerClass="first-carousel-container container">
+                    {
+                        groupList && groupList.map((group, index) =>
+                            <DiscoverCard group={group}/>
+                        )
+                    }
+                </Carousel>;
 
-                        {
-                            groupList && groupList.map((group, index) =>
-                                <p key={index}>{group.title}</p>
-                            )
-                        }
-
-                    </div>
-                </div>
-                <br/>
-
-                <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
-
-                    <div className="carousel-inner">
-
-                        <div className="carousel-item active">
-                            <div className="afo-carousel-box">
-                                <p>slide 1</p>
-                            </div>
-                        </div>
-
-                        <div className="carousel-item">
-                            <div className="afo-carousel-box">
-                                <p>slide 2</p>
-                            </div>
-                        </div>
-
-                        <div className="carousel-item">
-                            <div className="afo-carousel-box">
-                                <p>slide 3</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <a className="carousel-control-prev" href="#carouselExampleControls" role="button"
-                       data-slide="prev">
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="sr-only">Previous</span>
-                    </a>
-
-                    <a className="carousel-control-next" href="#carouselExampleControls" role="button"
-                       data-slide="next">
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="sr-only">Next</span>
-                    </a>
-
-                </div>
 
             </div>
         </div>

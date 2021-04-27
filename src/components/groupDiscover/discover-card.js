@@ -1,15 +1,15 @@
 import React from "react";
+import '../../styles/afo-group-discover.css';
 
 const DiscoverCard = ({group}) => {
     return(
         <>
-            <div className="card" style="width: 18rem;">
-                <img className="card-img-top" src="..." alt="Card image cap"/>
+            <div className="card afo-card-style">
+                <img className="card-img-top" src={group.pictureURL} alt="Group Image"/>
                     <div className="card-body">
                         <h5 className="card-title">Card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk
-                            of the card's content.</p>
-                        <a href="#" className="btn btn-primary">Go somewhere</a>
+                        <p className="card-text">{group.description}</p>
+                        <a href={`/details/group/${group._id}`} className="btn btn-primary">View Group</a>
                     </div>
             </div>
         </>
