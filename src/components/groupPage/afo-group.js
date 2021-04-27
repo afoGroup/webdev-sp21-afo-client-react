@@ -63,8 +63,29 @@ const Group = () => {
     }, [currentGroup]);
 
     const joinGroup = () => {
-        // include join group logic - updateUser
+        const updateUser = {
+            ...currentUser,
+            clubs: currentUser.clubs.push(groupId)
+        }
+        userService.updateUser(currentUser._id, updateUser)
+            .then(() => {
+                setCurrentUser(updateUser)
+                console.log("SET LEAVE GROUP BUTTON - Owner CAN NEVER SEE LEAVE GROUP")
+                }
+            )
     };
+
+    const leaveGroup = () => {
+        const userLeaving = {
+            ...currentUser,
+            clubs: currentUser.clubs.filter(clubId => clubId === groupId)
+        }
+        userService.updateUser(currentUser._id, userLeaving)
+            .then(() => {
+                setCurrentUser(userLeaving)
+                console.log("SET LEAVE GROUP BUTTON - to FALSE")
+            })
+    }
 
     const submitPost = () => {
         //include add post logic - createPost
