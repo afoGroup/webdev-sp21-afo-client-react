@@ -16,6 +16,7 @@ const AfoHome = (props) => {
     const [groupIdList, setGroupIdList] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
     const [loginState, setLoginState] = useState(LOGIN_STATE.LOGGED_OUT);
+    const [noGroups, setNoGroups] = useState(true);
 
     useEffect(() => {
         console.log('loginState: ' + loginState);
@@ -35,7 +36,10 @@ const AfoHome = (props) => {
                                     setCurrentUser(actualUser);
                                     setLoginState(LOGIN_STATE.LOGGED_IN);
                                     setGroupIdList(actualUser.clubs);
-                                    setGroupList(actualGroupList);
+                                    if(actualGroupList.length > 0){
+                                        setNoGroups(false);
+                                        setGroupList(actualGroupList);
+                                    }
                                 })
                         }
                     }).catch(error => {
@@ -71,7 +75,19 @@ const AfoHome = (props) => {
                                     <div className="row">
                                         <div className="col-12 text-center">
                                             <h6>Welcome Back!</h6>
-                                            <p>{currentUser.username} groups:</p>
+                                            {
+                                                noGroups &&
+                                                <>
+                                                    <p>{currentUser.username} - join one of the groups below to start your own list</p>
+                                                </>
+                                            }
+                                            {
+                                                !noGroups &&
+                                                <>
+                                                    <p>{currentUser.username} groups joined:</p>
+                                                </>
+                                            }
+
                                         </div>
                                     </div>
                                 </>
