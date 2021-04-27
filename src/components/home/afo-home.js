@@ -18,6 +18,7 @@ const AfoHome = (props) => {
     const [loginState, setLoginState] = useState(LOGIN_STATE.LOGGED_OUT);
 
     useEffect(() => {
+        console.log('loginState: ' + loginState);
         groupService.findAllGroups()
             .then((groups) => setGroupList(groups))
             .then(() =>

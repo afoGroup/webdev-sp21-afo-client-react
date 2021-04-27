@@ -52,7 +52,7 @@ const Settings = () => {
             instagram: instagram,
             twitter: twitter,
             pictureURL: imgUrl
-        }
+        };
         userService.updateUser(userId, updatedUser)
             .then(() => {
                 setUpdateSuccess(true);

@@ -32,7 +32,8 @@ const Registration = ({registerMyUser}) => {
             email: email,
             instagram: instagram,
             twitter: twitter,
-            pictureURL: imageUrl
+            pictureURL: imageUrl,
+            bio: ""
         };
         userService.registerUser(newUser)
             .then((actualUser) => {
