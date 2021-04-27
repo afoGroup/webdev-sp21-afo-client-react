@@ -42,7 +42,7 @@ const AfoHome = (props) => {
                         console.log(error)
                     }))
     }, []);
-    
+
     return (
         <div className="container-fluid">
             <div className="row">

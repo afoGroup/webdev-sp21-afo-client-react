@@ -58,9 +58,13 @@ const GroupManager = () => {
         };
         groupService.createGroup(newGroup)
             .then(group => {
-                userService.updateUser(currentUser._id, {...currentUser, ownerClubs: currentUser.ownerClubs.push(group._id)})
-                    .then(updatedUser => {
-                        console.log("created new group for: " + updatedUser)
+                let updatedOwnerClubs = currentUser.ownerClubs.push(group._id);
+                console.log('new ownerClubs: ' + updatedOwnerClubs);
+                let updatedUser = {...currentUser, ownerClubs: updatedOwnerClubs};
+                console.log('new user info: ' + updatedUser.username, updatedUser.ownerClubs);
+                userService.updateUser(currentUser._id, updatedUser)
+                    .then(returnedUser => {
+                        console.log("created new group for: " + returnedUser.username);
                     }).catch(error => console.log(error))
             })
     };
