@@ -74,6 +74,7 @@ const GroupManager = () => {
     };
 
     const addGroup = () => {
+        setGroupFormStatus(false);
         let newGroup = {
             title: newTitle,
             description: newDescription,
@@ -93,7 +94,7 @@ const GroupManager = () => {
     };
 
     const searchAnime = () => {
-        animeService.findAnimeByTitle(animeSelected)
+        animeService.findAnimeByTitle(animeInput)
             .then(result => {
                 console.log('anime resuts: ' + result);
                 setAnimeSearchResult(result);
@@ -189,7 +190,8 @@ const GroupManager = () => {
                                                     <p>{animeSearchResult.length} Results for {animeInput}</p>
                                                     <ul className="mini-anime-search">
                                                         {
-                                                            animeSearchResult.map((result, index) =>
+                                                            animeSearchResult.results &&
+                                                            animeSearchResult.results.map((result, index) =>
                                                                 <li key={index}>
                                                                     <p onClick={() => {
                                                                         setNewAnimeId(result.mal_id);
@@ -214,7 +216,7 @@ const GroupManager = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => addGroup()}
-                                                className="btn btn-secondary">
+                                                className="btn btn-secondary float-right">
                                                 + Add Group
                                             </button>
 
@@ -247,8 +249,7 @@ const GroupManager = () => {
                                             <p>total: {ownerGroups.length}</p>
                                             <ul>
                                                 {
-                                                    ownerGroups.results &&
-                                                    ownerGroups.results.map((oGroup, index) =>
+                                                    ownerGroups.map((oGroup, index) =>
                                                         <li key={index*2}>
                                                             <Link to={`/details/group/${oGroup._id}`}>
                                                                 {oGroup.title}{` `}
