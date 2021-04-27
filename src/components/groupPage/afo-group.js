@@ -55,9 +55,9 @@ const Group = () => {
                     setGroupAnime(actualAnime)
                 })
         }
-        if(currentGroup.owner){
-            console.log('GroupOwner: ' + currentGroup.owner);
-            userService.findUserById(currentGroup.owner)
+        if(currentGroup.ownerId){
+            console.log('GroupOwner: ' + currentGroup.ownerId);
+            userService.findUserById(currentGroup.ownerId)
                 .then((actualOwner) => {
                     setGroupOwner(actualOwner)
                 })
