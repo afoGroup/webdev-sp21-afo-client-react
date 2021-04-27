@@ -69,7 +69,7 @@ const Profile = () => {
                                             }
                                         </div>
                                     </div>
-                                    <h5>{currentUser.username} Groups:</h5>
+                                    <h6>{currentUser.username} Groups:</h6>
                                     <GroupDiscover groupList={currentUser.clubs}/>
 
                                     {
