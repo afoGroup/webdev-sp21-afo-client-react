@@ -13,6 +13,7 @@ import Registration from "./components/registration";
 import Group from "./components/groupPage/afo-group";
 import Profile from "./components/profile/afo-profile";
 import Settings from "./components/profile/afo-settings";
+import GroupManager from "./components/profile/afo-group-manager";
 
 import "./styles/App.css";
 import "./styles/afo-colors.css"
@@ -67,6 +68,11 @@ function App() {
                 <Route path={["/settings/:userId", "/settings/:userId/"]}
                        exact={true}>
                     <Settings/>
+                </Route>
+
+                <Route path={["/group-manager/:userId", "/group-manager/:userId/"]}
+                       exact={true}>
+                    <GroupManager/>
                 </Route>
 
             </BrowserRouter>

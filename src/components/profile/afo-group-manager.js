@@ -1,15 +1,24 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import AfoNavbar from "../navbar/afo-navbar";
 import settingsPage from "./afo-settings";
 import '../../styles/afo-profile.css';
+import {useParams} from "react-router-dom";
+import userService from "../../services/user-service";
 
 const GroupManager = () => {
 
-    const groupList = [
-        {id: '123'},
-        {id: '456'},
-        {id: '789'}
-    ];
+    const {userId} = useParams();
+
+    const [currentUser, setCurrentUser] = useState({});
+    const [memberGroups, setMemberGroups] = useState([]);
+    const [ownerGroups, setOwnerGroups] = useState([]);
+
+    useEffect(() => {
+        userService.findUserById(userId)
+            .then((actualUser) => {
+                setCurrentUser(actualUser)
+            })
+    }, [userId]);
 
     return(
         <div className="container-fluid">
@@ -21,7 +30,26 @@ const GroupManager = () => {
 
                             <div className="row">
                                 <div className="col-12">
-                                    <h1 className="afo-purple afo-header">Profile Page</h1>
+                                    <h1 className="afo-purple afo-header">Group Manager: {currentUser.username}</h1>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-12">
+                                    {
+                                        currentUser && currentUser.userType && currentUser.userType === "otaku" &&
+                                        <>
+                                            <div className="row">
+                                                <div className="col-12 my-5 pl-4">
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-secondary">
+                                                        Manage Groups
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </>
+                                    }
                                 </div>
                             </div>
 

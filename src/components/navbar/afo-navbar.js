@@ -123,7 +123,8 @@ const AfoNavbar = () => {
                             <ul>
                                 <li><Link to={`/user/` + currentUser._id}>Profile</Link></li>
                                 <li><Link to={`/settings/` + currentUser._id}>Settings</Link></li>
-                                <li><span className="btn" onClick={() => logout()}>Log Out</span></li>
+                                <li><Link to={`/group-manager/` + currentUser._id}>Group Manager</Link></li>
+                                <li><span className="btn p-2" onClick={() => logout()}>Log Out</span></li>
                             </ul>
                         }
                     </nav>

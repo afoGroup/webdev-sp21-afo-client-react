@@ -48,10 +48,6 @@ const Settings = () => {
 
     };
 
-    const manageGroups = () => {
-        //
-    };
-
     return(
         <div className="container-fluid">
             <div className="row">
@@ -197,17 +193,6 @@ const Settings = () => {
                                             type="button"
                                             className="btn btn-secondary">
                                             Update Profile
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div className="row">
-                                    <div className="col-12 my-5 pl-4">
-                                        <button
-                                            onClick={() => manageGroups()}
-                                            type="button"
-                                            className="btn btn-secondary">
-                                            Manage Groups
                                         </button>
                                     </div>
                                 </div>
