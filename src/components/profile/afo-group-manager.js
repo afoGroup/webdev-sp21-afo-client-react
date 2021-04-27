@@ -14,6 +14,10 @@ const GroupManager = () => {
     const [memberGroups, setMemberGroups] = useState([]);
     const [ownerGroups, setOwnerGroups] = useState([]);
 
+    const [newTitle, setNewTitle] = useState("");
+
+    const [groupFormStatus, setGroupFormStatus] = useState(false);
+
     useEffect(() => {
         userService.findUserById(userId)
             .then((actualUser) => {
@@ -35,6 +39,10 @@ const GroupManager = () => {
                 .catch(error => console.log(error))
         }
     }, [currentUser]);
+
+    const addGroup = () => {
+        //
+    };
 
     return(
         <div className="container-fluid">
@@ -59,7 +67,8 @@ const GroupManager = () => {
                                                 <div className="col-12 my-5 pl-4">
                                                     <button
                                                         type="button"
-                                                        className="btn btn-secondary">
+                                                        onClick={() => setGroupFormStatus(!groupFormStatus)}
+                                                        className="btn btn-outline-secondary float-right">
                                                         + Add Group
                                                     </button>
                                                 </div>
@@ -70,7 +79,25 @@ const GroupManager = () => {
                             </div>
 
                             <div className="row">
-                                <div className="col-6">
+                                <div className="col-12">
+                                    {
+                                        groupFormStatus &&
+                                        <>
+                                            <label>
+                                                <strong>New Group Name: </strong>
+                                            </label>
+                                            <input type="text"
+                                                   name="new-group"
+                                                   className="form-control mb-2"
+                                                   value={newTitle}
+                                                   onChange={(e) => setNewTitle(e.target.value)}/>
+                                        </>
+                                    }
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-6 pl-3">
                                     <p className="afo-dark-purple"><strong>Member Groups</strong></p>
                                     <p>total: {memberGroups.length}</p>
                                     <ul>
