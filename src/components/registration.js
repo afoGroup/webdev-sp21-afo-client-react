@@ -39,7 +39,7 @@ const Registration = ({registerMyUser}) => {
                 if (actualUser.message === "username already exists") {
                     setAlertDupeUsername(true);
                 } else {
-                    history.push(`/user/${actualUser._id}`)
+                    history.push(`/profile`)
                 }
             })
     };

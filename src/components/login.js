@@ -19,7 +19,7 @@ const Login = (props) => {
                 if(actualUser === 0) {
                     alert("login failed, try again")
                 } else {
-                    history.push(`/user/${actualUser._id}`)
+                    history.push(`/profile`)
                 }
             })
             .catch(() => {

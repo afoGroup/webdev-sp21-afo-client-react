@@ -9,16 +9,14 @@ import '../../styles/afo-profile.css';
 import {useDispatch, useSelector} from "react-redux";
 
 const Profile = () => {
-    const {userId} = useParams();
-
     const [currentUser, setCurrentUser] = useState({});
 
     useEffect(() => {
-        userService.findUserById(userId)
+        userService.getCurrentUser()
             .then((actualUser) => {
                 setCurrentUser(actualUser)
             })
-    }, [userId]);
+    }, []);
 
     return(
         <div className="container-fluid">

@@ -36,7 +36,7 @@ const Post = ({group, ownerStatus, postId}) => {
             .then((returnedGroup) => {
                 postService.deletePost(postId)
                     .then(() => {
-                        history.push(`/group/${returnedGroup._id}`)
+                        history.push(`/details/group/${returnedGroup._id}`)
                     })
             })
 
@@ -60,7 +60,7 @@ const Post = ({group, ownerStatus, postId}) => {
                             {
                                 postOwner && postOwner._id &&
                                 <p>
-                                    <a className="afo-purple" href={`/user/${postOwner._id}`}>
+                                    <a className="afo-purple" href={`/profile/${postOwner._id}`}>
                                         {postOwner.username}
                                     </a>
                                 </p>

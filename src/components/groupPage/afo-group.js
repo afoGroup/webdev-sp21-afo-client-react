@@ -63,11 +63,11 @@ const Group = () => {
     }, [currentGroup]);
 
     const joinGroup = () => {
-        // include join group logic
+        // include join group logic - updateUser
     };
 
     const submitPost = () => {
-        //include add post logic
+        //include add post logic - createPost
     };
 
     return(
@@ -123,7 +123,7 @@ const Group = () => {
                                                         currentGroup.animeId && groupAnime.title &&
                                                         <>
                                                             <p><strong>Group Anime: </strong>
-                                                                <a className="afo-purple" href={`/anime/${currentGroup.animeId}`}>
+                                                                <a className="afo-purple" href={`/details/anime/${currentGroup.animeId}`}>
                                                                     {groupAnime.title}
                                                                 </a>
                                                             </p>

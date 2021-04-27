@@ -198,7 +198,7 @@ const GroupManager = () => {
                                         {
                                             memberGroups.map((mGroup, index) =>
                                                 <li key={index}>
-                                                    <Link to={`/group/${mGroup._id}`}>
+                                                    <Link to={`/details/group/${mGroup._id}`}>
                                                         {mGroup.title}
                                                     </Link>
                                                 </li>
@@ -216,7 +216,7 @@ const GroupManager = () => {
                                                 {
                                                     ownerGroups.map((oGroup, index) =>
                                                         <li key={index*2}>
-                                                            <Link to={`/group/${oGroup._id}`}>
+                                                            <Link to={`/details/group/${oGroup._id}`}>
                                                                 {oGroup.title}
                                                             </Link>
                                                         </li>
