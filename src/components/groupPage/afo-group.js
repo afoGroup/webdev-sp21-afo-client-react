@@ -64,21 +64,14 @@ const Group = () => {
     }, [currentGroup]);
 
     const joinGroup = () => {
-        console.log('groupId: ' + groupId);
-        console.log('clubsList:' + currentUser.clubs)
-        console.log('clubsList JSON.stringify:' + JSON.stringify(currentUser.clubs))
         let newClubs = [...currentUser.clubs, groupId];
-        console.log('newClubs: ' + newClubs.toString());
         const updateUser = {
             ...currentUser,
             clubs: newClubs
         };
-        console.log('updated Club: ' + JSON.stringify(updateUser));
-        console.log("updateUser in JoinGroup:" + updateUser.clubs.toString());
         userService.updateUser(currentUser._id, updateUser)
             .then(() => {
                 setCurrentUser(updateUser);
-                console.log("SET LEAVE GROUP BUTTON - Owner CAN NEVER SEE LEAVE GROUP")
                 }
             )
     };
@@ -88,11 +81,9 @@ const Group = () => {
             ...currentUser,
             clubs: currentUser.clubs.filter(clubId => clubId !== groupId)
         };
-        console.log('LEAVE Club: ' + JSON.stringify(userLeaving));
         userService.updateUser(currentUser._id, userLeaving)
             .then(() => {
                 setCurrentUser(userLeaving);
-                console.log("SET LEAVE GROUP BUTTON - to FALSE")
             })
     };
 
@@ -102,19 +93,12 @@ const Group = () => {
             owner: currentUser._id,
             createdDate: Date.now()
         };
-
-        console.log("(afo-group-creating new post: " + JSON.stringify(newPost));
-        console.log("(afo-group-creating new post, groupID: " + groupId);
         postService.createPost(groupId, newPost)
             .then((post) => {
-                console.log("newPost's ID", post._id);
-                console.log("currentGroupPosts:" + currentGroup.posts.toString());
                 const postInGroup = {
                     ...currentGroup,
                     posts: [...currentGroup.posts, post._id]
                 };
-                console.log("(afo-group-creating new post-updatingGroup: " + JSON.stringify(postInGroup));
-                console.log("continued only posts" + postInGroup.posts.toString())
                 groupService.updateGroup(groupId, postInGroup)
                     .then(() => {
                         setCurrentGroup(postInGroup);
