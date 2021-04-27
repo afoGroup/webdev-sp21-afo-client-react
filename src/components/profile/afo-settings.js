@@ -35,7 +35,7 @@ const Settings = () => {
                     setPassword(actualUser.password);
                     setType(actualUser.userType);
                     setBio(actualUser.bio);
-                    setImageUrl(actualUser.pictureURL)
+                    setImageUrl(actualUser.pictureURL);
                     setTwitter(actualUser.twitter);
                     setInstagram(actualUser.instagram);
                     console.log("USE EFFECT: " + JSON.stringify(currentUser))
