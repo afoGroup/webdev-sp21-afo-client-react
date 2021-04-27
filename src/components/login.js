@@ -11,8 +11,6 @@ const Login = (props) => {
     const [alertError, setAlertError] = useState(false);
     const history = useHistory();
 
-
-
     const loginClicked = () => {
         userService.login(credentials)
             .then((actualUser) => {
@@ -29,7 +27,6 @@ const Login = (props) => {
             })
 
     };
-
 
     return(
         <div className="container-fluid">

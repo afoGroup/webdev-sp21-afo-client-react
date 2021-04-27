@@ -85,8 +85,20 @@ const Settings = () => {
         if (!(alertEmail || alertPassword || alertCard)) {
             update();
         }
-
     };
+
+    const deleteUser = () => {
+        if (confirm("Are you sure you want to delete your account?")) {
+            userService.deleteUser(userId)
+                .then((response) => {
+                    console.log(JSON.stringify(response))
+                    history.push(`/home`);
+                })
+                .catch((error) => {
+                    console.log("Some Error from DELETE:",)
+                })
+        }
+    }
 
     return(
         <div className="container-fluid">
@@ -269,6 +281,12 @@ const Settings = () => {
                                             type="button"
                                             className="btn btn-secondary">
                                             Update Profile
+                                        </button>
+                                        <button
+                                            onClick={() => deleteUser()}
+                                            type="button"
+                                            className="mx-5 btn btn-danger">
+                                            Delete Account
                                         </button>
                                     </div>
                                 </div>
