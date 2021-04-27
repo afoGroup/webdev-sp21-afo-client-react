@@ -42,6 +42,7 @@ const Settings = () => {
 
     const update = () => {
         setCurrentUser({
+            _id: userId,
             password: password,
             userType: type,
             email: email,
@@ -185,7 +186,10 @@ const Settings = () => {
                                                        className="form-control"
                                                        id="twitterHandle"
                                                        value={twitter}
-                                                       onChange={(e) => setTwitter(e.target.value)}
+                                                       onChange={(e) => {
+                                                           setUpdateSuccess(false)
+                                                           setTwitter(e.target.value)
+                                                       }}
                                                        placeholder="Username"/>
                                             </div>
                                         </div>
@@ -202,14 +206,21 @@ const Settings = () => {
                                                        className="form-control"
                                                        id="igHandle"
                                                        value={instagram}
-                                                       onChange={(e) => setInstagram(e.target.value)}
+                                                       onChange={(e) => {
+                                                           setUpdateSuccess(false)
+                                                           setInstagram(e.target.value)
+                                                       }}
                                                        placeholder="Username"/>
                                             </div>
                                         </div>
                                         <label>
                                             <strong>Bio: </strong>
                                         </label>
-                                        <textarea rows="4" className="form-control">{bio}</textarea>
+                                        <textarea rows="4" className="form-control" value={bio}
+                                                  onChange={(e) => {
+                                                      setUpdateSuccess(false)
+                                                      setBio(e.target.value)
+                                                  }}/>
 
                                     </div>
                                     <div className="col-12 col-md-6 p-4">
@@ -234,7 +245,10 @@ const Settings = () => {
                                             <div className="profile-img-info">
                                                 <input
                                                     value={imgUrl}
-                                                    onChange={(e) => setImageUrl(e.target.value)}
+                                                    onChange={(e) => {
+                                                        setUpdateSuccess(false)
+                                                        setImageUrl(e.target.value)
+                                                    }}
                                                     type="text"
                                                     name="profile-group"
                                                     className="form-control"
