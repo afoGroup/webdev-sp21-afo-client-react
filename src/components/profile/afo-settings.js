@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import AfoNavbar from "../navbar/afo-navbar";
 import '../../styles/afo-profile.css';
-import userActions from "../../actions/user-actions";
-import {useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 import userService from "../../services/user-service";
 import {DEFAULT_USER_IMAGE} from "../../constants/api-urls";
@@ -19,7 +17,6 @@ const Settings = () => {
     const [cardNum, setCardNum] = useState("");
     const [bio, setBio] = useState("");
     const [currentUser, setCurrentUser] = useState({});
-    // const [loginState, setCurrentLoginState] = useState("logged-out");
 
     const [alertEmail, setAlertEmail] = useState(false);
     const [alertPassword, setAlertPassword] = useState(false);
@@ -32,6 +29,7 @@ const Settings = () => {
                 if(actualUser && actualUser.username !== "wbdv-afo-logged-out"){
                     setCurrentUser(actualUser);
                     setUsername(actualUser.username);
+                    setEmail(actualUser.email);
                     setPassword(actualUser.password);
                     setType(actualUser.userType);
                     setBio(actualUser.bio);
