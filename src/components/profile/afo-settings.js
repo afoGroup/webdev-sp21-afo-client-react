@@ -41,8 +41,8 @@ const Settings = () => {
     }, [userId]);
 
     const update = () => {
+        console.log("Update Insta:" + instagram)
         setCurrentUser({
-            _id: userId,
             password: password,
             userType: type,
             email: email,
