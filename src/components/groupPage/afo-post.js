@@ -33,12 +33,13 @@ const Post = ({group, ownerStatus, postId}) => {
     const deletePost = () => {
         const updatedGroup = {...group, posts: group.posts.filter(pid => pid!==postId)};
         groupService.updateGroup(group._id, updatedGroup)
-            .then(() => {
+            .then((returnedGroup) => {
                 postService.deletePost(postId)
+                    .then(() => {
+                        history.push(`/group/${returnedGroup._id}`)
+                    })
             })
-            .then(() => {
-                history.push(`/group/${group._id}`)
-            })
+
     };
 
     return(
@@ -59,7 +60,7 @@ const Post = ({group, ownerStatus, postId}) => {
                             {
                                 postOwner && postOwner._id &&
                                 <p>
-                                    <a className="afo-purple" href={`/profile/${postOwner._id}`}>
+                                    <a className="afo-purple" href={`/user/${postOwner._id}`}>
                                         {postOwner.username}
                                     </a>
                                 </p>

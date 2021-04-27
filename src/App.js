@@ -59,8 +59,7 @@ function App() {
                     <Group/>
                 </Route>
 
-                <Route path={[
-                    "/user/:userId", "/user/:userId/"]}
+                <Route path={["/user/:userId", "/user/:userId/"]}
                        exact={true}>
                     <Profile/>
                 </Route>
