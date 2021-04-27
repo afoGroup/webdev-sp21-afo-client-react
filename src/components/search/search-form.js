@@ -160,7 +160,11 @@ const SearchForm= (props) => {
                                                 <br/>
                                                 <input type="text"
                                                        name="groupNameInput"
-                                                       className="text-input-box"/>
+                                                       value={props.searchTitle}
+                                                       className="text-input-box"
+                                                       onChange={(event) => {
+                                                           props.setSearchTitle(event.target.value)
+                                                       }}/>
                                             </div>
                                         </div>
                                         <div className="row">
@@ -189,7 +193,11 @@ const SearchForm= (props) => {
                                                 <br/>
                                                 <input type="text"
                                                        name="userNameInput"
-                                                       className="text-input-box"/>
+                                                       value={props.searchTitle}
+                                                       className="text-input-box"
+                                                       onChange={(event) => {
+                                                           props.setSearchTitle(event.target.value)
+                                                       }}/>
                                             </div>
                                         </div>
                                         <div className="row">
