@@ -65,7 +65,7 @@ function App() {
                     <Profile/>
                 </Route>
 
-                <Route path={["/profile/settings", "/profile/settings/", "/profile/settings/:userId", "/profile/settings/:userId/"]}
+                <Route path={["/profile/settings/:userId", "/profile/settings/:userId/"]}
                        exact={true}>
                     <Settings/>
                 </Route>
