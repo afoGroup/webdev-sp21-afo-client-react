@@ -81,7 +81,8 @@ const GroupManager = () => {
 
                             <div className="row">
                                 <div className="col-12">
-                                    <h1 className="afo-purple afo-header pt-4">Group Manager: {currentUser.username}</h1>
+                                    <h1 className="afo-purple afo-header pt-4">Group Manager</h1>
+                                    <h5>{currentUser.username}</h5>
                                 </div>
                             </div>
 
@@ -147,10 +148,11 @@ const GroupManager = () => {
                                                 className="btn afo-purple">
                                                 Search Anime
                                             </button>
-                                            <div className="mini-anime-search">
-                                                {
-                                                    animeSearched !== "" &&
-                                                    <>
+
+                                            {
+                                                animeSearched !== "" &&
+                                                <>
+                                                    <div className="mini-anime-search">
                                                         <p>{animeSearchResult.length} Results for {animeSearched}</p>
                                                         <ul>
                                                             {
@@ -172,9 +174,9 @@ const GroupManager = () => {
                                                                 <p>Selected Group Anime: {animeSelected}</p>
                                                             </>
                                                         }
-                                                    </>
-                                                }
-                                            </div>
+                                                    </div>
+                                                </>
+                                            }
 
                                             <button
                                                 type="button"
