@@ -2,6 +2,9 @@ p{
     overflow-wrap: break-word;
 }
 
+li{
+    text-decoration: none;
+}
 .profile-img-info{
     width: 350px;
 }
