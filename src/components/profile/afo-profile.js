@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import userActions from "../../actions/user-actions";
 import userService from "../../services/user-service";
 import AfoNavbar from "../navbar/afo-navbar";
@@ -13,6 +13,7 @@ import {act} from "@testing-library/react";
 const Profile = () => {
 
     const {userId} = useParams();
+    const history = useHistory();
 
     const [currentUser, setCurrentUser] = useState({});
     const [pageUser, setPageUser] = useState({});
@@ -60,9 +61,23 @@ const Profile = () => {
                     <AfoNavbar/>
                     <div className="row top-row">
                         <div className="col-12">
-
                             {
-                                pageUser &&
+                                pageUser.username === "wbdv-afo-logged-out" &&
+                                <>
+                                    <div className="row">
+                                        <div className="col-12 text-center">
+                                            <h1 className="m-auto my-5 afo-header">Must login to view profile</h1>
+                                            <button type="button"
+                                                    className="btn group-btn btn-block my-3"
+                                                    onClick={() => {history.push("/login")}}>
+                                                <strong className="afo-white">Login to join group & post</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </>
+                            }
+                            {
+                                pageUser.username !== "wbdv-afo-logged-out" &&
                                 <>
                                     <div className="row">
                                         <div className="col-6 m-4">
