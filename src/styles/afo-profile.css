@@ -16,7 +16,7 @@ li{
 .profile-img{
     width: 350px;
     height: 350px;
-    object-fit: contain;
+    object-fit: scale-down;
 }
 
 .mini-anime-search{

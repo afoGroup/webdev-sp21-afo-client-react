@@ -6,7 +6,7 @@ const SimpleDisplay = ({imageURL, header, text, linkId, type}) => {
 
     return(
         <div className="row afo-simple-container">
-            <div className="col-5">
+            <div className="col-5 p-0">
                 <div className="row">
                     <div className="col-12">
                         <img
