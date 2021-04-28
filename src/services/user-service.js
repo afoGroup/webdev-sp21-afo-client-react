@@ -40,7 +40,7 @@ export const findUserById = (uid) =>
         .then(response => response.json());
 
 export const findUserByUsername = (username) =>
-    fetch(`${ANIFANSONLY_URL}/search/users/${username}`).then(response => response.json());
+    fetch(`${ANIFANSONLY_URL}/api/search/users/${username}`).then(response => response.json());
 
 
 export const updateUser = (uid, user) =>
