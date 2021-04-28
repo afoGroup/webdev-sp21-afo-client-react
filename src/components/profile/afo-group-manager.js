@@ -272,8 +272,10 @@ const GroupManager = () => {
                                                                 text={oGroup.description}
                                                                 header={oGroup.title}
                                                                 imageURL={oGroup.pictureURL}/>
-                                                            <i className="fa fa-times afo-group-delete"
-                                                               onClick={() => deleteGroup(oGroup._id)}></i>
+                                                            <span>
+                                                                <i className="fa fa-times afo-group-delete"
+                                                                   onClick={() => deleteGroup(oGroup._id)}></i>
+                                                            </span>
                                                         </div>
                                                     )
                                                 }
