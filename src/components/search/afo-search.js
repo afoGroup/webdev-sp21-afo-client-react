@@ -63,7 +63,7 @@ const AfoSearch = (props) => {
             groupService.findGroupsByTitle(searchTitle)
                 .then(result => {
                     console.log('title result: ' + result.title);
-                    setSearchResults(result);
+                    setSearchResults([result]);
                     setSearchedValue(searchTitle);
                     setSearchTitle("");
                 }).catch(error => console.log(error))

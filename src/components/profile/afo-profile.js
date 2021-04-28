@@ -8,22 +8,26 @@ import SettingsPage from "./afo-settings";
 import '../../styles/afo-profile.css';
 import {useDispatch, useSelector} from "react-redux";
 import groupService from "../../services/group-service";
+import {act} from "@testing-library/react";
 
 const Profile = () => {
 
     const {userId} = useParams();
 
     const [currentUser, setCurrentUser] = useState({});
+    const [pageUser, setPageUser] = useState({});
     const [currentUserStatus, setCurrentUserStatus] = useState(false);
     const [groupList, setGroupList] = useState([]);
     const [groupIdList, setGroupIdList] = useState([]);
 
     useEffect(() => {
+        console.log('pageId: ' + userId);
         userService.getCurrentUser()
             .then((actualUser) => {
-                if(userId === undefined || actualUser._id !== userId){
-                    console.log('1: ' + actualUser.clubs);
+                if(userId === undefined){
+                    console.log('currentUser clubs: ' + actualUser.clubs);
                     setCurrentUser(actualUser);
+                    setPageUser(actualUser);
                     setGroupIdList(actualUser.clubs);
                     setCurrentUserStatus(true);
                 }
@@ -35,8 +39,8 @@ const Profile = () => {
             userService.findUserById(userId)
                 .then((actualUser) => {
                     if(actualUser._id === userId){
-                        console.log('2: ' + actualUser.clubs);
-                        setCurrentUser(actualUser);
+                        console.log('pageUser clubs: ' + actualUser.clubs);
+                        setPageUser(actualUser);
                         setGroupIdList(actualUser.clubs);
                     }
                 })
@@ -58,33 +62,33 @@ const Profile = () => {
                         <div className="col-12">
 
                             {
-                                currentUser &&
+                                pageUser &&
                                 <>
                                     <div className="row">
                                         <div className="col-6 m-4">
-                                            <h3 className="afo-purple afo-header">{currentUser.username}</h3>
-                                            <p><strong>Twitter: @</strong> {currentUser.twitter}</p>
-                                            <p><strong>Instagram: @</strong> {currentUser.instagram}</p>
-                                            <p>{currentUser.bio}</p>
+                                            <h3 className="afo-purple afo-header">{pageUser.username}</h3>
+                                            <p><strong>Twitter: @</strong> {pageUser.twitter}</p>
+                                            <p><strong>Instagram: @</strong> {pageUser.instagram}</p>
+                                            <p>{pageUser.bio}</p>
                                         </div>
                                         <div className="col-6 m-4">
                                             {
-                                                currentUser.pictureUrl !== ''?
+                                                pageUser.pictureUrl !== ''?
                                                     <img
-                                                        src={currentUser.pictureUrl}
+                                                        src={pageUser.pictureUrl}
                                                         className="anime-img"
-                                                        alt={`${currentUser.username} profile`}/> : <></>
+                                                        alt={`${pageUser.username} profile`}/> : <></>
 
                                             }
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-12 text-center">
-                                            <h6>{currentUser.username} Groups:</h6>
+                                            <h6>{pageUser.username} Groups:</h6>
                                         </div>
                                     </div>
                                     {
-                                        currentUser.clubs &&
+                                        pageUser.clubs &&
                                         <>
                                             <div className="mb-5">
                                                 <GroupDiscover groupList={groupList}/>
@@ -93,10 +97,10 @@ const Profile = () => {
                                     }
 
                                     {
-                                        currentUser.userType === "otaku" &&
+                                        pageUser.userType === "otaku" &&
                                         <>
-                                            <p className="my-2">{currentUser.username} - you can view the groups you own in your
-                                                <Link classname="afo-purple" to={`/profile/group-manager/${currentUser._id}`}> Group Manager</Link>
+                                            <p className="my-2">{pageUser.username} - you can view the groups you own in your
+                                                <Link classname="afo-purple" to={`/profile/group-manager/${pageUser._id}`}> Group Manager</Link>
                                             </p>
                                         </>
                                     }
