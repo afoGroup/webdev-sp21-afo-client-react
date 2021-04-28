@@ -5,7 +5,7 @@ import "../styles/afo-simple-display.css";
 const SimpleDisplay = ({imageURL, header, text, linkId, type}) => {
 
     return(
-        <div className="row afo-simple-container my-3">
+        <div className="row afo-simple-container">
             <div className="col-5">
                 <img
                     src={imageURL}
