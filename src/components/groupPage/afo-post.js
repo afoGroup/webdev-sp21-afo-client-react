@@ -79,7 +79,7 @@ const Post = ({group, ownerStatus, postId, setCurrentGroup}) => {
                         </div>
                         <div className="col-6 text-right">
                             {
-                                currentPost && <p>{currentPost.createdDate.toLocaleDateString()}</p>
+                                currentPost.createdDate && <p>{currentPost.createdDate.toLocaleString()}</p>
                             }
 
                         </div>
