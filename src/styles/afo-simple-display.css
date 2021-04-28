@@ -1,17 +1,17 @@
 .afo-simple-container{
     width: 400px;
     height: 250px;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 2px solid black;
-    margin: auto;
+    margin: 20px auto;
 }
 
 .afo-simple-info{
-    border-right: 2px solid black;
+    border-left: 2px solid black;
 }
 
 .afo-simple-img{
-    height: 245px;
+    height: 250px;
     oject-fit: cover;
 }
 

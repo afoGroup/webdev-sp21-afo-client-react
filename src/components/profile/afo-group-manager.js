@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import AfoNavbar from "../navbar/afo-navbar";
-import settingsPage from "./afo-settings";
 import {Link, useHistory, useParams} from "react-router-dom";
+import SimpleDisplay from "../afo-simple-display";
 import userService from "../../services/user-service";
 import groupService from "../../services/group-service";
 import animeService from "../../services/anime-service";
@@ -239,15 +239,18 @@ const GroupManager = () => {
 
                             <div className="row">
                                 <div className="col-6 pl-3">
-                                    <p className="afo-dark-purple"><strong>Member Groups</strong></p>
+                                    <p className="afo-dark-purple"><strong>Groups Joined</strong></p>
                                     <p>total: {memberGroups.length}</p>
                                     <ul>
                                         {
                                             memberGroups.map((mGroup, index) =>
                                                 <li key={index}>
-                                                    <Link to={`/details/group/${mGroup._id}`}>
-                                                        {mGroup.title}
-                                                    </Link>
+                                                    <SimpleDisplay
+                                                        type={'group'}
+                                                        linkId={mGroup._id}
+                                                        text={mGroup.description}
+                                                        header={mGroup.title}
+                                                        imageURL={mGroup.pictureURL}/>
                                                 </li>
                                             )
                                         }
@@ -263,10 +266,13 @@ const GroupManager = () => {
                                                 {
                                                     ownerGroups.map((oGroup, index) =>
                                                         <li key={index*2}>
-                                                            <Link to={`/details/group/${oGroup._id}`}>
-                                                                {oGroup.title}{` `}
-                                                            </Link>
-                                                            <i className="fa fa-times float-right afo-group-delete"
+                                                            <SimpleDisplay
+                                                                type={'group'}
+                                                                linkId={oGroup._id}
+                                                                text={oGroup.description}
+                                                                header={oGroup.title}
+                                                                imageURL={oGroup.pictureURL}/>
+                                                            <i className="fa fa-times afo-group-delete"
                                                                onClick={() => deleteGroup(oGroup._id)}></i>
                                                         </li>
                                                     )

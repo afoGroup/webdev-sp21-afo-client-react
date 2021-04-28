@@ -253,8 +253,8 @@ const AfoSearch = (props) => {
                                 <>
                                     <div className="row group-search-results">
                                         <div className="col-12 text-center">
-                                            <h4 className="afo-purple afo-header">
-                                                {searchResults.length} Results for {searchedValue}
+                                            <h4 className="afo-purple afo-header py-4">
+                                                {searchResults.length} Results for "{searchedValue}"
                                             </h4>
                                             {
                                                 searchResults.map((result, index) =>
