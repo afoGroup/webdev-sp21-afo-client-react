@@ -88,9 +88,9 @@ const Profile = () => {
                                         </div>
                                         <div className="col-6 m-4">
                                             {
-                                                pageUser.pictureUrl !== ''?
+                                                pageUser.pictureURL !== ''?
                                                     <img
-                                                        src={pageUser.pictureUrl}
+                                                        src={pageUser.pictureURL}
                                                         className="anime-img"
                                                         alt={`${pageUser.username} profile`}/> : <></>
 
@@ -102,6 +102,7 @@ const Profile = () => {
                                             <h6>{pageUser.username} Groups:</h6>
                                         </div>
                                     </div>
+
                                     {
                                         pageUser.clubs &&
                                         <>

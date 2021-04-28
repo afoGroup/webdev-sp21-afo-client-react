@@ -238,48 +238,44 @@ const GroupManager = () => {
                             </div>
 
                             <div className="row">
-                                <div className="col-6 pl-3">
+                                <div className="col-12 col-md-6">
                                     <p className="afo-dark-purple"><strong>Groups Joined</strong></p>
                                     <p>total: {memberGroups.length}</p>
-                                    <ul>
-                                        {
-                                            memberGroups.map((mGroup, index) =>
-                                                <li key={index}>
-                                                    <SimpleDisplay
-                                                        type={'group'}
-                                                        linkId={mGroup._id}
-                                                        text={mGroup.description}
-                                                        header={mGroup.title}
-                                                        imageURL={mGroup.pictureURL}/>
-                                                </li>
-                                            )
-                                        }
-                                    </ul>
+                                    {
+                                        memberGroups.map((mGroup, index) =>
+                                            <SimpleDisplay
+                                                type={'group'}
+                                                linkId={mGroup._id}
+                                                text={mGroup.description}
+                                                header={mGroup.title}
+                                                imageURL={mGroup.pictureURL}/>
+                                        )
+                                    }
                                 </div>
-                                <div className="col-6">
+                                <div className="col-12 col-md-6">
                                     {
                                         currentUser && currentUser.userType && currentUser.userType === "otaku" &&
                                         <>
                                             <p className="afo-dark-purple"><strong>Owner Groups</strong></p>
                                             <p>total: {ownerGroups.length}</p>
-                                            <ul>
-                                                {
-                                                    ownerGroups.map((oGroup, index) =>
-                                                        <div key={index*2}>
+                                            {
+                                                ownerGroups.map((oGroup, index) =>
+                                                    <div key={index*2} className="row">
+                                                        <div className="col-11">
                                                             <SimpleDisplay
                                                                 type={'group'}
                                                                 linkId={oGroup._id}
                                                                 text={oGroup.description}
                                                                 header={oGroup.title}
                                                                 imageURL={oGroup.pictureURL}/>
-                                                            <span>
-                                                                <i className="fa fa-times afo-group-delete"
-                                                                   onClick={() => deleteGroup(oGroup._id)}></i>
-                                                            </span>
                                                         </div>
-                                                    )
-                                                }
-                                            </ul>
+                                                        <div className="col-1">
+                                                            <i className="fa fa-times afo-group-delete"
+                                                               onClick={() => deleteGroup(oGroup._id)}></i>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
                                         </>
                                     }
                                 </div>
