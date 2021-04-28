@@ -265,7 +265,7 @@ const GroupManager = () => {
                                             <ul>
                                                 {
                                                     ownerGroups.map((oGroup, index) =>
-                                                        <li key={index*2}>
+                                                        <div key={index*2}>
                                                             <SimpleDisplay
                                                                 type={'group'}
                                                                 linkId={oGroup._id}
@@ -274,7 +274,7 @@ const GroupManager = () => {
                                                                 imageURL={oGroup.pictureURL}/>
                                                             <i className="fa fa-times afo-group-delete"
                                                                onClick={() => deleteGroup(oGroup._id)}></i>
-                                                        </li>
+                                                        </div>
                                                     )
                                                 }
                                             </ul>

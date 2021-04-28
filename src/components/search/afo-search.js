@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {connect} from 'react-redux';
-import {Link, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import animeActions from "../../actions/anime-actions";
 import AfoNavbar from "../navbar/afo-navbar";
 import SimpleDisplay from "../afo-simple-display";
@@ -63,7 +63,7 @@ const AfoSearch = (props) => {
             groupService.findGroupsByTitle(searchTitle)
                 .then(result => {
                     console.log('title result: ' + result.title);
-                    setSearchResults([result]);
+                    setSearchResults(result);
                     setSearchedValue(searchTitle);
                     setSearchTitle("");
                 }).catch(error => console.log(error))
@@ -71,7 +71,7 @@ const AfoSearch = (props) => {
             userService.findUserByUsername(searchTitle)
                 .then(result => {
                     console.log('user result: ' + result.username);
-                    setSearchResults(result);
+                    setSearchResults([result]);
                     setSearchedValue(searchTitle);
                     setSearchTitle("");
                 }).catch(error => console.log(error))
@@ -287,7 +287,7 @@ const AfoSearch = (props) => {
                                     <div className="row user-search-results">
                                         <div className="col-12 text-center">
                                             <h4 className="afo-purple afo-header">
-                                                {searchResults.length} Results for {searchedValue}
+                                                {searchResults.length} Results for "{searchedValue}"
                                             </h4>
                                             {
                                                 searchResults.map((result, index) =>
