@@ -11,6 +11,7 @@
 
 .afo-simple-image{
     height: 245px;
+    oject-fit: cover;
 }
 
 .afo-simple-text{

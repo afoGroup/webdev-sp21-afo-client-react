@@ -251,8 +251,8 @@ const AfoSearch = (props) => {
                                 searchResults &&
                                 searchResults.length >= 1 &&
                                 <>
-                                    <div className="row">
-                                        <div className="col-12">
+                                    <div className="row group-search-results">
+                                        <div className="col-12 text-center">
                                             <h4 className="afo-purple afo-header">
                                                 {searchResults.length} Results for {searchedValue}
                                             </h4>
@@ -276,8 +276,8 @@ const AfoSearch = (props) => {
                                 searchResults &&
                                 searchResults.length >= 1 &&
                                 <>
-                                    <div className="row">
-                                        <div className="col-12">
+                                    <div className="row user-search-results">
+                                        <div className="col-12 text-center">
                                             <h4 className="afo-purple afo-header">
                                                 {searchResults.length} Results for {searchedValue}
                                             </h4>
