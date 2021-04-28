@@ -1,0 +1,19 @@
+.afo-simple-container{
+    width: 400px;
+    height: 250px;
+    border-radius: 3px;
+    border: 2px solid black;
+}
+
+.afo-simple-info{
+    border-right: 2px solid black;
+}
+
+.afo-simple-image{
+    height: 245px;
+}
+
+.afo-simple-text{
+    height: 100px;
+    overflow: scroll;
+}

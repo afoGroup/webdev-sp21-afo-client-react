@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {connect} from 'react-redux';
+import {Link} from "react-router-dom";
 import animeActions from "../../actions/anime-actions";
 import AfoNavbar from "../navbar/afo-navbar";
+import SimpleDisplay from "../afo-simple-display";
 import SearchForm from "./search-form";
 import SearchResults from "./search-results";
 import userService from "../../services/user-service";
 import groupService from "../../services/group-service";
 import "../../styles/afo-search.css"
-import {Link} from "react-router-dom";
+
 
 const AfoSearch = (props) => {
     const [searchType, setSearchType] = useState('init');
@@ -256,11 +258,12 @@ const AfoSearch = (props) => {
                                             </h4>
                                             {
                                                 searchResults.map((result, index) =>
-                                                    <li key={index}>
-                                                        <Link to={`/details/group/${result._id}`}>
-                                                            {result.title}
-                                                        </Link>
-                                                    </li>
+                                                    <SimpleDisplay
+                                                        type={'group'}
+                                                        linkId={result._id}
+                                                        text={result.description}
+                                                        header={result.title}
+                                                        imageURL={result.pictureURL}/>
                                                 )
                                             }
                                         </div>
@@ -280,11 +283,12 @@ const AfoSearch = (props) => {
                                             </h4>
                                             {
                                                 searchResults.map((result, index) =>
-                                                    <li key={index}>
-                                                        <Link to={`/profile/${result._id}`}>
-                                                            {result.username}
-                                                        </Link>
-                                                    </li>
+                                                    <SimpleDisplay
+                                                        type={'user'}
+                                                        linkId={result._id}
+                                                        text={result.bio}
+                                                        header={result.username}
+                                                        imageURL={result.pictureURL}/>
                                                 )
                                             }
                                         </div>
