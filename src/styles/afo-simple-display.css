@@ -11,8 +11,9 @@
 }
 
 .afo-simple-img{
+    width: 165px;
     height: 250px;
-    oject-fit: cover;
+    object-fit: cover;
 }
 
 .afo-simple-text{

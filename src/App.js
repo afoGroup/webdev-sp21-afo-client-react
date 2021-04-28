@@ -35,7 +35,7 @@ function App() {
                     <AfoHome/>
                 </Route>
 
-                <Route path={["/search", "/search/:criteria"]}
+                <Route path={["/search", "/search?:criteria=:searchCriteria"]}
                        exact={true}>
                     <AfoSearch/>
                 </Route>

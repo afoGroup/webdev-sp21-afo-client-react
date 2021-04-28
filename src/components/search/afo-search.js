@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {connect} from 'react-redux';
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import animeActions from "../../actions/anime-actions";
 import AfoNavbar from "../navbar/afo-navbar";
 import SimpleDisplay from "../afo-simple-display";
@@ -23,6 +23,14 @@ const AfoSearch = (props) => {
     const [titleAlert, setTitleAlert] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     const [searchedValue, setSearchedValue] = useState("");
+
+    const {criteria} = useParams();
+    const {searchCriteria} = useParams();
+
+    useEffect(() => {
+        console.log(criteria);
+        console.log(searchCriteria)
+    }, []);
 
     useEffect(() => {
         makePageLists();
@@ -54,7 +62,7 @@ const AfoSearch = (props) => {
         } else if(searchType === 'group'){
             groupService.findGroupsByTitle(searchTitle)
                 .then(result => {
-                    console.log('title result: ' + result);
+                    console.log('title result: ' + result.title);
                     setSearchResults(result);
                     setSearchedValue(searchTitle);
                     setSearchTitle("");
@@ -62,7 +70,7 @@ const AfoSearch = (props) => {
         } else if(searchType === 'user'){
             userService.findUserByUsername(searchTitle)
                 .then(result => {
-                    console.log('user result: ' + result);
+                    console.log('user result: ' + result.username);
                     setSearchResults(result);
                     setSearchedValue(searchTitle);
                     setSearchTitle("");
