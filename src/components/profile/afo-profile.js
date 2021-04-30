@@ -56,7 +56,7 @@ const Profile = () => {
 
     return(
         <div className="container-fluid">
-            <div className="row">
+            <div className="row mt-3">
                 <div className="col-12">
                     <AfoNavbar/>
                     <div className="row top-row">
@@ -81,23 +81,23 @@ const Profile = () => {
                                 <>
                                     <div className="row">
                                         <div className="col-6 m-4">
-                                            <h3 className="afo-purple afo-header">{pageUser.username}</h3>
+                                            <h3 className="afo-purple afo-header pt-4">{pageUser.username}</h3>
                                             <p><strong>Twitter: @</strong> {pageUser.twitter}</p>
                                             <p><strong>Instagram: @</strong> {pageUser.instagram}</p>
                                             <p>{pageUser.bio}</p>
                                         </div>
-                                        <div className="col-5 m-4 custom-control-inline">
+                                        <div className="offset-md col-5 m-4 custom-control-inline">
                                             {
                                                 pageUser.pictureURL !== ''?
                                                     <img
-                                                        src={"https://www.rover.com/blog/wp-content/uploads/2020/01/happy-corgi.jpg"}
+                                                        src={pageUser.pictureURL}
                                                         className="anime-img"
                                                         alt={`${pageUser.username} profile`}/> : <></>
 
                                             }
                                         </div>
                                     </div>
-                                    <div className="row">
+                                    <div className="row pt-4">
                                         <div className="col-12 text-center">
                                             <h6>{pageUser.username} Groups:</h6>
                                         </div>

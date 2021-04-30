@@ -100,7 +100,15 @@ const GroupManager = () => {
     const deleteGroup = (groupId) => {
         groupService.deleteGroup(groupId)
             .then(() => {
-                setCurrentUser(currentUser);
+                const updateUser = {
+                    ...currentUser,
+                    ownerClubs: currentUser.ownerClubs.filter(gid => gid !== groupId)
+                };
+                userService.updateUser(currentUser._id, updateUser)
+                    .then(() => {
+                            setCurrentUser(updateUser);
+                        }
+                    )
             })
             .catch(error => console.log(error))
     };
@@ -118,9 +126,9 @@ const GroupManager = () => {
 
 
     return(
-        <div className="container-fluid mx-5">
+        <div className="container-fluid ml-4">
             <div className="row">
-                <div className="col-12">
+                <div className="col-10">
                     <AfoNavbar/>
                     <div className="row top-row">
                         <div className="col-12">
@@ -260,17 +268,16 @@ const GroupManager = () => {
                                             <p>total: {ownerGroups.length}</p>
                                             {
                                                 ownerGroups.map((oGroup, index) =>
-                                                    <div key={index*2} className="row">
-                                                        <div className="col-11">
-                                                            <SimpleDisplay
-                                                                type={'group'}
-                                                                linkId={oGroup._id}
-                                                                text={oGroup.description}
-                                                                header={oGroup.title}
-                                                                imageURL={oGroup.pictureURL}/>
-                                                        </div>
+                                                    <div key={index*2}>
+                                                        <SimpleDisplay
+                                                            className="col-10"
+                                                            type={'group'}
+                                                            linkId={oGroup._id}
+                                                            text={oGroup.description}
+                                                            header={oGroup.title}
+                                                            imageURL={oGroup.pictureURL}/>
                                                         <div className="col-1">
-                                                            <i className="fa fa-times fa-lg afo-group-delete mt-5"
+                                                            <i className="fa fa-times fa-lg afo-group-delete mt-5 float-left"
                                                                onClick={() => deleteGroup(oGroup._id)}></i>
                                                         </div>
                                                     </div>
