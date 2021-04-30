@@ -126,9 +126,9 @@ const GroupManager = () => {
 
 
     return(
-        <div className="container-fluid ml-4">
+        <div className="container-fluid ml-5">
             <div className="row">
-                <div className="col-10">
+                <div className="col-11">
                     <AfoNavbar/>
                     <div className="row top-row">
                         <div className="col-12">
@@ -136,7 +136,7 @@ const GroupManager = () => {
                             <div className="row">
                                 <div className="col-12">
                                     <h1 className="afo-purple afo-header pt-4">Group Manager</h1>
-                                    <h5>{currentUser.username}</h5>
+                                    <h5 className="afo-purple afo-header">User: {currentUser.username}</h5>
                                 </div>
                             </div>
 
@@ -269,6 +269,10 @@ const GroupManager = () => {
                                             {
                                                 ownerGroups.map((oGroup, index) =>
                                                     <div key={index*2}>
+                                                        <div className="col-1 custom-control-inline">
+                                                            <i className="fa fa-times fa-lg afo-group-delete mt-5 float-left"
+                                                               onClick={() => deleteGroup(oGroup._id)}></i>
+                                                        </div>
                                                         <SimpleDisplay
                                                             className="col-10"
                                                             type={'group'}
@@ -276,10 +280,6 @@ const GroupManager = () => {
                                                             text={oGroup.description}
                                                             header={oGroup.title}
                                                             imageURL={oGroup.pictureURL}/>
-                                                        <div className="col-1">
-                                                            <i className="fa fa-times fa-lg afo-group-delete mt-5 float-left"
-                                                               onClick={() => deleteGroup(oGroup._id)}></i>
-                                                        </div>
                                                     </div>
                                                 )
                                             }

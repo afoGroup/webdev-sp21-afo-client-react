@@ -81,12 +81,12 @@ const Profile = () => {
                                 <>
                                     <div className="row">
                                         <div className="col-6 m-4">
-                                            <h3 className="afo-purple afo-header pt-4">{pageUser.username}</h3>
+                                            <h3 className="afo-purple afo-header">{pageUser.username}</h3>
                                             <p><strong>Twitter: @</strong> {pageUser.twitter}</p>
                                             <p><strong>Instagram: @</strong> {pageUser.instagram}</p>
                                             <p>{pageUser.bio}</p>
                                         </div>
-                                        <div className="offset-md col-5 m-4 custom-control-inline">
+                                        <div className="col-5 m-4 custom-control-inline">
                                             {
                                                 pageUser.pictureURL !== ''?
                                                     <img
@@ -97,7 +97,7 @@ const Profile = () => {
                                             }
                                         </div>
                                     </div>
-                                    <div className="row pt-4">
+                                    <div className="row mt-5 mb-2">
                                         <div className="col-12 text-center">
                                             <h6>{pageUser.username} Groups:</h6>
                                         </div>
