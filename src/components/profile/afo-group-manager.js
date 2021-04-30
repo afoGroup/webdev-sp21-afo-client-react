@@ -278,9 +278,9 @@ const GroupManager = () => {
                                                             text={oGroup.description}
                                                             header={oGroup.title}
                                                             imageURL={oGroup.pictureURL}/>
-                                                            <span className="col-1 float-right mr-3">
+                                                            <span className="col-1 float-right mr-2">
                                                             <button
-                                                                className="btn btn-secondary px-3 fa fa-times fa-lg afo-group-delete mr-1"
+                                                                className="btn btn-secondary px-2 fa fa-times fa-lg afo-group-delete mt-3"
                                                                 onClick={() => deleteGroup(oGroup._id)}/>
                                                             </span>
                                                     </div>
