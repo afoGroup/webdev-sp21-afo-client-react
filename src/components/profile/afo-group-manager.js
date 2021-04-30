@@ -280,7 +280,7 @@ const GroupManager = () => {
                                                             imageURL={oGroup.pictureURL}/>
                                                             <span className="col-1 float-right mr-3">
                                                             <button
-                                                                className="btn btn-secondary px-3 fa fa-times fa-lg afo-group-delete"
+                                                                className="btn btn-secondary px-3 fa fa-times fa-lg afo-group-delete mr-3"
                                                                 onClick={() => deleteGroup(oGroup._id)}/>
                                                             </span>
                                                     </div>
