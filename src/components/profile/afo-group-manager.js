@@ -126,7 +126,7 @@ const GroupManager = () => {
 
 
     return(
-        <div className="container-fluid ml-5">
+        <div className="container-fluid ml-4">
             <div className="row">
                 <div className="col-11">
                     <AfoNavbar/>
@@ -251,14 +251,14 @@ const GroupManager = () => {
                                     <p>total: {memberGroups.length}</p>
                                     {
                                         memberGroups.map((mGroup, index) =>
-                                            <div className="row">
+                                            <div className=>
                                                 <SimpleDisplay
                                                     type={'group'}
                                                     linkId={mGroup._id}
                                                     text={mGroup.description}
                                                     header={mGroup.title}
                                                     imageURL={mGroup.pictureURL}/>
-                                            </div>
+                                                    </div>
                                         )
                                     }
                                 </div>
@@ -280,7 +280,7 @@ const GroupManager = () => {
                                                             imageURL={oGroup.pictureURL}/>
                                                             <span className="col-1 float-right mr-3">
                                                             <button
-                                                                className="btn btn-secondary px-3 fa fa-times fa-lg afo-group-delete mr-3"
+                                                                className="btn btn-secondary px-3 fa fa-times fa-lg afo-group-delete mr-1"
                                                                 onClick={() => deleteGroup(oGroup._id)}/>
                                                             </span>
                                                     </div>
