@@ -251,7 +251,7 @@ const GroupManager = () => {
                                     <p>total: {memberGroups.length}</p>
                                     {
                                         memberGroups.map((mGroup, index) =>
-                                            <div className=>
+                                            <div className="row">
                                                 <SimpleDisplay
                                                     type={'group'}
                                                     linkId={mGroup._id}
