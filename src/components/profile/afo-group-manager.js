@@ -118,7 +118,7 @@ const GroupManager = () => {
 
 
     return(
-        <div className="container-fluid">
+        <div className="container-fluid mx-5">
             <div className="row">
                 <div className="col-12">
                     <AfoNavbar/>
@@ -270,7 +270,7 @@ const GroupManager = () => {
                                                                 imageURL={oGroup.pictureURL}/>
                                                         </div>
                                                         <div className="col-1">
-                                                            <i className="fa fa-times afo-group-delete"
+                                                            <i className="fa fa-times fa-lg afo-group-delete mt-5"
                                                                onClick={() => deleteGroup(oGroup._id)}></i>
                                                         </div>
                                                     </div>

@@ -86,11 +86,11 @@ const Profile = () => {
                                             <p><strong>Instagram: @</strong> {pageUser.instagram}</p>
                                             <p>{pageUser.bio}</p>
                                         </div>
-                                        <div className="col-6 m-4">
+                                        <div className="col-5 m-4 custom-control-inline">
                                             {
                                                 pageUser.pictureURL !== ''?
                                                     <img
-                                                        src={pageUser.pictureURL}
+                                                        src={"https://www.rover.com/blog/wp-content/uploads/2020/01/happy-corgi.jpg"}
                                                         className="anime-img"
                                                         alt={`${pageUser.username} profile`}/> : <></>
 

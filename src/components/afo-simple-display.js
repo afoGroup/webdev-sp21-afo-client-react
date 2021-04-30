@@ -29,8 +29,8 @@ const SimpleDisplay = ({imageURL, header, text, linkId, type}) => {
                         }
                         {
                             type === 'user' &&
-                            <Link className="btn btn-secondary" to={`/details/anime/${linkId}`}>
-                                View Group
+                            <Link className="btn btn-secondary" to={`/profile/${linkId}`}>
+                                View User
                             </Link>
                         }
                     </div>
