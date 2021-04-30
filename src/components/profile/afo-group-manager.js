@@ -135,8 +135,8 @@ const GroupManager = () => {
 
                             <div className="row">
                                 <div className="col-12">
-                                    <h1 className="afo-purple afo-header pt-4">Group Manager</h1>
-                                    <h5 className="afo-purple afo-header">User: {currentUser.username}</h5>
+                                    <h1 className="afo-purple pt-4">Group Manager</h1>
+                                    <h5 className="afo-purple">{currentUser.username}</h5>
                                 </div>
                             </div>
 
@@ -251,12 +251,14 @@ const GroupManager = () => {
                                     <p>total: {memberGroups.length}</p>
                                     {
                                         memberGroups.map((mGroup, index) =>
-                                            <SimpleDisplay
-                                                type={'group'}
-                                                linkId={mGroup._id}
-                                                text={mGroup.description}
-                                                header={mGroup.title}
-                                                imageURL={mGroup.pictureURL}/>
+                                            <div className="row">
+                                                <SimpleDisplay
+                                                    type={'group'}
+                                                    linkId={mGroup._id}
+                                                    text={mGroup.description}
+                                                    header={mGroup.title}
+                                                    imageURL={mGroup.pictureURL}/>
+                                            </div>
                                         )
                                     }
                                 </div>
@@ -268,11 +270,7 @@ const GroupManager = () => {
                                             <p>total: {ownerGroups.length}</p>
                                             {
                                                 ownerGroups.map((oGroup, index) =>
-                                                    <div key={index*2}>
-                                                        <div className="col-1 custom-control-inline">
-                                                            <i className="fa fa-times fa-lg afo-group-delete mt-5 float-left"
-                                                               onClick={() => deleteGroup(oGroup._id)}></i>
-                                                        </div>
+                                                    <div key={index*2} className="row">
                                                         <SimpleDisplay
                                                             className="col-10"
                                                             type={'group'}
@@ -280,6 +278,11 @@ const GroupManager = () => {
                                                             text={oGroup.description}
                                                             header={oGroup.title}
                                                             imageURL={oGroup.pictureURL}/>
+                                                            <span className="col-1 float-right mr-3">
+                                                            <button
+                                                                className="btn btn-secondary px-3 fa fa-times fa-lg afo-group-delete"
+                                                                onClick={() => deleteGroup(oGroup._id)}/>
+                                                            </span>
                                                     </div>
                                                 )
                                             }

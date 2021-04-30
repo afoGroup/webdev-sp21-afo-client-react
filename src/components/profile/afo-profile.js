@@ -41,6 +41,24 @@ const Profile = () => {
                 .then((actualUser) => {
                     if(actualUser._id === userId){
                         console.log('pageUser clubs: ' + actualUser.clubs);
+                        let userTwitter = actualUser.twitter;
+                        let userInsta = actualUser.instagram;
+                        let userBio = actualUser.bio;
+                        if (userTwitter === '') {
+                            userTwitter = 'None'
+                        }
+                        if (userInsta === '') {
+                            userInsta = 'None'
+                        }
+                        if (userBio === '') {
+                            userBio = 'No bio...'
+                        }
+                        const cleanedUser = {
+                            ...actualUser,
+                            twitter: userTwitter,
+                            instagram: userInsta,
+                            bio: userBio
+                        };
                         setPageUser(actualUser);
                         setGroupIdList(actualUser.clubs);
                     }
@@ -81,7 +99,7 @@ const Profile = () => {
                                 <>
                                     <div className="row">
                                         <div className="col-6 m-4">
-                                            <h3 className="afo-purple afo-header">{pageUser.username}</h3>
+                                            <h3 className="afo-purple mb-3">{pageUser.username}</h3>
                                             <p><strong>Twitter: @</strong> {pageUser.twitter}</p>
                                             <p><strong>Instagram: @</strong> {pageUser.instagram}</p>
                                             <p>{pageUser.bio}</p>
